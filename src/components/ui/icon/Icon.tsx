@@ -8,10 +8,13 @@ type IconProps = {
   name: IconName;
 } & HTMLAttributes<HTMLSpanElement>;
 
+type RawSvgModule = string | { default?: unknown };
+
 const rawIconSvgs = import.meta.glob('./assets/*.svg', {
-  as: 'raw',
   eager: true,
-}) as Record<string, string>;
+  query: '?raw',
+  import: 'default',
+}) as Record<string, RawSvgModule>;
 
 function normalizeIconName(filePath: string) {
   const fileName = filePath.split('/').pop() ?? filePath;
@@ -22,6 +25,18 @@ function normalizeIconName(filePath: string) {
     .replace(/^_+|_+$/g, '');
 }
 
+function toSvgMarkup(svgModule: RawSvgModule) {
+  if (typeof svgModule === 'string') {
+    return svgModule;
+  }
+
+  if (typeof svgModule?.default === 'string') {
+    return svgModule.default;
+  }
+
+  throw new Error('Expected an SVG asset to resolve to a raw string.');
+}
+
 function normalizeIconMarkup(svgMarkup: string) {
   return svgMarkup
     .replace(/\sfill="(?!none|currentColor|url\()[^"]*"/gi, ' fill="currentColor"')
@@ -29,9 +44,9 @@ function normalizeIconMarkup(svgMarkup: string) {
 }
 
 const iconMarkupByName = Object.fromEntries(
-  Object.entries(rawIconSvgs).map(([filePath, svgMarkup]) => [
+  Object.entries(rawIconSvgs).map(([filePath, svgModule]) => [
     normalizeIconName(filePath),
-    normalizeIconMarkup(svgMarkup),
+    normalizeIconMarkup(toSvgMarkup(svgModule)),
   ]),
 ) as Record<IconName, string>;
 
