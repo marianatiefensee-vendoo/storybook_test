@@ -1,0 +1,224 @@
+.button {
+  --button-bg: transparent;
+  --button-border: transparent;
+  --button-color: #494455;
+  --button-hover-overlay: transparent;
+  --button-height: 56px;
+  --button-padding-inline: 24px;
+  --button-padding-block: 16px;
+  --button-radius: 8px;
+
+  appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: var(--button-height);
+  padding: var(--button-padding-block) var(--button-padding-inline);
+  border: 1px solid var(--button-border);
+  border-radius: var(--button-radius);
+  background: var(--button-bg);
+  color: var(--button-color);
+  font-family: 'Lexend', 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--button-hover-overlay);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+.button:focus-visible {
+  outline: 2px solid #4a00bf;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.button--medium {
+  --button-height: 56px;
+  --button-padding-inline: 24px;
+  --button-padding-block: 16px;
+  --button-radius: 8px;
+}
+
+.button--small {
+  --button-height: 48px;
+  --button-padding-inline: 16px;
+  --button-padding-block: 10px;
+  --button-radius: 5px;
+}
+
+.button--filled {
+  --button-bg: #4a00bf;
+  --button-color: #ffffff;
+  --button-hover-overlay: rgba(255, 255, 255, 0.08);
+}
+
+.button--outline {
+  --button-bg: transparent;
+  --button-border: #cbc3d7;
+  --button-color: #494455;
+  --button-hover-overlay: rgba(73, 68, 85, 0.08);
+}
+
+.button--text {
+  --button-bg: transparent;
+  --button-border: transparent;
+  --button-color: #4a00bf;
+  --button-hover-overlay: rgba(73, 68, 85, 0.08);
+}
+
+.button--tonal {
+  --button-bg: #c3b0ff;
+  --button-border: transparent;
+  --button-color: #503f86;
+  --button-hover-overlay: rgba(80, 63, 134, 0.08);
+}
+
+.button--loading {
+  pointer-events: none;
+}
+
+.button[data-disabled='true'] {
+  background: rgba(29, 26, 36, 0.1);
+  border-color: #cbc3d7;
+}
+
+.button[data-disabled='true'][data-variant='filled'] {
+  --button-color: #1d1a24;
+}
+
+.button[data-disabled='true'][data-variant='outline'] {
+  --button-color: #494455;
+}
+
+.button[data-disabled='true'][data-variant='text'] {
+  --button-color: #1d1a24;
+}
+
+.button[data-disabled='true'][data-variant='tonal'] {
+  --button-color: #1d1a24;
+}
+
+.button[data-loading='true'] .button__icon,
+.button[data-loading='true'] .button__label {
+  visibility: hidden;
+}
+
+.button[data-loading='true'] .button__loading--inline {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.button__icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.button--small .button__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.button__icon > svg,
+.button__icon > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.button__label {
+  position: relative;
+  z-index: 1;
+}
+
+.button[data-disabled='true'] .button__icon,
+.button[data-disabled='true'] .button__label {
+  opacity: 0.38;
+}
+
+.button__loading {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+
+.button__loading--inline {
+  margin-left: 2px;
+}
+
+.button[data-loading='true'][data-variant='filled'][data-size='small'] {
+  width: 56px;
+  padding: 0;
+  justify-content: center;
+}
+
+.button__spinner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: button-spin 0.8s linear infinite;
+}
+
+.button__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

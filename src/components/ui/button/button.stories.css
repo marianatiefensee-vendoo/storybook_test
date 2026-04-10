@@ -1,0 +1,31 @@
+.button-demo-grid,
+.button-matrix {
+  display: grid;
+  gap: 16px;
+}
+
+.button-demo-grid {
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.button-demo-grid--stacked {
+  grid-auto-flow: row;
+}
+
+.button-demo-grid--icons {
+  grid-template-columns: repeat(3, max-content);
+}
+
+.button-matrix {
+  grid-auto-rows: min-content;
+  gap: 24px;
+}
+
+.button-matrix__row {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 24px 28px;
+  align-items: center;
+}
