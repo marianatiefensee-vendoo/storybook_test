@@ -1,11 +1,15 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ReactNode,
+} from 'react';
 
 import './button.css';
 
 export type ButtonVariant = 'filled' | 'outline' | 'text' | 'tonal';
 export type ButtonSize = 'medium' | 'small';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -52,7 +56,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     .filter(Boolean)
     .join(' ');
 
-  const showCompactLoadingState = loading && variant === 'filled' && size === 'small';
+  const content = (
+    <span className="button__content">
+      {leadingIcon ? (
+        <span aria-hidden="true" className="button__icon button__icon--leading">
+          {leadingIcon}
+        </span>
+      ) : null}
+      <span className="button__label">{children}</span>
+      {trailingIcon ? (
+        <span aria-hidden="true" className="button__icon button__icon--trailing">
+          {trailingIcon}
+        </span>
+      ) : null}
+    </span>
+  );
 
   return (
     <button
@@ -67,33 +85,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       data-disabled={isDisabled ? 'true' : undefined}
       {...buttonProps}
     >
-      {showCompactLoadingState ? (
-        <>
-          <span className="button__sr-only">{children}</span>
-          <span aria-hidden="true" className="button__loading">
-            <span className="button__spinner" />
-          </span>
-        </>
-      ) : (
-        <>
-          {leadingIcon ? (
-            <span aria-hidden="true" className="button__icon button__icon--leading">
-              {leadingIcon}
-            </span>
-          ) : null}
-          <span className="button__label">{children}</span>
-          {trailingIcon ? (
-            <span aria-hidden="true" className="button__icon button__icon--trailing">
-              {trailingIcon}
-            </span>
-          ) : null}
-          {loading ? (
-            <span aria-hidden="true" className="button__loading button__loading--inline">
-              <span className="button__spinner" />
-            </span>
-          ) : null}
-        </>
-      )}
+      {loading ? <span className="button__sr-only">{children}</span> : null}
+      {content}
+      {loading ? (
+        <span aria-hidden="true" className="button__loading">
+          <span className="button__spinner" />
+        </span>
+      ) : null}
     </button>
   );
 });

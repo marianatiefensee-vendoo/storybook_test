@@ -1,23 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { fn } from 'storybook/test';
+import { expect, fn, userEvent } from 'storybook/test';
 
-import { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from './Button';
+import { Button, type ButtonSize, type ButtonVariant } from './Button';
 import './button.stories.css';
 
-type StoryArgs = Omit<ButtonProps, 'children'> & {
-  label: string;
-  showLeadingIcon: boolean;
-  showTrailingIcon: boolean;
-};
-
 const LinkIcon = () => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M9.5 15.5 7.25 17.75a3.182 3.182 0 0 1-4.5 0 3.182 3.182 0 0 1 0-4.5L5 11"
       stroke="currentColor"
@@ -42,41 +31,25 @@ const LinkIcon = () => (
   </svg>
 );
 
-const ButtonStory = ({
-  label,
-  showLeadingIcon,
-  showTrailingIcon,
-  leadingIcon,
-  trailingIcon,
-  ...args
-}: StoryArgs) => (
-  <Button
-    {...args}
-    leadingIcon={showLeadingIcon ? leadingIcon ?? <LinkIcon /> : undefined}
-    trailingIcon={showTrailingIcon ? trailingIcon ?? <LinkIcon /> : undefined}
-  >
-    {label}
-  </Button>
-);
-
-ButtonStory.displayName = 'ButtonStory';
-
 const meta = {
   title: 'Components/Button',
-  component: ButtonStory,
+  component: Button,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   args: {
+    children: 'Button',
     onClick: fn(),
     variant: 'filled',
     size: 'medium',
-    label: 'Button',
-    showLeadingIcon: false,
-    showTrailingIcon: false,
+    disabled: false,
+    loading: false,
   },
   argTypes: {
+    children: {
+      control: 'text',
+    },
     variant: {
       control: 'select',
       options: ['filled', 'outline', 'text', 'tonal'] satisfies ButtonVariant[],
@@ -85,20 +58,11 @@ const meta = {
       control: 'radio',
       options: ['medium', 'small'] satisfies ButtonSize[],
     },
-    loading: {
-      control: 'boolean',
-    },
     disabled: {
       control: 'boolean',
     },
-    showLeadingIcon: {
+    loading: {
       control: 'boolean',
-    },
-    showTrailingIcon: {
-      control: 'boolean',
-    },
-    label: {
-      control: 'text',
     },
     leadingIcon: {
       control: false,
@@ -106,27 +70,34 @@ const meta = {
     trailingIcon: {
       control: false,
     },
+    onClick: {
+      control: false,
+    },
   },
-} satisfies Meta<StoryArgs>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  play: async ({ canvas, args }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Button' }));
+    await expect(args.onClick).toHaveBeenCalled();
+  },
+};
 
 export const Variants: Story = {
   args: {
-    showLeadingIcon: false,
-    showTrailingIcon: false,
+    children: 'Button',
   },
   parameters: {
     layout: 'padded',
   },
-  render: (args) => (
+  render: () => (
     <div className="button-demo-grid">
       {(['filled', 'outline', 'text', 'tonal'] as ButtonVariant[]).map((variant) => (
-        <Button key={variant} {...args} variant={variant}>
-          {variant}
+        <Button key={variant} variant={variant}>
+          Button
         </Button>
       ))}
     </div>
@@ -135,17 +106,16 @@ export const Variants: Story = {
 
 export const Sizes: Story = {
   args: {
-    showLeadingIcon: false,
-    showTrailingIcon: false,
+    children: 'Button',
   },
   parameters: {
     layout: 'padded',
   },
-  render: (args) => (
+  render: () => (
     <div className="button-demo-grid button-demo-grid--stacked">
       {(['medium', 'small'] as ButtonSize[]).map((size) => (
-        <Button key={size} {...args} size={size}>
-          {size}
+        <Button key={size} size={size}>
+          Button
         </Button>
       ))}
     </div>
@@ -154,41 +124,35 @@ export const Sizes: Story = {
 
 export const WithIcons: Story = {
   args: {
-    showLeadingIcon: true,
-    showTrailingIcon: true,
+    children: 'Button',
   },
   parameters: {
     layout: 'padded',
   },
-  render: (args) => (
+  render: () => (
     <div className="button-demo-grid button-demo-grid--icons">
-      <Button {...args} leadingIcon={<LinkIcon />} trailingIcon={undefined}>
-        Leading icon
+      <Button leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+        Button
       </Button>
-      <Button {...args} leadingIcon={undefined} trailingIcon={<LinkIcon />}>
-        Trailing icon
-      </Button>
-      <Button {...args} leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
-        Both icons
-      </Button>
+      <Button leadingIcon={<LinkIcon />}>Button</Button>
+      <Button trailingIcon={<LinkIcon />}>Button</Button>
     </div>
   ),
 };
 
 export const Disabled: Story = {
   args: {
+    children: 'Button',
     disabled: true,
-    showLeadingIcon: false,
-    showTrailingIcon: false,
   },
   parameters: {
     layout: 'padded',
   },
-  render: (args) => (
+  render: () => (
     <div className="button-demo-grid button-demo-grid--stacked">
       {(['filled', 'outline', 'text', 'tonal'] as ButtonVariant[]).map((variant) => (
-        <Button key={variant} {...args} variant={variant}>
-          {variant}
+        <Button key={variant} variant={variant} disabled>
+          Button
         </Button>
       ))}
     </div>
@@ -197,11 +161,10 @@ export const Disabled: Story = {
 
 export const Loading: Story = {
   args: {
+    children: 'Button',
     variant: 'filled',
     size: 'small',
     loading: true,
-    showLeadingIcon: false,
-    showTrailingIcon: false,
   },
   parameters: {
     layout: 'centered',
@@ -210,86 +173,85 @@ export const Loading: Story = {
 
 export const FigmaMatrix: Story = {
   args: {
-    showLeadingIcon: false,
-    showTrailingIcon: false,
+    children: 'Button',
   },
   parameters: {
     layout: 'padded',
   },
-  render: (args) => (
+  render: () => (
     <div className="button-matrix">
       <div className="button-matrix__row">
-        <Button {...args} variant="filled" size="medium">
+        <Button variant="filled" size="medium" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="filled" size="medium">
+        <Button variant="filled" size="medium" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="filled" size="medium" disabled>
+        <Button variant="filled" size="medium" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="filled" size="small">
-          Button
-        </Button>
-      </div>
-      <div className="button-matrix__row">
-        <Button {...args} variant="filled" size="small">
-          Button
-        </Button>
-        <Button {...args} variant="filled" size="small" loading>
-          Button
-        </Button>
-        <Button {...args} variant="filled" size="small" disabled>
-          Button
-        </Button>
-        <Button {...args} variant="outline" size="medium">
+        <Button variant="filled" size="small" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
       </div>
       <div className="button-matrix__row">
-        <Button {...args} variant="outline" size="medium">
+        <Button variant="filled" size="small" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="outline" size="medium" disabled>
+        <Button variant="filled" size="small" loading>
           Button
         </Button>
-        <Button {...args} variant="outline" size="small">
+        <Button variant="filled" size="small" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="outline" size="small">
-          Button
-        </Button>
-      </div>
-      <div className="button-matrix__row">
-        <Button {...args} variant="outline" size="small" disabled>
-          Button
-        </Button>
-        <Button {...args} variant="text" size="medium">
-          Button
-        </Button>
-        <Button {...args} variant="text" size="medium" disabled>
-          Button
-        </Button>
-        <Button {...args} variant="text" size="small">
+        <Button variant="outline" size="medium" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
       </div>
       <div className="button-matrix__row">
-        <Button {...args} variant="text" size="small" disabled>
+        <Button variant="outline" size="medium" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="tonal" size="medium" disabled>
+        <Button variant="outline" size="medium" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="tonal" size="medium">
+        <Button variant="outline" size="small" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
-        <Button {...args} variant="tonal" size="small">
+        <Button variant="outline" size="small" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
       </div>
       <div className="button-matrix__row">
-        <Button {...args} variant="tonal" size="small" disabled>
+        <Button variant="outline" size="small" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+        <Button variant="text" size="medium" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+        <Button variant="text" size="medium" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+        <Button variant="text" size="small" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+      </div>
+      <div className="button-matrix__row">
+        <Button variant="text" size="small" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+        <Button variant="tonal" size="medium" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+        <Button variant="tonal" size="medium" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+        <Button variant="tonal" size="small" leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
+          Button
+        </Button>
+      </div>
+      <div className="button-matrix__row">
+        <Button variant="tonal" size="small" disabled leadingIcon={<LinkIcon />} trailingIcon={<LinkIcon />}>
           Button
         </Button>
       </div>

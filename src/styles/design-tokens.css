@@ -1,0 +1,47 @@
+:root {
+  /* Typography */
+  --go-flow-font-family-brand: 'Lexend', 'Segoe UI', system-ui, sans-serif;
+  --go-flow-font-size-label-large: 14px;
+  --go-flow-font-weight-medium: 500;
+  --go-flow-line-height-label-large: 20px;
+  --go-flow-letter-spacing-label-large: 0.1px;
+
+  /* Core colors */
+  --go-flow-sys-light-primary: #4a00bf;
+  --go-flow-sys-light-on-primary: #ffffff;
+  --go-flow-sys-light-on-surface: #1d1a24;
+  --go-flow-sys-light-on-surface-variant: #494455;
+  --go-flow-sys-light-outline-variant: #cbc3d7;
+  --go-flow-sys-light-secondary-container: #c3b0ff;
+  --go-flow-sys-light-on-secondary-container: #503f86;
+
+  /* State layers */
+  --go-flow-state-layer-on-surface-10: rgba(29, 26, 36, 0.1);
+  --go-flow-state-layer-filled-hover: rgba(255, 255, 255, 0.08);
+  --go-flow-state-layer-outline-hover: rgba(73, 68, 85, 0.08);
+  --go-flow-state-layer-tonal-hover: rgba(80, 63, 134, 0.08);
+
+  /* Spacing and shape */
+  --go-flow-space-1: 4px;
+  --go-flow-space-2-5: 10px;
+  --go-flow-space-4: 16px;
+  --go-flow-space-6: 24px;
+  --go-flow-radius-button-small: 5px;
+  --go-flow-radius-button-medium: 8px;
+
+  /* Button-specific semantic tokens */
+  --go-flow-button-height-medium: 56px;
+  --go-flow-button-height-small: 48px;
+  --go-flow-button-padding-inline-medium: 24px;
+  --go-flow-button-padding-inline-small: 16px;
+  --go-flow-button-padding-block-medium: 16px;
+  --go-flow-button-padding-block-small: 10px;
+  --go-flow-button-content-gap: 10px;
+  --go-flow-button-label-padding-inline: 4px;
+  --go-flow-button-icon-size-medium: 24px;
+  --go-flow-button-icon-size-small: 20px;
+  --go-flow-button-spinner-size: 24px;
+  --go-flow-button-spinner-stroke-width: 2px;
+  --go-flow-button-transition-duration: 120ms;
+  --go-flow-button-transition-easing: ease;
+}

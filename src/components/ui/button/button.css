@@ -1,60 +1,68 @@
 .button {
-  --button-bg: transparent;
-  --button-border: transparent;
-  --button-color: #494455;
-  --button-hover-overlay: transparent;
-  --button-height: 56px;
-  --button-padding-inline: 24px;
-  --button-padding-block: 16px;
-  --button-radius: 8px;
+  --button-bg: var(--go-flow-sys-light-primary);
+  --button-border-color: transparent;
+  --button-fg: var(--go-flow-sys-light-on-primary);
+  --button-hover-state-layer: var(--go-flow-state-layer-filled-hover);
+  --button-height: var(--go-flow-button-height-medium);
+  --button-padding-inline: var(--go-flow-button-padding-inline-medium);
+  --button-padding-block: var(--go-flow-button-padding-block-medium);
+  --button-radius: var(--go-flow-radius-button-medium);
+  --button-gap: var(--go-flow-button-content-gap);
+  --button-label-padding-inline: var(--go-flow-button-label-padding-inline);
+  --button-icon-size: var(--go-flow-button-icon-size-medium);
+  --button-spinner-size: var(--go-flow-button-spinner-size);
+  --button-spinner-border-width: var(--go-flow-button-spinner-stroke-width);
+  --button-transition-duration: var(--go-flow-button-transition-duration);
+  --button-transition-easing: var(--go-flow-button-transition-easing);
 
   appearance: none;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: var(--button-gap);
   box-sizing: border-box;
   min-width: 0;
   min-height: var(--button-height);
-  padding: var(--button-padding-block) var(--button-padding-inline);
-  border: 1px solid var(--button-border);
+  padding-block: var(--button-padding-block);
+  padding-inline: var(--button-padding-inline);
+  border: 1px solid var(--button-border-color);
   border-radius: var(--button-radius);
   background: var(--button-bg);
-  color: var(--button-color);
-  font-family: 'Lexend', 'Segoe UI', system-ui, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0.1px;
+  color: var(--button-fg);
+  cursor: pointer;
+  font-family: var(--go-flow-font-family-brand);
+  font-size: var(--go-flow-font-size-label-large);
+  font-weight: var(--go-flow-font-weight-medium);
+  letter-spacing: var(--go-flow-letter-spacing-label-large);
+  line-height: var(--go-flow-line-height-label-large);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   transition:
-    background-color 120ms ease,
-    border-color 120ms ease,
-    color 120ms ease,
-    box-shadow 120ms ease,
-    transform 120ms ease;
+    background-color var(--button-transition-duration) var(--button-transition-easing),
+    border-color var(--button-transition-duration) var(--button-transition-easing),
+    color var(--button-transition-duration) var(--button-transition-easing),
+    transform var(--button-transition-duration) var(--button-transition-easing);
 }
 
 .button::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--button-hover-overlay);
+  background: var(--button-hover-state-layer);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 120ms ease;
+  transition: opacity var(--button-transition-duration) var(--button-transition-easing);
 }
 
-.button:hover::before {
+.button:hover:not(:disabled):not([data-loading='true'])::before {
   opacity: 1;
 }
 
 .button:focus-visible {
-  outline: 2px solid #4a00bf;
+  outline: 2px solid var(--go-flow-sys-light-primary);
   outline-offset: 2px;
 }
 
@@ -63,98 +71,86 @@
 }
 
 .button--medium {
-  --button-height: 56px;
-  --button-padding-inline: 24px;
-  --button-padding-block: 16px;
-  --button-radius: 8px;
+  --button-height: var(--go-flow-button-height-medium);
+  --button-padding-inline: var(--go-flow-button-padding-inline-medium);
+  --button-padding-block: var(--go-flow-button-padding-block-medium);
+  --button-radius: var(--go-flow-radius-button-medium);
+  --button-icon-size: var(--go-flow-button-icon-size-medium);
+  --button-spinner-size: var(--go-flow-button-spinner-size);
 }
 
 .button--small {
-  --button-height: 48px;
-  --button-padding-inline: 16px;
-  --button-padding-block: 10px;
-  --button-radius: 5px;
+  --button-height: var(--go-flow-button-height-small);
+  --button-padding-inline: var(--go-flow-button-padding-inline-small);
+  --button-padding-block: var(--go-flow-button-padding-block-small);
+  --button-radius: var(--go-flow-radius-button-small);
+  --button-icon-size: var(--go-flow-button-icon-size-small);
+  --button-spinner-size: var(--go-flow-button-spinner-size);
 }
 
 .button--filled {
-  --button-bg: #4a00bf;
-  --button-color: #ffffff;
-  --button-hover-overlay: rgba(255, 255, 255, 0.08);
+  --button-bg: var(--go-flow-sys-light-primary);
+  --button-border-color: transparent;
+  --button-fg: var(--go-flow-sys-light-on-primary);
+  --button-hover-state-layer: var(--go-flow-state-layer-filled-hover);
 }
 
 .button--outline {
   --button-bg: transparent;
-  --button-border: #cbc3d7;
-  --button-color: #494455;
-  --button-hover-overlay: rgba(73, 68, 85, 0.08);
+  --button-border-color: var(--go-flow-sys-light-outline-variant);
+  --button-fg: var(--go-flow-sys-light-on-surface-variant);
+  --button-hover-state-layer: var(--go-flow-state-layer-outline-hover);
 }
 
 .button--text {
   --button-bg: transparent;
-  --button-border: transparent;
-  --button-color: #4a00bf;
-  --button-hover-overlay: rgba(73, 68, 85, 0.08);
+  --button-border-color: transparent;
+  --button-fg: var(--go-flow-sys-light-primary);
+  --button-hover-state-layer: var(--go-flow-state-layer-outline-hover);
 }
 
 .button--tonal {
-  --button-bg: #c3b0ff;
-  --button-border: transparent;
-  --button-color: #503f86;
-  --button-hover-overlay: rgba(80, 63, 134, 0.08);
-}
-
-.button--loading {
-  pointer-events: none;
+  --button-bg: var(--go-flow-sys-light-secondary-container);
+  --button-border-color: transparent;
+  --button-fg: var(--go-flow-sys-light-on-secondary-container);
+  --button-hover-state-layer: var(--go-flow-state-layer-tonal-hover);
 }
 
 .button[data-disabled='true'] {
-  background: rgba(29, 26, 36, 0.1);
-  border-color: #cbc3d7;
+  background: var(--go-flow-state-layer-on-surface-10);
+  border-color: var(--go-flow-sys-light-outline-variant);
 }
 
-.button[data-disabled='true'][data-variant='filled'] {
-  --button-color: #1d1a24;
+.button[data-disabled='true'][data-variant='filled'],
+.button[data-disabled='true'][data-variant='text'],
+.button[data-disabled='true'][data-variant='tonal'] {
+  --button-fg: var(--go-flow-sys-light-on-surface);
 }
 
 .button[data-disabled='true'][data-variant='outline'] {
-  --button-color: #494455;
+  --button-fg: var(--go-flow-sys-light-on-surface-variant);
 }
 
-.button[data-disabled='true'][data-variant='text'] {
-  --button-color: #1d1a24;
+.button__content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
 }
 
-.button[data-disabled='true'][data-variant='tonal'] {
-  --button-color: #1d1a24;
-}
-
-.button[data-loading='true'] .button__icon,
-.button[data-loading='true'] .button__label {
+.button[data-loading='true'] .button__content {
   visibility: hidden;
 }
 
-.button[data-loading='true'] .button__loading--inline {
-  position: absolute;
-  inset: 0;
-  width: auto;
-  height: auto;
-  margin: 0;
-}
-
 .button__icon {
-  position: relative;
-  z-index: 1;
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-}
-
-.button--small .button__icon {
-  width: 20px;
-  height: 20px;
+  width: var(--button-icon-size);
+  height: var(--button-icon-size);
 }
 
 .button__icon > svg,
@@ -165,41 +161,35 @@
 }
 
 .button__label {
-  position: relative;
-  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--button-icon-size);
+  padding-inline: var(--button-label-padding-inline);
 }
 
-.button[data-disabled='true'] .button__icon,
-.button[data-disabled='true'] .button__label {
+.button[data-disabled='true'] .button__content {
   opacity: 0.38;
 }
 
 .button__loading {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-}
-
-.button__loading--inline {
-  margin-left: 2px;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
 }
 
 .button[data-loading='true'][data-variant='filled'][data-size='small'] {
   width: 56px;
   padding: 0;
-  justify-content: center;
 }
 
 .button__spinner {
   display: block;
-  width: 100%;
-  height: 100%;
-  border: 2px solid currentColor;
+  width: var(--button-spinner-size);
+  height: var(--button-spinner-size);
+  border: var(--button-spinner-border-width) solid currentColor;
   border-right-color: transparent;
   border-radius: 999px;
   animation: button-spin 0.8s linear infinite;
