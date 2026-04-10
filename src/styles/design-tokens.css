@@ -33,8 +33,10 @@
 
   /* Field-specific semantic tokens */
   --go-flow-field-height-default: 56px;
+  --go-flow-field-height-text-area: 120px;
   --go-flow-field-padding-inline: 16px;
   --go-flow-field-padding-block: 16px;
+  --go-flow-field-padding-block-text-area: 16px;
   --go-flow-field-gap: 8px;
   --go-flow-field-radius: 12px;
   --go-flow-field-border-width: 1px;
