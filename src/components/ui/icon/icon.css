@@ -1,0 +1,16 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--go-flow-icon-size);
+  height: var(--go-flow-icon-size);
+  flex: 0 0 auto;
+  vertical-align: middle;
+  color: inherit;
+}
+
+.icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

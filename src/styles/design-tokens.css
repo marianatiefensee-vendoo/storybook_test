@@ -11,6 +11,8 @@
   --go-flow-sys-light-on-primary: #ffffff;
   --go-flow-sys-light-on-surface: #1d1a24;
   --go-flow-sys-light-on-surface-variant: #494455;
+  --go-flow-sys-light-error: #b3261e;
+  --go-flow-sys-light-on-error: #ffffff;
   --go-flow-sys-light-outline-variant: #cbc3d7;
   --go-flow-sys-light-secondary-container: #c3b0ff;
   --go-flow-sys-light-on-secondary-container: #503f86;
@@ -29,6 +31,35 @@
   --go-flow-radius-button-small: 5px;
   --go-flow-radius-button-medium: 8px;
 
+  /* Field-specific semantic tokens */
+  --go-flow-field-height-default: 56px;
+  --go-flow-field-padding-inline: 16px;
+  --go-flow-field-padding-block: 16px;
+  --go-flow-field-gap: 8px;
+  --go-flow-field-radius: 12px;
+  --go-flow-field-border-width: 1px;
+  --go-flow-field-focus-ring-width: 2px;
+  --go-flow-field-supporting-size: 12px;
+  --go-flow-field-supporting-line-height: 16px;
+  --go-flow-field-surface: #ffffff;
+  --go-flow-field-surface-disabled: rgba(29, 26, 36, 0.04);
+  --go-flow-field-border: var(--go-flow-sys-light-outline-variant);
+  --go-flow-field-border-hover: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-field-border-focus: var(--go-flow-sys-light-primary);
+  --go-flow-field-border-error: var(--go-flow-sys-light-error);
+  --go-flow-field-border-disabled: rgba(73, 68, 85, 0.16);
+  --go-flow-field-text: var(--go-flow-sys-light-on-surface);
+  --go-flow-field-text-disabled: rgba(29, 26, 36, 0.38);
+  --go-flow-field-placeholder: rgba(73, 68, 85, 0.72);
+  --go-flow-field-placeholder-disabled: rgba(29, 26, 36, 0.24);
+  --go-flow-field-supporting-text: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-field-error-text: var(--go-flow-sys-light-error);
+  --go-flow-field-label: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-field-label-focused: var(--go-flow-sys-light-primary);
+  --go-flow-field-label-error: var(--go-flow-sys-light-error);
+  --go-flow-field-label-disabled: rgba(29, 26, 36, 0.38);
+  --go-flow-field-focus-ring: var(--go-flow-sys-light-primary);
+
   /* Button-specific semantic tokens */
   --go-flow-button-height-medium: 56px;
   --go-flow-button-height-small: 48px;
@@ -37,11 +68,15 @@
   --go-flow-button-padding-block-medium: 16px;
   --go-flow-button-padding-block-small: 10px;
   --go-flow-button-content-gap: 10px;
-  --go-flow-button-label-padding-inline: 4px;
+  --go-flow-button-label-padding-inline: 0px;
   --go-flow-button-icon-size-medium: 24px;
-  --go-flow-button-icon-size-small: 20px;
+  --go-flow-button-icon-size-small: 24px;
   --go-flow-button-spinner-size: 24px;
   --go-flow-button-spinner-stroke-width: 2px;
   --go-flow-button-transition-duration: 120ms;
   --go-flow-button-transition-easing: ease;
+
+  /* Icon contract */
+  --go-flow-icon-size: 24px;
+  --go-flow-icon-stroke-width: 2px;
 }

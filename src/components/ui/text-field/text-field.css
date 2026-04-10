@@ -1,0 +1,172 @@
+.text-field {
+  --text-field-stack-gap: var(--go-flow-field-gap);
+  --text-field-control-height: var(--go-flow-field-height-default);
+  --text-field-control-padding-inline: var(--go-flow-field-padding-inline);
+  --text-field-control-padding-block: var(--go-flow-field-padding-block);
+  --text-field-control-radius: var(--go-flow-field-radius);
+  --text-field-control-border-width: var(--go-flow-field-border-width);
+  --text-field-control-bg: var(--go-flow-field-surface);
+  --text-field-control-border-color: var(--go-flow-field-border);
+  --text-field-control-border-hover-color: var(--go-flow-field-border-hover);
+  --text-field-control-border-focus-color: var(--go-flow-field-border-focus);
+  --text-field-control-border-error-color: var(--go-flow-field-border-error);
+  --text-field-control-border-disabled-color: var(--go-flow-field-border-disabled);
+  --text-field-control-text-color: var(--go-flow-field-text);
+  --text-field-control-text-disabled-color: var(--go-flow-field-text-disabled);
+  --text-field-control-placeholder-color: var(--go-flow-field-placeholder);
+  --text-field-control-placeholder-disabled-color: var(--go-flow-field-placeholder-disabled);
+  --text-field-control-supporting-color: var(--go-flow-field-supporting-text);
+  --text-field-control-supporting-error-color: var(--go-flow-field-error-text);
+  --text-field-control-label-color: var(--go-flow-field-label);
+  --text-field-control-label-focused-color: var(--go-flow-field-label-focused);
+  --text-field-control-label-error-color: var(--go-flow-field-label-error);
+  --text-field-control-label-disabled-color: var(--go-flow-field-label-disabled);
+  --text-field-control-focus-ring-color: var(--go-flow-field-focus-ring);
+  --text-field-control-focus-ring-width: var(--go-flow-field-focus-ring-width);
+  --text-field-supporting-size: var(--go-flow-field-supporting-size);
+  --text-field-supporting-line-height: var(--go-flow-field-supporting-line-height);
+
+  display: grid;
+  gap: var(--text-field-stack-gap);
+  inline-size: 100%;
+  min-inline-size: 0;
+  font-family: var(--go-flow-font-family-brand);
+}
+
+.text-field__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-field-control-label-color);
+  font-size: var(--go-flow-font-size-label-large);
+  font-weight: var(--go-flow-font-weight-medium);
+  line-height: var(--go-flow-line-height-label-large);
+  letter-spacing: var(--go-flow-letter-spacing-label-large);
+}
+
+.text-field__required {
+  color: inherit;
+}
+
+.text-field__control {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: var(--text-field-control-height);
+  padding-block: var(--text-field-control-padding-block);
+  padding-inline: var(--text-field-control-padding-inline);
+  border: var(--text-field-control-border-width) solid var(--text-field-control-border-color);
+  border-radius: var(--text-field-control-radius);
+  background: var(--text-field-control-bg);
+  color: var(--text-field-control-text-color);
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.text-field:hover:not([data-disabled='true']) .text-field__control {
+  border-color: var(--text-field-control-border-hover-color);
+}
+
+.text-field:focus-within .text-field__control {
+  border-color: var(--text-field-control-border-focus-color);
+  outline: var(--text-field-control-focus-ring-width) solid
+    var(--text-field-control-focus-ring-color);
+  outline-offset: 2px;
+}
+
+.text-field[data-invalid='true'] .text-field__control {
+  border-color: var(--text-field-control-border-error-color);
+}
+
+.text-field[data-invalid='true']:focus-within .text-field__control {
+  border-color: var(--text-field-control-border-error-color);
+}
+
+.text-field[data-disabled='true'] .text-field__control {
+  background: var(--go-flow-field-surface-disabled);
+  border-color: var(--text-field-control-border-disabled-color);
+}
+
+.text-field__input {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 20px;
+  letter-spacing: inherit;
+  outline: none;
+  appearance: none;
+  caret-color: currentColor;
+}
+
+.text-field__input::placeholder {
+  color: var(--text-field-control-placeholder-color);
+  opacity: 1;
+}
+
+.text-field__input:disabled {
+  color: var(--text-field-control-text-disabled-color);
+  cursor: not-allowed;
+}
+
+.text-field__input:disabled::placeholder {
+  color: var(--text-field-control-placeholder-disabled-color);
+}
+
+.text-field__supporting {
+  color: var(--text-field-control-supporting-color);
+  font-size: var(--text-field-supporting-size);
+  line-height: var(--text-field-supporting-line-height);
+}
+
+.text-field[data-invalid='true'] .text-field__supporting {
+  color: var(--text-field-control-supporting-error-color);
+}
+
+.text-field[data-disabled='true'] .text-field__label {
+  color: var(--text-field-control-label-disabled-color);
+}
+
+.text-field[data-disabled='true'] .text-field__supporting {
+  color: var(--text-field-control-label-disabled-color);
+}
+
+.text-field:focus-within .text-field__label {
+  color: var(--text-field-control-label-focused-color);
+}
+
+.text-field[data-invalid='true'] .text-field__label {
+  color: var(--text-field-control-label-error-color);
+}
+
+.text-field[data-disabled='true']:focus-within .text-field__label {
+  color: var(--text-field-control-label-disabled-color);
+}
+
+.text-field[data-disabled='true'] .text-field__control {
+  background: var(--go-flow-field-surface-disabled);
+  border-color: var(--text-field-control-border-disabled-color);
+  box-shadow: none;
+  outline: none;
+}
+
+.text-field[data-disabled='true'] .text-field__label,
+.text-field[data-disabled='true'] .text-field__supporting,
+.text-field[data-disabled='true'] .text-field__input {
+  color: var(--text-field-control-label-disabled-color);
+}
+
+.text-field[data-disabled='true'] .text-field__input::placeholder {
+  color: var(--text-field-control-placeholder-disabled-color);
+}
+
+.text-field[data-disabled='true'] .text-field__input {
+  cursor: not-allowed;
+}

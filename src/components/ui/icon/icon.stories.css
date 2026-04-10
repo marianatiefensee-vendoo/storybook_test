@@ -1,0 +1,31 @@
+.icon-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, max-content));
+  gap: 16px;
+  align-items: start;
+}
+
+.icon-gallery__item {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.icon-gallery__swatch {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--go-flow-sys-light-outline-variant);
+  border-radius: 12px;
+  color: var(--go-flow-sys-light-primary);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(74, 0, 191, 0.06), transparent 70%),
+    #fff;
+}
+
+.icon-gallery__label {
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--go-flow-sys-light-on-surface-variant);
+}

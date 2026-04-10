@@ -153,8 +153,7 @@
   height: var(--button-icon-size);
 }
 
-.button__icon > svg,
-.button__icon > img {
+.button__icon > * {
   display: block;
   width: 100%;
   height: 100%;
@@ -165,6 +164,7 @@
   align-items: center;
   min-height: var(--button-icon-size);
   padding-inline: var(--button-label-padding-inline);
+  line-height: 1;
 }
 
 .button[data-disabled='true'] .button__content {
