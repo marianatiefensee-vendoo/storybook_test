@@ -8,6 +8,21 @@ import { Icon } from '../icon/Icon';
 import { iconNames, type IconName } from '../icon/icon-names';
 import './button.stories.css';
 
+const figmaDesignUrl =
+  'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1219-5473&m=dev';
+const figmaAccessToken = import.meta.env.VITE_STORYBOOK_FIGMA_ACCESS_TOKEN;
+const buttonDesign = figmaAccessToken
+  ? {
+      type: 'figspec' as const,
+      url: figmaDesignUrl,
+      accessToken: figmaAccessToken,
+    }
+  : {
+      type: 'figma' as const,
+      url: figmaDesignUrl,
+      allowFullscreen: true,
+    };
+
 type ButtonStoryArgs = {
   children: string;
   variant: ButtonVariant;
@@ -100,11 +115,7 @@ type Story = StoryObj<ButtonStoryArgs>;
 export const Playground: Story = {
   render: renderButton,
   parameters: {
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1219-5473&m=dev',
-      allowFullscreen: true,
-    },
+    design: buttonDesign,
   },
   play: async ({ canvas, args }) => {
     await userEvent.click(canvas.getByRole('button', { name: args.children as string }));
