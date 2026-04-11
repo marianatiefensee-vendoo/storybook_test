@@ -23,8 +23,12 @@
   --text-field-control-label-disabled-color: var(--go-flow-field-label-disabled);
   --text-field-control-focus-ring-color: var(--go-flow-field-focus-ring);
   --text-field-control-focus-ring-width: var(--go-flow-field-focus-ring-width);
-  --text-field-supporting-size: var(--go-flow-field-supporting-size);
-  --text-field-supporting-line-height: var(--go-flow-field-supporting-line-height);
+  --text-field-control-label-font: var(--go-flow-field-label-font);
+  --text-field-control-label-letter-spacing: var(--go-flow-field-label-letter-spacing);
+  --text-field-control-input-font: var(--go-flow-field-input-font);
+  --text-field-control-input-letter-spacing: var(--go-flow-field-input-letter-spacing);
+  --text-field-control-supporting-font: var(--go-flow-field-supporting-font);
+  --text-field-control-supporting-letter-spacing: var(--go-flow-field-supporting-letter-spacing);
 
   display: grid;
   gap: var(--text-field-stack-gap);
@@ -38,10 +42,8 @@
   align-items: center;
   gap: 2px;
   color: var(--text-field-control-label-color);
-  font-size: var(--go-flow-font-size-label-large);
-  font-weight: var(--go-flow-font-weight-medium);
-  line-height: var(--go-flow-line-height-label-large);
-  letter-spacing: var(--go-flow-letter-spacing-label-large);
+  font: var(--text-field-control-label-font);
+  letter-spacing: var(--text-field-control-label-letter-spacing);
 }
 
 .text-field__required {
@@ -98,9 +100,8 @@
   border: 0;
   background: transparent;
   color: inherit;
-  font: inherit;
-  line-height: 20px;
-  letter-spacing: inherit;
+  font: var(--text-field-control-input-font);
+  letter-spacing: var(--text-field-control-input-letter-spacing);
   outline: none;
   appearance: none;
   caret-color: currentColor;
@@ -122,8 +123,8 @@
 
 .text-field__supporting {
   color: var(--text-field-control-supporting-color);
-  font-size: var(--text-field-supporting-size);
-  line-height: var(--text-field-supporting-line-height);
+  font: var(--text-field-control-supporting-font);
+  letter-spacing: var(--text-field-control-supporting-letter-spacing);
 }
 
 .text-field[data-invalid='true'] .text-field__supporting {

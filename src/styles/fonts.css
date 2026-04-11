@@ -1,0 +1,12 @@
+@import '@fontsource-variable/lexend';
+
+body {
+  font-family: var(--go-flow-font-family-brand);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

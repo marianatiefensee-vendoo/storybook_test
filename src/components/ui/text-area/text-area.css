@@ -23,8 +23,12 @@
   --text-area-control-label-disabled-color: var(--go-flow-field-label-disabled);
   --text-area-control-focus-ring-color: var(--go-flow-field-focus-ring);
   --text-area-control-focus-ring-width: var(--go-flow-field-focus-ring-width);
-  --text-area-supporting-size: var(--go-flow-field-supporting-size);
-  --text-area-supporting-line-height: var(--go-flow-field-supporting-line-height);
+  --text-area-control-label-font: var(--go-flow-field-label-font);
+  --text-area-control-label-letter-spacing: var(--go-flow-field-label-letter-spacing);
+  --text-area-control-input-font: var(--go-flow-field-input-font);
+  --text-area-control-input-letter-spacing: var(--go-flow-field-input-letter-spacing);
+  --text-area-control-supporting-font: var(--go-flow-field-supporting-font);
+  --text-area-control-supporting-letter-spacing: var(--go-flow-field-supporting-letter-spacing);
 
   display: grid;
   gap: var(--text-area-stack-gap);
@@ -38,10 +42,8 @@
   align-items: center;
   gap: 2px;
   color: var(--text-area-control-label-color);
-  font-size: var(--go-flow-font-size-label-large);
-  font-weight: var(--go-flow-font-weight-medium);
-  line-height: var(--go-flow-line-height-label-large);
-  letter-spacing: var(--go-flow-letter-spacing-label-large);
+  font: var(--text-area-control-label-font);
+  letter-spacing: var(--text-area-control-label-letter-spacing);
 }
 
 .text-area__required {
@@ -94,9 +96,8 @@
   resize: vertical;
   background: transparent;
   color: inherit;
-  font: inherit;
-  line-height: 20px;
-  letter-spacing: inherit;
+  font: var(--text-area-control-input-font);
+  letter-spacing: var(--text-area-control-input-letter-spacing);
   outline: none;
   appearance: none;
   caret-color: currentColor;
@@ -118,8 +119,8 @@
 
 .text-area__supporting {
   color: var(--text-area-control-supporting-color);
-  font-size: var(--text-area-supporting-size);
-  line-height: var(--text-area-supporting-line-height);
+  font: var(--text-area-control-supporting-font);
+  letter-spacing: var(--text-area-control-supporting-letter-spacing);
 }
 
 .text-area[data-invalid='true'] .text-area__supporting {

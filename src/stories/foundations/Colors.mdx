@@ -1,0 +1,20 @@
+import { ColorItem, ColorPalette, Meta } from '@storybook/addon-docs/blocks';
+
+import { colorPaletteSections } from '../../styles/color-tokens';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+The palette below is driven by the shared semantic design tokens used by the components in this repo. Component-local aliases should map to these values, not replace them.
+
+<ColorPalette>
+  {colorPaletteSections.map((section) => (
+    <ColorItem
+      key={section.title}
+      title={section.title}
+      subtitle={section.subtitle}
+      colors={section.colors}
+    />
+  ))}
+</ColorPalette>

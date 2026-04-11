@@ -31,11 +31,8 @@
   background: var(--button-bg);
   color: var(--button-fg);
   cursor: pointer;
-  font-family: var(--go-flow-font-family-brand);
-  font-size: var(--go-flow-font-size-label-large);
-  font-weight: var(--go-flow-font-weight-medium);
-  letter-spacing: var(--go-flow-letter-spacing-label-large);
-  line-height: var(--go-flow-line-height-label-large);
+  font: var(--go-flow-button-label-font);
+  letter-spacing: var(--go-flow-button-label-letter-spacing);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
@@ -164,7 +161,7 @@
   align-items: center;
   min-height: var(--button-icon-size);
   padding-inline: var(--button-label-padding-inline);
-  line-height: 1;
+  line-height: inherit;
 }
 
 .button[data-disabled='true'] .button__content {

@@ -1,10 +1,46 @@
 :root {
   /* Typography */
-  --go-flow-font-family-brand: 'Lexend', 'Segoe UI', system-ui, sans-serif;
+  --go-flow-font-family-brand: 'Lexend Variable', 'Segoe UI', system-ui, sans-serif;
   --go-flow-font-size-label-large: 14px;
   --go-flow-font-weight-medium: 500;
   --go-flow-line-height-label-large: 20px;
   --go-flow-letter-spacing-label-large: 0.1px;
+  --go-flow-typography-display-large: 400 57px/64px var(--go-flow-font-family-brand);
+  --go-flow-typography-display-large-letter-spacing: -0.25px;
+  --go-flow-typography-display-medium: 400 45px/52px var(--go-flow-font-family-brand);
+  --go-flow-typography-display-medium-letter-spacing: 0px;
+  --go-flow-typography-display-small: 400 36px/44px var(--go-flow-font-family-brand);
+  --go-flow-typography-display-small-letter-spacing: 0px;
+  --go-flow-typography-headline-large: 400 32px/40px var(--go-flow-font-family-brand);
+  --go-flow-typography-headline-large-letter-spacing: 0px;
+  --go-flow-typography-headline-medium: 400 28px/36px var(--go-flow-font-family-brand);
+  --go-flow-typography-headline-medium-letter-spacing: 0px;
+  --go-flow-typography-headline-small: 400 24px/32px var(--go-flow-font-family-brand);
+  --go-flow-typography-headline-small-letter-spacing: 0px;
+  --go-flow-typography-title-large: 400 22px/28px var(--go-flow-font-family-brand);
+  --go-flow-typography-title-large-letter-spacing: 0px;
+  --go-flow-typography-title-medium: 500 16px/24px var(--go-flow-font-family-brand);
+  --go-flow-typography-title-medium-letter-spacing: 0.15px;
+  --go-flow-typography-title-small: 500 14px/20px var(--go-flow-font-family-brand);
+  --go-flow-typography-title-small-letter-spacing: 0.1px;
+  --go-flow-typography-body-large: 400 16px/24px var(--go-flow-font-family-brand);
+  --go-flow-typography-body-large-letter-spacing: 0.5px;
+  --go-flow-typography-body-medium: 400 14px/20px var(--go-flow-font-family-brand);
+  --go-flow-typography-body-medium-letter-spacing: 0.25px;
+  --go-flow-typography-body-small: 400 12px/16px var(--go-flow-font-family-brand);
+  --go-flow-typography-body-small-letter-spacing: 0.4px;
+  --go-flow-typography-body-large-emphasized: 500 16px/24px var(--go-flow-font-family-brand);
+  --go-flow-typography-body-large-emphasized-letter-spacing: 0.5px;
+  --go-flow-typography-body-medium-emphasized: 500 14px/20px var(--go-flow-font-family-brand);
+  --go-flow-typography-body-medium-emphasized-letter-spacing: 0.25px;
+  --go-flow-typography-body-small-emphasized: 500 12px/16px var(--go-flow-font-family-brand);
+  --go-flow-typography-body-small-emphasized-letter-spacing: 0.4px;
+  --go-flow-typography-label-large: 500 14px/20px var(--go-flow-font-family-brand);
+  --go-flow-typography-label-large-letter-spacing: 0.1px;
+  --go-flow-typography-label-medium: 500 12px/16px var(--go-flow-font-family-brand);
+  --go-flow-typography-label-medium-letter-spacing: 0.5px;
+  --go-flow-typography-label-small: 500 11px/16px var(--go-flow-font-family-brand);
+  --go-flow-typography-label-small-letter-spacing: 0.5px;
 
   /* Core colors */
   --go-flow-sys-light-primary: #4a00bf;
@@ -41,8 +77,12 @@
   --go-flow-field-radius: 12px;
   --go-flow-field-border-width: 1px;
   --go-flow-field-focus-ring-width: 2px;
-  --go-flow-field-supporting-size: 12px;
-  --go-flow-field-supporting-line-height: 16px;
+  --go-flow-field-label-font: var(--go-flow-typography-label-large);
+  --go-flow-field-label-letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
+  --go-flow-field-input-font: var(--go-flow-typography-body-large);
+  --go-flow-field-input-letter-spacing: var(--go-flow-typography-body-large-letter-spacing);
+  --go-flow-field-supporting-font: var(--go-flow-typography-body-small);
+  --go-flow-field-supporting-letter-spacing: var(--go-flow-typography-body-small-letter-spacing);
   --go-flow-field-surface: #ffffff;
   --go-flow-field-surface-disabled: rgba(29, 26, 36, 0.04);
   --go-flow-field-border: var(--go-flow-sys-light-outline-variant);
@@ -71,6 +111,8 @@
   --go-flow-button-padding-block-small: 10px;
   --go-flow-button-content-gap: 10px;
   --go-flow-button-label-padding-inline: 0px;
+  --go-flow-button-label-font: var(--go-flow-typography-label-large);
+  --go-flow-button-label-letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
   --go-flow-button-icon-size-medium: 24px;
   --go-flow-button-icon-size-small: 24px;
   --go-flow-button-spinner-size: 24px;
