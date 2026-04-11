@@ -13,9 +13,16 @@ const textFieldDesignUrl =
 const meta = {
   title: 'Components/TextField',
   component: TextField,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     design: createFigmaDesign(textFieldDesignUrl),
+    docs: {
+      description: {
+        component:
+          'Single-line text entry primitive with semantic label, supporting text, and error handling.',
+      },
+    },
   },
   args: {
     label: 'Email address',

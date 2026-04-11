@@ -13,9 +13,16 @@ const textAreaDesignUrl =
 const meta = {
   title: 'Components/TextArea',
   component: TextArea,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     design: createFigmaDesign(textAreaDesignUrl),
+    docs: {
+      description: {
+        component:
+          'Multi-line text entry primitive that follows the same field token contract as TextField.',
+      },
+    },
   },
   args: {
     label: 'Description',

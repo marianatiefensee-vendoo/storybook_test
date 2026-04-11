@@ -60,12 +60,28 @@
   --go-flow-state-layer-tonal-hover: rgba(80, 63, 134, 0.08);
 
   /* Spacing and shape */
+  --go-flow-space-0: 0px;
   --go-flow-space-1: 4px;
+  --go-flow-space-2: 8px;
   --go-flow-space-2-5: 10px;
+  --go-flow-space-3: 12px;
   --go-flow-space-4: 16px;
   --go-flow-space-6: 24px;
+  --go-flow-space-8: 32px;
+  --go-flow-space-12: 48px;
+  --go-flow-space-16: 64px;
+  --go-flow-radius-none: 0px;
+  --go-flow-radius-sm: 4px;
+  --go-flow-radius-md: 8px;
+  --go-flow-radius-lg: 12px;
+  --go-flow-radius-xl: 16px;
+  --go-flow-radius-full: 9999px;
   --go-flow-radius-button-small: 5px;
   --go-flow-radius-button-medium: 8px;
+  --go-flow-elevation-level-0: none;
+  --go-flow-elevation-level-1: 0 1px 2px rgba(29, 26, 36, 0.08), 0 1px 3px rgba(29, 26, 36, 0.12);
+  --go-flow-elevation-level-2: 0 2px 6px rgba(29, 26, 36, 0.12), 0 4px 12px rgba(29, 26, 36, 0.08);
+  --go-flow-elevation-level-3: 0 6px 16px rgba(29, 26, 36, 0.16), 0 12px 24px rgba(29, 26, 36, 0.08);
 
   /* Field-specific semantic tokens */
   --go-flow-field-height-default: 56px;

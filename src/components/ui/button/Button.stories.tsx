@@ -41,8 +41,15 @@ function renderButton(args: ButtonStoryArgs) {
 const meta = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component:
+          'Semantic button primitive for the Go Flow design system. Use the live Playground to inspect the args-driven API and variant stories to compare state and layout combinations.',
+      },
+    },
   },
   args: {
     children: 'Button',

@@ -11,9 +11,16 @@ const iconGalleryDesignUrl =
 const meta = {
   title: 'Components/Icon',
   component: Icon,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     design: createFigmaDesign(iconGalleryDesignUrl),
+    docs: {
+      description: {
+        component:
+          'Canonical icon layer built from the Figma SVG set and normalized to a 24 by 24 contract.',
+      },
+    },
   },
   args: {
     name: 'link',

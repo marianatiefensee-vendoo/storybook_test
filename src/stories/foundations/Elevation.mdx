@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import { elevationSections } from '../../styles/foundation-tokens';
+import './foundation-docs.css';
+
+<Meta title="Foundations/Elevation" />
+
+# Elevation
+
+Elevation tokens provide a shared shadow scale for raised surfaces and overlays.
+
+<div className="foundation-page">
+  {elevationSections.map((section) => (
+    <section key={section.title} className="foundation-page__section">
+      <div className="foundation-page__heading">
+        <h2 className="foundation-page__title">{section.title}</h2>
+        <p className="foundation-page__subtitle">{section.subtitle}</p>
+      </div>
+
+      <div className="foundation-card-grid">
+        {section.tokens.map((token) => (
+          <article key={token.name} className="foundation-card">
+            <div className="foundation-card__preview">
+              <div
+                className="foundation-card__swatch foundation-card__elevation"
+                style={{ boxShadow: token.value }}
+              />
+            </div>
+            <div className="foundation-card__meta">
+              <strong className="foundation-card__name">{token.name}</strong>
+              <span className="foundation-card__description">
+                {token.description}
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</div>

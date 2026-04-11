@@ -4,6 +4,9 @@ import '../src/styles/design-tokens.css'
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      toc: true,
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,
