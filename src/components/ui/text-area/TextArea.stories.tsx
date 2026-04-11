@@ -4,13 +4,18 @@ import { expect, fn, userEvent } from 'storybook/test';
 import type { ChangeEvent } from 'react';
 
 import { TextArea, type TextAreaProps } from './TextArea';
+import { createFigmaDesign } from '../../../stories/figma-design';
 import './text-area.stories.css';
+
+const textAreaDesignUrl =
+  'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1559-12825&m=dev';
 
 const meta = {
   title: 'Components/TextArea',
   component: TextArea,
   parameters: {
     layout: 'centered',
+    design: createFigmaDesign(textAreaDesignUrl),
   },
   tags: ['autodocs'],
   args: {

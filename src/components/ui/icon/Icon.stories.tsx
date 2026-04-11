@@ -2,13 +2,18 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Icon } from './Icon';
 import { iconNames, type IconName } from './icon-names';
+import { createFigmaDesign } from '../../../stories/figma-design';
 import './icon.stories.css';
+
+const iconGalleryDesignUrl =
+  'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?m=dev';
 
 const meta = {
   title: 'Components/Icon',
   component: Icon,
   parameters: {
     layout: 'centered',
+    design: createFigmaDesign(iconGalleryDesignUrl),
   },
   tags: ['autodocs'],
   args: {

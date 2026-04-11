@@ -4,13 +4,18 @@ import { expect, fn, userEvent } from 'storybook/test';
 import type { ChangeEvent } from 'react';
 
 import { TextField, type TextFieldProps } from './TextField';
+import { createFigmaDesign } from '../../../stories/figma-design';
 import './text-field.stories.css';
+
+const textFieldDesignUrl =
+  'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?m=dev';
 
 const meta = {
   title: 'Components/TextField',
   component: TextField,
   parameters: {
     layout: 'centered',
+    design: createFigmaDesign(textFieldDesignUrl),
   },
   tags: ['autodocs'],
   args: {

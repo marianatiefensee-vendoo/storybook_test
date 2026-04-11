@@ -6,22 +6,12 @@ import { expect, fn, userEvent } from 'storybook/test';
 import { Button, type ButtonSize, type ButtonVariant } from './Button';
 import { Icon } from '../icon/Icon';
 import { iconNames, type IconName } from '../icon/icon-names';
+import { createFigmaDesign } from '../../../stories/figma-design';
 import './button.stories.css';
 
-const figmaDesignUrl =
+const buttonDesignUrl =
   'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1219-5473&m=dev';
-const figmaAccessToken = import.meta.env.VITE_STORYBOOK_FIGMA_ACCESS_TOKEN;
-const buttonDesign = figmaAccessToken
-  ? {
-      type: 'figspec' as const,
-      url: figmaDesignUrl,
-      accessToken: figmaAccessToken,
-    }
-  : {
-      type: 'figma' as const,
-      url: figmaDesignUrl,
-      allowFullscreen: true,
-    };
+const buttonDesign = createFigmaDesign(buttonDesignUrl);
 
 type ButtonStoryArgs = {
   children: string;
@@ -54,7 +44,6 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   args: {
     children: 'Button',
     onClick: fn(),
