@@ -38,10 +38,6 @@ const meta = {
   component: Button,
   parameters: {
     layout: 'centered',
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1219-5473&m=dev',
-    },
   },
   tags: ['autodocs'],
   args: {
@@ -103,6 +99,13 @@ type Story = StoryObj<ButtonStoryArgs>;
 
 export const Playground: Story = {
   render: renderButton,
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1219-5473&m=dev',
+      allowFullscreen: true,
+    },
+  },
   play: async ({ canvas, args }) => {
     await userEvent.click(canvas.getByRole('button', { name: args.children as string }));
     await expect(args.onClick).toHaveBeenCalled();
