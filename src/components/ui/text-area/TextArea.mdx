@@ -1,0 +1,25 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import * as TextAreaStories from './TextArea.stories';
+
+<Meta of={TextAreaStories} />
+
+# TextArea
+
+The TextArea is the multi-line counterpart to TextField. It follows the same semantic API and tokenized field foundation, but expands to support longer content entry.
+
+## Playground
+
+<Canvas of={TextAreaStories.Playground} />
+
+## Controls
+
+<Controls of={TextAreaStories.Playground} />
+
+## States
+
+<Story of={TextAreaStories.Default} />
+<Story of={TextAreaStories.Focused} />
+<Story of={TextAreaStories.Filled} />
+<Story of={TextAreaStories.Disabled} />
+<Story of={TextAreaStories.Error} />

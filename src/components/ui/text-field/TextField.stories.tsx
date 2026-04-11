@@ -17,7 +17,6 @@ const meta = {
     layout: 'centered',
     design: createFigmaDesign(textFieldDesignUrl),
   },
-  tags: ['autodocs'],
   args: {
     label: 'Email address',
     placeholder: 'name@example.com',

@@ -1,0 +1,21 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import * as IconStories from './Icon.stories';
+
+<Meta of={IconStories} />
+
+# Icon
+
+The icon layer is built from the canonical Figma SVG set and normalized to a consistent 24 by 24 contract. All icons inherit `currentColor`, so component usage can stay semantic and theme-aware.
+
+## Playground
+
+<Canvas of={IconStories.Playground} />
+
+## Controls
+
+<Controls of={IconStories.Playground} />
+
+## Gallery
+
+<Story of={IconStories.Gallery} />

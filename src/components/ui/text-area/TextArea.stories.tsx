@@ -17,7 +17,6 @@ const meta = {
     layout: 'centered',
     design: createFigmaDesign(textAreaDesignUrl),
   },
-  tags: ['autodocs'],
   args: {
     label: 'Description',
     placeholder: 'Tell us what you are selling...',

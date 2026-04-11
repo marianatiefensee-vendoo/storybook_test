@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import { typographySections } from '../../styles/typography-tokens';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+Lexend Variable is the brand typeface for the Go Flow design system. These samples map the semantic text styles used by the components in this repo to the token layer from Figma.
+
+<div style={{ display: 'grid', gap: '32px' }}>
+  {typographySections.map((section) => (
+    <section key={section.title} style={{ display: 'grid', gap: '16px' }}>
+      <div style={{ display: 'grid', gap: '4px' }}>
+        <h2 style={{ margin: 0 }}>{section.title}</h2>
+        <p style={{ margin: 0, color: 'var(--go-flow-field-supporting-text)' }}>
+          {section.subtitle}
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gap: '12px' }}>
+        {section.samples.map((sample) => (
+          <article
+            key={sample.title}
+            style={{
+              display: 'grid',
+              gap: '12px',
+              padding: '20px',
+              borderRadius: '16px',
+              border: '1px solid var(--go-flow-field-border)',
+              background: '#ffffff',
+            }}
+          >
+            <div
+              style={{
+                font: sample.font,
+                letterSpacing: sample.letterSpacing,
+                color: 'var(--go-flow-field-text)',
+              }}
+            >
+              {sample.sample}
+            </div>
+            <div style={{ display: 'grid', gap: '4px' }}>
+              <strong>{sample.title}</strong>
+              <span style={{ color: 'var(--go-flow-field-supporting-text)' }}>
+                {sample.description}
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</div>

@@ -15,7 +15,6 @@ const meta = {
     layout: 'centered',
     design: createFigmaDesign(iconGalleryDesignUrl),
   },
-  tags: ['autodocs'],
   args: {
     name: 'link',
   },
