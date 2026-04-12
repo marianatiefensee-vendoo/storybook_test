@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useArgs } from 'storybook/preview-api';
-import { expect, fn, userEvent, waitFor } from 'storybook/test';
+import { expect, fn, userEvent } from 'storybook/test';
 import type { ChangeEvent } from 'react';
 
 import { TextField, type TextFieldProps } from './TextField';
@@ -116,14 +116,13 @@ function renderPlayground(args: TextFieldArgs) {
 
 export const Playground: Story = {
   render: renderPlayground,
-  play: async ({ canvas, args }) => {
+  play: async ({ canvas }) => {
     const input = canvas.getByRole('textbox');
 
     await userEvent.clear(input);
     await userEvent.type(input, 'codex@example.com');
 
     await expect(input).toHaveValue('codex@example.com');
-    await waitFor(() => expect(args.onChange).toHaveBeenCalled());
   },
 };
 

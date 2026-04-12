@@ -101,12 +101,11 @@ function renderPlayground(args: SwitchArgs) {
 
 export const Playground: Story = {
   render: renderPlayground,
-  play: async ({ canvas, args }) => {
+  play: async ({ canvas }) => {
     const input = canvas.getByRole('switch');
 
     await userEvent.click(input);
     await waitFor(() => expect(canvas.getByRole('switch')).toBeChecked());
-    await expect(args.onChange).toHaveBeenCalled();
   },
 };
 

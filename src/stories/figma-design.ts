@@ -14,7 +14,7 @@ const figmaAccessToken = import.meta.env.VITE_STORYBOOK_FIGMA_ACCESS_TOKEN as
   | string
   | undefined;
 
-export function createFigmaDesign(url: string): FigmaDesignParameter {
+export function createFigmaDesign(url: string): FigmaDesignParameter | undefined {
   if (figmaAccessToken) {
     return {
       type: 'figspec',
@@ -23,10 +23,13 @@ export function createFigmaDesign(url: string): FigmaDesignParameter {
     };
   }
 
+  if (import.meta.env.PROD) {
+    return undefined;
+  }
+
   return {
     type: 'figma',
     url,
     allowFullscreen: true,
   };
 }
-

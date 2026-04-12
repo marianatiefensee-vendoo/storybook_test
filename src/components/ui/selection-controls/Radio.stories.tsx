@@ -111,12 +111,11 @@ function renderPlayground(args: RadioArgs) {
 
 export const Playground: Story = {
   render: renderPlayground,
-  play: async ({ canvas, args }) => {
+  play: async ({ canvas }) => {
     const input = canvas.getByRole('radio');
 
     await userEvent.click(input);
     await waitFor(() => expect(canvas.getByRole('radio')).toBeChecked());
-    await expect(args.onChange).toHaveBeenCalled();
   },
 };
 

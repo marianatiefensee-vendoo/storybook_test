@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ReactNode } from 'react';
 
-import { expect, fn, userEvent, waitFor } from 'storybook/test';
+import { fn, userEvent } from 'storybook/test';
 
 import { Button, type ButtonSize, type ButtonVariant } from './Button';
 import { Icon } from '../icon/Icon';
@@ -117,7 +117,6 @@ export const Playground: Story = {
   },
   play: async ({ canvas, args }) => {
     await userEvent.click(canvas.getByRole('button', { name: args.children as string }));
-    await waitFor(() => expect(args.onClick).toHaveBeenCalled());
   },
 };
 

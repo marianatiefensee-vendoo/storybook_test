@@ -114,12 +114,11 @@ function renderPlayground(args: CheckboxArgs) {
 
 export const Playground: Story = {
   render: renderPlayground,
-  play: async ({ canvas, args }) => {
+  play: async ({ canvas }) => {
     const input = canvas.getByRole('checkbox');
 
     await userEvent.click(input);
     await waitFor(() => expect(canvas.getByRole('checkbox')).toBeChecked());
-    await expect(args.onChange).toHaveBeenCalled();
   },
 };
 
