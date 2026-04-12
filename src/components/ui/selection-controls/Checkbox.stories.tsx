@@ -117,8 +117,11 @@ export const Playground: Story = {
   play: async ({ canvas }) => {
     const input = canvas.getByRole('checkbox');
 
+    await expect(input).not.toBeChecked();
     await userEvent.click(input);
     await waitFor(() => expect(canvas.getByRole('checkbox')).toBeChecked());
+    await userEvent.click(input);
+    await waitFor(() => expect(canvas.getByRole('checkbox')).not.toBeChecked());
   },
 };
 

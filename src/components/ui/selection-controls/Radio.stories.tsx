@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useArgs } from 'storybook/preview-api';
 import { expect, fn, userEvent, waitFor } from 'storybook/test';
-import type { ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from 'react';
 
 import { Radio, type RadioProps } from './Radio';
 import { selectionControlsDesign } from './selection-controls.design';
@@ -125,21 +125,56 @@ export const Group: Story = {
       disable: true,
     },
   },
-  render: () => (
-    <fieldset className="selection-control-story-frame">
-      <legend className="selection-control-story-group">
-        <span className="selection-control__label">Notification frequency</span>
-        <span className="selection-control__supporting">
-          Choose exactly one delivery cadence.
-        </span>
-      </legend>
-      <div className="selection-control-story-group">
-        <Radio name="frequency" value="daily" label="Daily" checked />
-        <Radio name="frequency" value="weekly" label="Weekly" />
-        <Radio name="frequency" value="monthly" label="Monthly" />
-      </div>
-    </fieldset>
-  ),
+  render: function GroupStory() {
+    const [selected, setSelected] = useState('daily');
+
+    return (
+      <fieldset className="selection-control-story-frame">
+        <legend className="selection-control-story-group">
+          <span className="selection-control__label">Notification frequency</span>
+          <span className="selection-control__supporting">
+            Choose exactly one delivery cadence.
+          </span>
+        </legend>
+        <div className="selection-control-story-group">
+          <Radio
+            name="frequency"
+            value="daily"
+            label="Daily"
+            checked={selected === 'daily'}
+            onChange={() => setSelected('daily')}
+          />
+          <Radio
+            name="frequency"
+            value="weekly"
+            label="Weekly"
+            checked={selected === 'weekly'}
+            onChange={() => setSelected('weekly')}
+          />
+          <Radio
+            name="frequency"
+            value="monthly"
+            label="Monthly"
+            checked={selected === 'monthly'}
+            onChange={() => setSelected('monthly')}
+          />
+        </div>
+      </fieldset>
+    );
+  },
+  play: async ({ canvas }) => {
+    const daily = canvas.getByRole('radio', { name: 'Daily' });
+    const weekly = canvas.getByRole('radio', { name: 'Weekly' });
+    const monthly = canvas.getByRole('radio', { name: 'Monthly' });
+
+    await expect(daily).toBeChecked();
+    await userEvent.click(weekly);
+    await waitFor(() => expect(weekly).toBeChecked());
+    await waitFor(() => expect(daily).not.toBeChecked());
+    await userEvent.click(monthly);
+    await waitFor(() => expect(monthly).toBeChecked());
+    await waitFor(() => expect(weekly).not.toBeChecked());
+  },
 };
 
 export const States: Story = {
