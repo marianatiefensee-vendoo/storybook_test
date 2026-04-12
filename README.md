@@ -71,3 +71,13 @@ export default defineConfig([
   },
 ])
 ```
+
+## Storybook Deployment
+
+This repo is configured to deploy Storybook as a static site on Vercel.
+
+- Build command: `npm run build-storybook`
+- Dev command: `npm run storybook`
+- Output directory: `storybook-static`
+
+The deployment settings live in [vercel.json](./vercel.json).
