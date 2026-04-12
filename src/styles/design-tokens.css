@@ -47,8 +47,10 @@
   --go-flow-sys-light-on-primary: #ffffff;
   --go-flow-sys-light-on-surface: #1d1a24;
   --go-flow-sys-light-on-surface-variant: #494455;
+  --go-flow-sys-light-secondary: #64539b;
   --go-flow-sys-light-surface: #fdf7ff;
   --go-flow-sys-light-surface-container-highest: #e6e0ee;
+  --go-flow-sys-light-surface-container: #f3edf7;
   --go-flow-sys-light-outline: #7a7486;
   --go-flow-sys-light-error: #b3261e;
   --go-flow-sys-light-on-error: #ffffff;
@@ -238,6 +240,56 @@
   --go-flow-app-bar-action-shell-size: 48px;
   --go-flow-app-bar-action-size: 40px;
   --go-flow-app-bar-action-radius: 4px;
+
+  /* Listing flow-specific semantic tokens */
+  --go-flow-listing-flow-surface: var(--go-flow-sys-light-surface);
+  --go-flow-listing-flow-surface-variant: var(--go-flow-sys-light-surface-container);
+  --go-flow-listing-flow-card-surface: #ffffff;
+  --go-flow-listing-flow-card-border: var(--go-flow-sys-light-outline-variant);
+  --go-flow-listing-flow-card-border-strong: var(--go-flow-sys-light-outline);
+  --go-flow-listing-flow-card-radius: 16px;
+  --go-flow-listing-flow-card-padding: 20px;
+  --go-flow-listing-flow-card-shadow: var(--go-flow-elevation-level-1);
+  --go-flow-listing-flow-section-gap: 24px;
+  --go-flow-listing-flow-inner-gap: 16px;
+  --go-flow-listing-flow-chip-radius: 9999px;
+  --go-flow-listing-flow-chip-padding-inline: 10px;
+  --go-flow-listing-flow-chip-padding-block: 4px;
+  --go-flow-listing-flow-chip-font: var(--go-flow-typography-label-small);
+  --go-flow-listing-flow-chip-letter-spacing: var(--go-flow-typography-label-small-letter-spacing);
+  --go-flow-listing-flow-chip-neutral-surface: var(--go-flow-sys-light-surface-container);
+  --go-flow-listing-flow-chip-accent-surface: var(--go-flow-sys-light-secondary-container);
+  --go-flow-listing-flow-chip-accent-fg: var(--go-flow-sys-light-on-secondary-container);
+  --go-flow-listing-flow-chip-fg: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-listing-flow-step-badge-size: 28px;
+  --go-flow-listing-flow-step-badge-radius: 9999px;
+  --go-flow-listing-flow-step-badge-font: var(--go-flow-typography-label-medium);
+  --go-flow-listing-flow-step-badge-letter-spacing: var(--go-flow-typography-label-medium-letter-spacing);
+  --go-flow-listing-flow-step-badge-current-surface: var(--go-flow-sys-light-primary);
+  --go-flow-listing-flow-step-badge-current-fg: var(--go-flow-sys-light-on-primary);
+  --go-flow-listing-flow-step-badge-complete-surface: var(--go-flow-sys-light-secondary-container);
+  --go-flow-listing-flow-step-badge-complete-fg: var(--go-flow-sys-light-on-secondary-container);
+  --go-flow-listing-flow-step-badge-upcoming-surface: var(--go-flow-sys-light-surface-container);
+  --go-flow-listing-flow-step-badge-upcoming-fg: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-listing-flow-icon-button-size: 40px;
+  --go-flow-listing-flow-icon-button-radius: 8px;
+  --go-flow-listing-flow-icon-button-surface: transparent;
+  --go-flow-listing-flow-icon-button-surface-hover: rgba(73, 68, 85, 0.08);
+  --go-flow-listing-flow-icon-button-fg: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-listing-flow-progress-card-surface: #ffffff;
+  --go-flow-listing-flow-progress-card-border: var(--go-flow-listing-flow-card-border);
+  --go-flow-listing-flow-progress-card-shadow: var(--go-flow-listing-flow-card-shadow);
+  --go-flow-listing-flow-preview-card-surface: #ffffff;
+  --go-flow-listing-flow-preview-card-radius: 20px;
+  --go-flow-listing-flow-preview-card-border: rgba(203, 195, 215, 0.7);
+  --go-flow-listing-flow-preview-image-height: 210px;
+  --go-flow-listing-flow-photo-tile-size: 120px;
+  --go-flow-listing-flow-photo-tile-radius: 16px;
+  --go-flow-listing-flow-photo-tile-surface: #ffffff;
+  --go-flow-listing-flow-photo-tile-border: var(--go-flow-sys-light-outline-variant);
+  --go-flow-listing-flow-photo-tile-border-dashed: var(--go-flow-sys-light-outline);
+  --go-flow-listing-flow-photo-tile-add-surface: var(--go-flow-sys-light-surface-container);
+  --go-flow-listing-flow-footer-surface: rgba(255, 255, 255, 0.88);
 
   /* Button-specific semantic tokens */
   --go-flow-button-height-medium: 56px;
