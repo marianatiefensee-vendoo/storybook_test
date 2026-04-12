@@ -3,6 +3,7 @@ import { useArgs } from 'storybook/preview-api';
 import { expect, fn, userEvent, waitFor } from 'storybook/test';
 
 import { NavRailItem, type NavRailItemLayout } from './NavRailItem';
+import { NavigationRail } from './NavigationRail';
 import { Icon } from '../icon/Icon';
 import { iconNames, type IconName } from '../icon/icon-names';
 import { createFigmaDesign } from '../../../stories/figma-design';
@@ -13,6 +14,7 @@ const navRailItemDesignUrl =
 
 type NavRailItemStoryArgs = {
   layout: NavRailItemLayout;
+  railExpanded: boolean;
   label: string;
   selected: boolean;
   disabled: boolean;
@@ -38,6 +40,7 @@ const meta = {
   },
   args: {
     layout: 'rail',
+    railExpanded: true,
     label: 'Inventory',
     selected: false,
     disabled: false,
@@ -50,6 +53,9 @@ const meta = {
     layout: {
       control: 'radio',
       options: ['bar', 'rail'] satisfies NavRailItemLayout[],
+    },
+    railExpanded: {
+      control: 'boolean',
     },
     label: {
       control: 'text',
@@ -106,22 +112,34 @@ function renderNavRailItem(args: NavRailItemStoryArgs) {
         : undefined;
 
   const selected = storyArgs.selected ?? args.selected;
+  const item = (
+    <NavRailItem
+      layout={resolvedArgs.layout}
+      selected={selected}
+      disabled={resolvedArgs.disabled}
+      icon={<Icon name={resolvedArgs.iconName} />}
+      label={resolvedArgs.label}
+      badge={badge}
+      badgeVariant={badgeVariant}
+      onClick={() => {
+        resolvedArgs.onClick?.();
+        updateArgs({ selected: !selected });
+      }}
+    />
+  );
 
   return (
     <div className="navigation-rail-story__panel">
-      <NavRailItem
-        layout={resolvedArgs.layout}
-        selected={selected}
-        disabled={resolvedArgs.disabled}
-        icon={<Icon name={resolvedArgs.iconName} />}
-        label={resolvedArgs.label}
-        badge={badge}
-        badgeVariant={badgeVariant}
-        onClick={() => {
-          resolvedArgs.onClick?.();
-          updateArgs({ selected: !selected });
-        }}
-      />
+      {resolvedArgs.layout === 'rail' ? (
+        <NavigationRail
+          ariaLabel="Navigation rail preview"
+          expanded={resolvedArgs.railExpanded}
+        >
+          {item}
+        </NavigationRail>
+      ) : (
+        item
+      )}
     </div>
   );
 }
@@ -167,22 +185,44 @@ export const States: Story = {
         />
       </div>
       <div className="navigation-rail-story__stack">
-        <p className="navigation-rail-story__label">Rail layout</p>
-        <NavRailItem layout="rail" icon={<Icon name="store" />} label="Marketplaces" />
-        <NavRailItem
-          layout="rail"
-          icon={<Icon name="store" />}
-          label="Marketplaces"
-          selected
-        />
-        <NavRailItem
-          layout="rail"
-          icon={<Icon name="store" />}
-          label="Marketplaces"
-          badge="3"
-          badgeVariant="prominent"
-          selected
-        />
+        <p className="navigation-rail-story__label">Rail expanded</p>
+        <NavigationRail ariaLabel="Rail expanded preview" expanded>
+          <NavRailItem layout="rail" icon={<Icon name="store" />} label="Marketplaces" />
+          <NavRailItem
+            layout="rail"
+            icon={<Icon name="store" />}
+            label="Marketplaces"
+            selected
+          />
+          <NavRailItem
+            layout="rail"
+            icon={<Icon name="store" />}
+            label="Marketplaces"
+            badge="3"
+            badgeVariant="prominent"
+            selected
+          />
+        </NavigationRail>
+      </div>
+      <div className="navigation-rail-story__stack">
+        <p className="navigation-rail-story__label">Rail docked</p>
+        <NavigationRail ariaLabel="Rail docked preview" expanded={false}>
+          <NavRailItem layout="rail" icon={<Icon name="store" />} label="Marketplaces" />
+          <NavRailItem
+            layout="rail"
+            icon={<Icon name="store" />}
+            label="Marketplaces"
+            selected
+          />
+          <NavRailItem
+            layout="rail"
+            icon={<Icon name="store" />}
+            label="Marketplaces"
+            badge="3"
+            badgeVariant="prominent"
+            selected
+          />
+        </NavigationRail>
       </div>
     </div>
   ),

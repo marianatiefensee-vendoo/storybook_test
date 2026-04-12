@@ -179,7 +179,8 @@
 }
 
 .nav-rail-item--rail {
-  width: var(--go-flow-nav-item-rail-width);
+  width: fit-content;
+  align-self: flex-start;
   align-items: center;
 }
 
@@ -192,7 +193,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--go-flow-nav-item-rail-gap);
-  width: 100%;
+  width: fit-content;
   min-height: 56px;
   padding: var(--go-flow-nav-item-rail-padding);
   border-radius: var(--go-flow-nav-item-rail-icon-shell-radius);
