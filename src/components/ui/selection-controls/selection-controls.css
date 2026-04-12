@@ -164,7 +164,7 @@
   border-color: var(--go-flow-control-border-hover);
 }
 
-.selection-control--switch .selection-control__input:hover:not(:disabled) ~ .selection-control__switch {
+.selection-control--switch .selection-control__input:hover:not(:disabled):not(:checked) ~ .selection-control__switch {
   background: var(--go-flow-control-border-hover);
 }
 
@@ -222,6 +222,15 @@
 .selection-control--switch .selection-control__switch {
   order: 2;
   margin-top: 0;
+  border-color: var(--go-flow-control-switch-track-border-off);
+  background: var(--go-flow-control-switch-track-fill-off);
+  padding: 4px;
+}
+
+.selection-control--switch[data-checked='true'] .selection-control__switch {
+  border-color: transparent;
+  background: var(--go-flow-control-switch-track-fill-on);
+  padding: 2px 4px;
 }
 
 .selection-control--switch .selection-control__indicator {
