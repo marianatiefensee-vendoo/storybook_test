@@ -75,7 +75,7 @@
   height: var(--go-flow-control-radio-size);
   border: var(--go-flow-control-radio-border-width) solid var(--go-flow-control-border);
   border-radius: var(--go-flow-radius-full);
-  background: var(--go-flow-control-field-surface);
+  background: transparent;
 }
 
 .selection-control__mark {
@@ -248,11 +248,13 @@
 
 .selection-control--radio[data-disabled='true'] .selection-control__indicator {
   border-color: var(--go-flow-control-border-disabled);
-  background: var(--go-flow-control-field-surface-disabled);
+  background: transparent;
+  opacity: 0.38;
 }
 
-.selection-control--radio[data-disabled='true'] .selection-control__input:checked ~ .selection-control__indicator .selection-control__radio-icon {
-  opacity: 0.38;
+.selection-control--radio[data-disabled='true'] .selection-control__input:checked ~ .selection-control__indicator {
+  border-color: var(--go-flow-control-border-focus);
+  background: var(--go-flow-control-border-focus);
 }
 
 .selection-control--checkbox[data-disabled='true'] .selection-control__input:checked ~ .selection-control__indicator,
