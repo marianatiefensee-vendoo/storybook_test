@@ -1,0 +1,31 @@
+import { Canvas, Controls, Description, IconGallery, IconItem, Meta } from '@storybook/addon-docs/blocks';
+
+import { Icon } from './Icon';
+import * as IconStories from './Icon.stories';
+import { iconNames } from './icon-names';
+
+<Meta of={IconStories} />
+
+# Icon
+
+<Description of={IconStories} />
+
+## Playground
+
+<Canvas of={IconStories.Playground} />
+
+## Controls
+
+<Controls of={IconStories.Playground} />
+
+## Icon Gallery
+
+<div style={{ color: 'var(--go-flow-sys-light-on-surface)' }}>
+  <IconGallery>
+    {iconNames.map((name) => (
+      <IconItem key={name} name={name}>
+        <Icon name={name} />
+      </IconItem>
+    ))}
+  </IconGallery>
+</div>

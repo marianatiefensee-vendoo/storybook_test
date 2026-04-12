@@ -118,6 +118,41 @@
   --go-flow-field-label-disabled: rgba(29, 26, 36, 0.38);
   --go-flow-field-focus-ring: var(--go-flow-sys-light-primary);
 
+  /* Selection control-specific semantic tokens */
+  --go-flow-control-field-surface: var(--go-flow-field-surface);
+  --go-flow-control-field-surface-disabled: var(--go-flow-field-surface-disabled);
+  --go-flow-control-border: var(--go-flow-field-border);
+  --go-flow-control-border-hover: var(--go-flow-field-border-hover);
+  --go-flow-control-border-focus: var(--go-flow-field-border-focus);
+  --go-flow-control-border-error: var(--go-flow-field-border-error);
+  --go-flow-control-border-disabled: var(--go-flow-field-border-disabled);
+  --go-flow-control-gap: 12px;
+  --go-flow-control-supporting-gap: 4px;
+  --go-flow-control-indicator-size: 20px;
+  --go-flow-control-indicator-border-width: 1px;
+  --go-flow-control-indicator-radius-checkbox: 4px;
+  --go-flow-control-indicator-radius-radio: 9999px;
+  --go-flow-control-switch-track-width: 36px;
+  --go-flow-control-switch-track-height: 20px;
+  --go-flow-control-switch-thumb-size: 16px;
+  --go-flow-control-switch-thumb-translate: 16px;
+  --go-flow-control-switch-thumb-fill: var(--go-flow-sys-light-on-primary);
+  --go-flow-control-switch-thumb-fill-disabled: rgba(255, 255, 255, 0.7);
+  --go-flow-control-switch-thumb-shadow: 0 1px 2px rgba(29, 26, 36, 0.24);
+  --go-flow-control-checkbox-mark-color: var(--go-flow-sys-light-on-primary);
+  --go-flow-control-radio-dot-size: 8px;
+  --go-flow-control-radio-dot-color: var(--go-flow-sys-light-primary);
+  --go-flow-control-label-font: var(--go-flow-typography-body-medium);
+  --go-flow-control-label-letter-spacing: var(--go-flow-typography-body-medium-letter-spacing);
+  --go-flow-control-supporting-font: var(--go-flow-typography-body-small);
+  --go-flow-control-supporting-letter-spacing: var(--go-flow-typography-body-small-letter-spacing);
+  --go-flow-control-transition-duration: 120ms;
+  --go-flow-control-transition-easing: ease;
+  --go-flow-control-text-disabled: var(--go-flow-field-text-disabled);
+  --go-flow-control-supporting-disabled: var(--go-flow-field-text-disabled);
+  --go-flow-control-mark-disabled: rgba(255, 255, 255, 0.7);
+  --go-flow-control-error-text: var(--go-flow-field-error-text);
+
   /* Button-specific semantic tokens */
   --go-flow-button-height-medium: 56px;
   --go-flow-button-height-small: 48px;

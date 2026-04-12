@@ -1,52 +1,63 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Controls, Meta, Typeset } from '@storybook/addon-docs/blocks';
 
+import * as TypographyStories from './Typography.stories';
 import { typographySections } from '../../styles/typography-tokens';
+import './foundation-docs.css';
 
-<Meta title="Foundations/Typography" />
+<Meta of={TypographyStories} />
 
 # Typography
 
-Lexend Variable is the brand typeface for the Go Flow design system. These samples map the semantic text styles used by the components in this repo to the token layer from Figma.
+Lexend Variable is the brand typeface for Go Flow. The samples below mirror the Storybook Design System pattern by showing each style family in a Typeset block, with the token names called out beneath each block.
 
-<div style={{ display: 'grid', gap: '32px' }}>
+## Playground
+
+<Canvas of={TypographyStories.Playground} />
+
+## Controls
+
+<Controls of={TypographyStories.Playground} />
+
+<div className="foundation-page">
   {typographySections.map((section) => (
-    <section key={section.title} style={{ display: 'grid', gap: '16px' }}>
-      <div style={{ display: 'grid', gap: '4px' }}>
-        <h2 style={{ margin: 0 }}>{section.title}</h2>
-        <p style={{ margin: 0, color: 'var(--go-flow-field-supporting-text)' }}>
-          {section.subtitle}
-        </p>
+    <section key={section.title} className="foundation-page__section">
+      <div className="foundation-page__heading">
+        <h2 className="foundation-page__title">{section.title}</h2>
+        <p className="foundation-page__subtitle">{section.subtitle}</p>
       </div>
 
-      <div style={{ display: 'grid', gap: '12px' }}>
-        {section.samples.map((sample) => (
-          <article
-            key={sample.title}
-            style={{
-              display: 'grid',
-              gap: '12px',
-              padding: '20px',
-              borderRadius: '16px',
-              border: '1px solid var(--go-flow-field-border)',
-              background: '#ffffff',
-            }}
-          >
-            <div
+      <div style={{ display: 'grid', gap: '24px' }}>
+        {section.blocks.map((block) => (
+          <div key={block.title} style={{ display: 'grid', gap: '12px' }}>
+            <div style={{ display: 'grid', gap: '4px' }}>
+              <strong>{block.title}</strong>
+              <p
+                style={{
+                  margin: 0,
+                  color: 'var(--go-flow-field-supporting-text)',
+                }}
+              >
+                {block.subtitle}
+              </p>
+            </div>
+
+            <Typeset
+              fontFamily={block.fontFamily}
+              fontWeight={block.fontWeight}
+              fontSizes={block.fontSizes}
+              sampleText={block.sampleText}
+            />
+
+            <p
               style={{
-                font: sample.font,
-                letterSpacing: sample.letterSpacing,
-                color: 'var(--go-flow-field-text)',
+                margin: 0,
+                color: 'var(--go-flow-field-supporting-text)',
+                fontSize: '12px',
               }}
             >
-              {sample.sample}
-            </div>
-            <div style={{ display: 'grid', gap: '4px' }}>
-              <strong>{sample.title}</strong>
-              <span style={{ color: 'var(--go-flow-field-supporting-text)' }}>
-                {sample.description}
-              </span>
-            </div>
-          </article>
+              Tokens: {block.tokenNames.join(', ')}
+            </p>
+          </div>
         ))}
       </div>
     </section>

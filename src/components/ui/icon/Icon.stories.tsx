@@ -11,7 +11,6 @@ const iconGalleryDesignUrl =
 const meta = {
   title: 'Components/Icon',
   component: Icon,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     design: createFigmaDesign(iconGalleryDesignUrl),
@@ -27,8 +26,15 @@ const meta = {
   },
   argTypes: {
     name: {
+      name: 'icon',
       control: 'select',
       options: iconNames satisfies readonly IconName[],
+      table: {
+        type: {
+          summary: 'IconName',
+          detail: iconNames.map((name) => `"${name}"`).join(' | '),
+        },
+      },
     },
   },
 } satisfies Meta<typeof Icon>;
@@ -36,26 +42,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Playground: Story = {};
-
-export const Gallery: Story = {
-  name: 'Icon Gallery',
-  parameters: {
-    layout: 'padded',
-    controls: {
-      disable: true,
-    },
-  },
-  render: () => (
-    <div className="icon-gallery">
-      {iconNames.map((name) => (
-        <div key={name} className="icon-gallery__item">
-          <div className="icon-gallery__swatch">
-            <Icon name={name} />
-          </div>
-          <span className="icon-gallery__label">{name}</span>
-        </div>
-      ))}
+export const Playground: Story = {
+  render: (args) => (
+    <div className="icon-playground">
+      <div className="icon-gallery__swatch">
+        <Icon {...args} />
+      </div>
     </div>
   ),
 };

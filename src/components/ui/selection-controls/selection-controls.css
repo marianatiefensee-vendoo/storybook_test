@@ -1,0 +1,254 @@
+.selection-control {
+  position: relative;
+  display: inline-grid;
+  min-width: 0;
+  cursor: pointer;
+  user-select: none;
+  color: var(--go-flow-sys-light-on-surface);
+  font: var(--go-flow-control-label-font);
+  letter-spacing: var(--go-flow-control-label-letter-spacing);
+  line-height: 20px;
+}
+
+.selection-control--checkbox,
+.selection-control--radio {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: flex-start;
+  column-gap: var(--go-flow-control-gap);
+}
+
+.selection-control--switch {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--go-flow-control-gap);
+}
+
+.selection-control__input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.selection-control__content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--go-flow-control-supporting-gap);
+}
+
+.selection-control__label {
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.selection-control__supporting {
+  color: var(--go-flow-sys-light-on-surface-variant);
+  font: var(--go-flow-control-supporting-font);
+  letter-spacing: var(--go-flow-control-supporting-letter-spacing);
+  line-height: 16px;
+}
+
+.selection-control__indicator {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--go-flow-control-indicator-size);
+  height: var(--go-flow-control-indicator-size);
+  margin-top: 2px;
+  border: var(--go-flow-control-indicator-border-width) solid var(--go-flow-control-border);
+  background: var(--go-flow-control-field-surface);
+  box-sizing: border-box;
+  transition:
+    background-color var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    border-color var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    box-shadow var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing);
+}
+
+.selection-control--radio .selection-control__indicator {
+  border-radius: var(--go-flow-control-indicator-radius-radio);
+}
+
+.selection-control--checkbox .selection-control__indicator {
+  border-radius: var(--go-flow-control-indicator-radius-checkbox);
+}
+
+.selection-control__mark {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  color: var(--go-flow-control-checkbox-mark-color);
+  opacity: 0;
+  transition:
+    opacity var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    transform var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing);
+}
+
+.selection-control__mark--check {
+  transform: scale(0.8);
+}
+
+.selection-control__mark--dash {
+  transform: scale(0.8);
+}
+
+.selection-control__radio-dot {
+  width: var(--go-flow-control-radio-dot-size);
+  height: var(--go-flow-control-radio-dot-size);
+  border-radius: 9999px;
+  background: var(--go-flow-control-radio-dot-color);
+  transform: scale(0);
+  opacity: 0;
+  transition:
+    opacity var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    transform var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing);
+}
+
+.selection-control__switch {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  width: var(--go-flow-control-switch-track-width);
+  height: var(--go-flow-control-switch-track-height);
+  border-radius: var(--go-flow-radius-full);
+  background: var(--go-flow-control-border);
+  box-sizing: border-box;
+  padding: 2px;
+  transition:
+    background-color var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    box-shadow var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing);
+}
+
+.selection-control__switch-thumb {
+  width: var(--go-flow-control-switch-thumb-size);
+  height: var(--go-flow-control-switch-thumb-size);
+  border-radius: var(--go-flow-radius-full);
+  background: var(--go-flow-control-switch-thumb-fill);
+  box-shadow: var(--go-flow-control-switch-thumb-shadow);
+  transform: translateX(0);
+  transition:
+    transform var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    background-color var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing),
+    box-shadow var(--go-flow-control-transition-duration) var(--go-flow-control-transition-easing);
+}
+
+.selection-control__input:hover:not(:disabled) ~ .selection-control__indicator,
+.selection-control__input:hover:not(:disabled) ~ .selection-control__switch {
+  border-color: var(--go-flow-control-border-hover);
+}
+
+.selection-control--switch .selection-control__input:hover:not(:disabled) ~ .selection-control__switch {
+  background: var(--go-flow-control-border-hover);
+}
+
+.selection-control__input:focus-visible ~ .selection-control__indicator,
+.selection-control__input:focus-visible ~ .selection-control__switch {
+  box-shadow:
+    0 0 0 2px var(--go-flow-control-field-surface),
+    0 0 0 4px var(--go-flow-control-focus-ring);
+}
+
+.selection-control__input:checked ~ .selection-control__indicator {
+  border-color: var(--go-flow-control-border-focus);
+}
+
+.selection-control--checkbox .selection-control__input:checked ~ .selection-control__indicator,
+.selection-control__input:indeterminate ~ .selection-control__indicator {
+  background: var(--go-flow-control-border-focus);
+}
+
+.selection-control--checkbox .selection-control__input:checked ~ .selection-control__indicator .selection-control__mark--check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selection-control--checkbox .selection-control__input:indeterminate ~ .selection-control__indicator .selection-control__mark--dash {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selection-control--radio .selection-control__input:checked ~ .selection-control__indicator {
+  background: var(--go-flow-control-field-surface);
+}
+
+.selection-control--radio .selection-control__input:checked ~ .selection-control__indicator .selection-control__radio-dot {
+  background: var(--go-flow-control-radio-dot-color);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selection-control--switch .selection-control__input:checked ~ .selection-control__switch {
+  background: var(--go-flow-control-border-focus);
+}
+
+.selection-control--switch .selection-control__input:checked ~ .selection-control__switch .selection-control__switch-thumb {
+  transform: translateX(var(--go-flow-control-switch-thumb-translate));
+}
+
+.selection-control--switch .selection-control__content {
+  order: 1;
+}
+
+.selection-control--switch .selection-control__switch {
+  order: 2;
+  margin-top: 0;
+}
+
+.selection-control--switch .selection-control__indicator {
+  margin-top: 0;
+}
+
+.selection-control[data-disabled='true'] {
+  cursor: not-allowed;
+}
+
+.selection-control[data-disabled='true'] .selection-control__label {
+  color: var(--go-flow-control-text-disabled);
+}
+
+.selection-control[data-disabled='true'] .selection-control__supporting {
+  color: var(--go-flow-control-supporting-disabled);
+}
+
+.selection-control[data-disabled='true'] .selection-control__indicator {
+  border-color: var(--go-flow-control-border-disabled);
+  background: var(--go-flow-control-field-surface-disabled);
+  box-shadow: none;
+}
+
+.selection-control--radio[data-disabled='true'] .selection-control__input:checked ~ .selection-control__indicator .selection-control__radio-dot {
+  background: var(--go-flow-control-mark-disabled);
+}
+
+.selection-control--checkbox[data-disabled='true'] .selection-control__input:checked ~ .selection-control__indicator .selection-control__mark--check,
+.selection-control--checkbox[data-disabled='true'] .selection-control__input:indeterminate ~ .selection-control__indicator .selection-control__mark--dash {
+  color: var(--go-flow-control-mark-disabled);
+}
+
+.selection-control--switch[data-disabled='true'] .selection-control__switch {
+  background: var(--go-flow-control-field-surface-disabled);
+}
+
+.selection-control--switch[data-disabled='true'] .selection-control__switch-thumb {
+  background: var(--go-flow-control-switch-thumb-fill-disabled);
+  box-shadow: none;
+}
+
+.selection-control[data-invalid='true'] .selection-control__label,
+.selection-control[data-invalid='true'] .selection-control__supporting {
+  color: var(--go-flow-control-error-text);
+}
+
+.selection-control[data-invalid='true'] .selection-control__indicator,
+.selection-control[data-invalid='true'] .selection-control__switch {
+  border-color: var(--go-flow-control-border-error);
+}
+
+.selection-control[data-invalid='true'] .selection-control__switch {
+  background: var(--go-flow-control-field-surface);
+}

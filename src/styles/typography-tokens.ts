@@ -1,171 +1,149 @@
-export type TypographySample = {
+export type TypographyTypesetBlock = {
   title: string;
-  description: string;
-  font: string;
-  letterSpacing: string;
-  sample: string;
+  subtitle: string;
+  fontFamily: string;
+  fontWeight: number;
+  fontSizes: number[];
+  sampleText: string;
+  tokenNames: string[];
 };
 
 export type TypographySection = {
   title: string;
   subtitle: string;
-  samples: TypographySample[];
+  blocks: TypographyTypesetBlock[];
 };
+
+export type TypographyStyleToken = {
+  name: string;
+  fontSize: number;
+  lineHeight: number;
+  fontWeight: number;
+  letterSpacing: string;
+  section: string;
+};
+
+const brandFontFamily = 'var(--go-flow-font-family-brand)';
+const sampleText = 'The quick brown fox jumps over the lazy dog.';
+
+export const typographyStyleTokens: TypographyStyleToken[] = [
+  { name: 'Display Large', fontSize: 57, lineHeight: 64, fontWeight: 400, letterSpacing: '-0.25px', section: 'Display' },
+  { name: 'Display Medium', fontSize: 45, lineHeight: 52, fontWeight: 400, letterSpacing: '0px', section: 'Display' },
+  { name: 'Display Small', fontSize: 36, lineHeight: 44, fontWeight: 400, letterSpacing: '0px', section: 'Display' },
+  { name: 'Headline Large', fontSize: 32, lineHeight: 40, fontWeight: 400, letterSpacing: '0px', section: 'Headline' },
+  { name: 'Headline Medium', fontSize: 28, lineHeight: 36, fontWeight: 400, letterSpacing: '0px', section: 'Headline' },
+  { name: 'Headline Small', fontSize: 24, lineHeight: 32, fontWeight: 400, letterSpacing: '0px', section: 'Headline' },
+  { name: 'Title Large', fontSize: 22, lineHeight: 28, fontWeight: 400, letterSpacing: '0px', section: 'Title' },
+  { name: 'Title Medium', fontSize: 16, lineHeight: 24, fontWeight: 500, letterSpacing: '0.15px', section: 'Title' },
+  { name: 'Title Small', fontSize: 14, lineHeight: 20, fontWeight: 500, letterSpacing: '0.1px', section: 'Title' },
+  { name: 'Body Large', fontSize: 16, lineHeight: 24, fontWeight: 400, letterSpacing: '0.5px', section: 'Body' },
+  { name: 'Body Medium', fontSize: 14, lineHeight: 20, fontWeight: 400, letterSpacing: '0.25px', section: 'Body' },
+  { name: 'Body Small', fontSize: 12, lineHeight: 16, fontWeight: 400, letterSpacing: '0.4px', section: 'Body' },
+  { name: 'Body Large Emphasized', fontSize: 16, lineHeight: 24, fontWeight: 500, letterSpacing: '0.5px', section: 'Body' },
+  { name: 'Body Medium Emphasized', fontSize: 14, lineHeight: 20, fontWeight: 500, letterSpacing: '0.25px', section: 'Body' },
+  { name: 'Body Small Emphasized', fontSize: 12, lineHeight: 16, fontWeight: 500, letterSpacing: '0.4px', section: 'Body' },
+  { name: 'Label Large', fontSize: 14, lineHeight: 20, fontWeight: 500, letterSpacing: '0.1px', section: 'Label' },
+  { name: 'Label Medium', fontSize: 12, lineHeight: 16, fontWeight: 500, letterSpacing: '0.5px', section: 'Label' },
+  { name: 'Label Small', fontSize: 11, lineHeight: 16, fontWeight: 500, letterSpacing: '0.5px', section: 'Label' },
+];
+
+export const typographyStyleNames = typographyStyleTokens.map((token) => token.name) as readonly string[];
 
 export const typographySections: TypographySection[] = [
   {
     title: 'Display',
-    subtitle: 'Largest text styles for hero content and prominent page moments.',
-    samples: [
+    subtitle: 'Largest text styles for hero content and major page moments.',
+    blocks: [
       {
-        title: 'Display Large',
-        description: '57px / 64px, regular, -0.25px',
-        font: 'var(--go-flow-typography-display-large)',
-        letterSpacing: 'var(--go-flow-typography-display-large-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Display Medium',
-        description: '45px / 52px, regular',
-        font: 'var(--go-flow-typography-display-medium)',
-        letterSpacing: 'var(--go-flow-typography-display-medium-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Display Small',
-        description: '36px / 44px, regular',
-        font: 'var(--go-flow-typography-display-small)',
-        letterSpacing: 'var(--go-flow-typography-display-small-letter-spacing)',
-        sample: 'Aa',
+        title: 'Display',
+        subtitle: 'Regular weight, large scale',
+        fontFamily: brandFontFamily,
+        fontWeight: 400,
+        fontSizes: [57, 45, 36],
+        sampleText,
+        tokenNames: ['Display Large', 'Display Medium', 'Display Small'],
       },
     ],
   },
   {
     title: 'Headline',
     subtitle: 'Section headers and high-emphasis supporting text.',
-    samples: [
+    blocks: [
       {
-        title: 'Headline Large',
-        description: '32px / 40px, regular',
-        font: 'var(--go-flow-typography-headline-large)',
-        letterSpacing: 'var(--go-flow-typography-headline-large-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Headline Medium',
-        description: '28px / 36px, regular',
-        font: 'var(--go-flow-typography-headline-medium)',
-        letterSpacing: 'var(--go-flow-typography-headline-medium-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Headline Small',
-        description: '24px / 32px, regular',
-        font: 'var(--go-flow-typography-headline-small)',
-        letterSpacing: 'var(--go-flow-typography-headline-small-letter-spacing)',
-        sample: 'Aa',
+        title: 'Headline',
+        subtitle: 'Regular weight, headline scale',
+        fontFamily: brandFontFamily,
+        fontWeight: 400,
+        fontSizes: [32, 28, 24],
+        sampleText,
+        tokenNames: ['Headline Large', 'Headline Medium', 'Headline Small'],
       },
     ],
   },
   {
     title: 'Title',
     subtitle: 'Component headings and app-level hierarchy.',
-    samples: [
+    blocks: [
       {
-        title: 'Title Large',
-        description: '22px / 28px, regular',
-        font: 'var(--go-flow-typography-title-large)',
-        letterSpacing: 'var(--go-flow-typography-title-large-letter-spacing)',
-        sample: 'Aa',
+        title: 'Title Regular',
+        subtitle: 'Large title style',
+        fontFamily: brandFontFamily,
+        fontWeight: 400,
+        fontSizes: [22],
+        sampleText,
+        tokenNames: ['Title Large'],
       },
       {
-        title: 'Title Medium',
-        description: '16px / 24px, medium, 0.15px',
-        font: 'var(--go-flow-typography-title-medium)',
-        letterSpacing: 'var(--go-flow-typography-title-medium-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Title Small',
-        description: '14px / 20px, medium, 0.1px',
-        font: 'var(--go-flow-typography-title-small)',
-        letterSpacing: 'var(--go-flow-typography-title-small-letter-spacing)',
-        sample: 'Aa',
+        title: 'Title Emphasized',
+        subtitle: 'Medium and small title styles',
+        fontFamily: brandFontFamily,
+        fontWeight: 500,
+        fontSizes: [16, 14],
+        sampleText,
+        tokenNames: ['Title Medium', 'Title Small'],
       },
     ],
   },
   {
     title: 'Body',
     subtitle: 'Default reading styles used across the system.',
-    samples: [
+    blocks: [
       {
-        title: 'Body Large',
-        description: '16px / 24px, regular, 0.5px',
-        font: 'var(--go-flow-typography-body-large)',
-        letterSpacing: 'var(--go-flow-typography-body-large-letter-spacing)',
-        sample: 'Aa',
+        title: 'Body Regular',
+        subtitle: 'Primary reading scale',
+        fontFamily: brandFontFamily,
+        fontWeight: 400,
+        fontSizes: [16, 14, 12],
+        sampleText,
+        tokenNames: ['Body Large', 'Body Medium', 'Body Small'],
       },
       {
-        title: 'Body Medium',
-        description: '14px / 20px, regular, 0.25px',
-        font: 'var(--go-flow-typography-body-medium)',
-        letterSpacing: 'var(--go-flow-typography-body-medium-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Body Small',
-        description: '12px / 16px, regular, 0.4px',
-        font: 'var(--go-flow-typography-body-small)',
-        letterSpacing: 'var(--go-flow-typography-body-small-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Body Large Emphasized',
-        description: '16px / 24px, medium, 0.5px',
-        font: 'var(--go-flow-typography-body-large-emphasized)',
-        letterSpacing: 'var(--go-flow-typography-body-large-emphasized-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Body Medium Emphasized',
-        description: '14px / 20px, medium, 0.25px',
-        font: 'var(--go-flow-typography-body-medium-emphasized)',
-        letterSpacing: 'var(--go-flow-typography-body-medium-emphasized-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Body Small Emphasized',
-        description: '12px / 16px, medium, 0.4px',
-        font: 'var(--go-flow-typography-body-small-emphasized)',
-        letterSpacing: 'var(--go-flow-typography-body-small-emphasized-letter-spacing)',
-        sample: 'Aa',
+        title: 'Body Emphasized',
+        subtitle: 'Medium-emphasis reading scale',
+        fontFamily: brandFontFamily,
+        fontWeight: 500,
+        fontSizes: [16, 14, 12],
+        sampleText,
+        tokenNames: [
+          'Body Large Emphasized',
+          'Body Medium Emphasized',
+          'Body Small Emphasized',
+        ],
       },
     ],
   },
   {
     title: 'Label',
     subtitle: 'Interactive text and compact labels in the component system.',
-    samples: [
+    blocks: [
       {
-        title: 'Label Large',
-        description: '14px / 20px, medium, 0.1px',
-        font: 'var(--go-flow-typography-label-large)',
-        letterSpacing: 'var(--go-flow-typography-label-large-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Label Medium',
-        description: '12px / 16px, medium, 0.5px',
-        font: 'var(--go-flow-typography-label-medium)',
-        letterSpacing: 'var(--go-flow-typography-label-medium-letter-spacing)',
-        sample: 'Aa',
-      },
-      {
-        title: 'Label Small',
-        description: '11px / 16px, medium, 0.5px',
-        font: 'var(--go-flow-typography-label-small)',
-        letterSpacing: 'var(--go-flow-typography-label-small-letter-spacing)',
-        sample: 'Aa',
+        title: 'Label',
+        subtitle: 'Medium-emphasis label scale',
+        fontFamily: brandFontFamily,
+        fontWeight: 500,
+        fontSizes: [14, 12, 11],
+        sampleText,
+        tokenNames: ['Label Large', 'Label Medium', 'Label Small'],
       },
     ],
   },

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ReactNode } from 'react';
 
-import { expect, fn, userEvent } from 'storybook/test';
+import { expect, fn, userEvent, waitFor } from 'storybook/test';
 
 import { Button, type ButtonSize, type ButtonVariant } from './Button';
 import { Icon } from '../icon/Icon';
@@ -28,10 +28,12 @@ type ButtonStoryArgs = {
 
 function renderButton(args: ButtonStoryArgs) {
   const { leadingIconName, trailingIconName, ...buttonArgs } = args;
+  const { onClick, ...restArgs } = buttonArgs;
 
   return (
     <Button
-      {...buttonArgs}
+      {...restArgs}
+      onClick={() => onClick?.()}
       leadingIcon={leadingIconName ? <Icon name={leadingIconName} /> : undefined}
       trailingIcon={trailingIconName ? <Icon name={trailingIconName} /> : undefined}
     />
@@ -115,7 +117,7 @@ export const Playground: Story = {
   },
   play: async ({ canvas, args }) => {
     await userEvent.click(canvas.getByRole('button', { name: args.children as string }));
-    await expect(args.onClick).toHaveBeenCalled();
+    await waitFor(() => expect(args.onClick).toHaveBeenCalled());
   },
 };
 

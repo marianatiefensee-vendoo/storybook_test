@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useArgs } from 'storybook/preview-api';
-import { expect, fn, userEvent } from 'storybook/test';
+import { expect, fn, userEvent, waitFor } from 'storybook/test';
 import type { ChangeEvent } from 'react';
 
 import { TextField, type TextFieldProps } from './TextField';
@@ -74,7 +74,9 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-type TextFieldArgs = NonNullable<Story['args']>;
+type TextFieldArgs = Omit<TextFieldProps, 'onChange'> & {
+  onChange: (value: string) => void;
+};
 
 const playgroundDefaults = {
   label: 'Email address',
@@ -91,8 +93,10 @@ function renderPlayground(args: TextFieldArgs) {
   const [storyArgs, updateArgs] = useArgs<TextFieldArgs>();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    args.onChange?.(event);
-    updateArgs({ value: event.target.value });
+    const value = event.currentTarget.value;
+
+    args.onChange?.(value);
+    updateArgs({ value });
   };
 
   const resolvedArgs = {
@@ -112,13 +116,14 @@ function renderPlayground(args: TextFieldArgs) {
 
 export const Playground: Story = {
   render: renderPlayground,
-  play: async ({ canvas }) => {
+  play: async ({ canvas, args }) => {
     const input = canvas.getByRole('textbox');
 
     await userEvent.clear(input);
     await userEvent.type(input, 'codex@example.com');
 
     await expect(input).toHaveValue('codex@example.com');
+    await waitFor(() => expect(args.onChange).toHaveBeenCalled());
   },
 };
 

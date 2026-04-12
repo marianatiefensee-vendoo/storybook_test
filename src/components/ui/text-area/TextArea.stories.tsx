@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useArgs } from 'storybook/preview-api';
-import { expect, fn, userEvent } from 'storybook/test';
+import { expect, fn, userEvent, waitFor } from 'storybook/test';
 import type { ChangeEvent } from 'react';
 
 import { TextArea, type TextAreaProps } from './TextArea';
@@ -73,7 +73,9 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-type TextAreaArgs = NonNullable<Story['args']>;
+type TextAreaArgs = Omit<TextAreaProps, 'onChange'> & {
+  onChange: (value: string) => void;
+};
 
 const playgroundDefaults = {
   label: 'Description',
@@ -90,8 +92,10 @@ function renderPlayground(args: TextAreaArgs) {
   const [storyArgs, updateArgs] = useArgs<TextAreaArgs>();
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    args.onChange?.(event);
-    updateArgs({ value: event.target.value });
+    const value = event.currentTarget.value;
+
+    args.onChange?.(value);
+    updateArgs({ value });
   };
 
   const resolvedArgs = {
@@ -111,13 +115,14 @@ function renderPlayground(args: TextAreaArgs) {
 
 export const Playground: Story = {
   render: renderPlayground,
-  play: async ({ canvas }) => {
+  play: async ({ canvas, args }) => {
     const input = canvas.getByRole('textbox');
 
     await userEvent.clear(input);
     await userEvent.type(input, 'A longer product description.');
 
     await expect(input).toHaveValue('A longer product description.');
+    await waitFor(() => expect(args.onChange).toHaveBeenCalled());
   },
 };
 
