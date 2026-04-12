@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 
+import { Icon } from '../icon/Icon';
 import { assignForwardedRef } from './selection-control-utils';
 import './selection-controls.css';
 
@@ -85,7 +86,9 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         onChange={onChange}
       />
       <span className="selection-control__indicator" aria-hidden="true">
-        <span className="selection-control__radio-dot" />
+        <span className="selection-control__radio-icon">
+          <Icon name="check" className="selection-control__radio-mark" />
+        </span>
       </span>
       <span className="selection-control__content">
         <span className="selection-control__label" id={labelId}>

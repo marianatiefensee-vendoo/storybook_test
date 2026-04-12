@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 
+import { Icon } from '../icon/Icon';
 import { assignForwardedRef } from './selection-control-utils';
 import './selection-controls.css';
 
@@ -102,7 +103,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         ) : null}
       </span>
       <span className="selection-control__switch" aria-hidden="true">
-        <span className="selection-control__switch-thumb" />
+        <span className="selection-control__switch-thumb">
+          <Icon
+            name={isChecked ? 'check' : 'x'}
+            className="selection-control__switch-icon"
+          />
+        </span>
       </span>
     </label>
   );
