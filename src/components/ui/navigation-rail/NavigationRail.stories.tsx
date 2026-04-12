@@ -38,6 +38,53 @@ const navItems: Array<{
   { id: 'settings', label: 'Settings', iconName: 'settings' },
 ];
 
+function NavigationRailBrand({ expanded }: { expanded: boolean }) {
+  return (
+    <img
+      alt="Vendoo"
+      className={[
+        'navigation-rail-story__brand-mark',
+        expanded
+          ? 'navigation-rail-story__brand-mark--expanded'
+          : 'navigation-rail-story__brand-mark--docked',
+      ].join(' ')}
+      src="https://www.figma.com/api/mcp/asset/d2894c21-6448-4048-8359-7b02a6066a77"
+    />
+  );
+}
+
+function NavigationRailChromeButton({
+  label,
+  iconName,
+}: {
+  label: string;
+  iconName: 'menu' | 'menu_open';
+}) {
+  return (
+    <button type="button" aria-label={label} className="navigation-rail-story__chrome-button">
+      <Icon name={iconName} />
+    </button>
+  );
+}
+
+function NavigationRailFab({ expanded }: { expanded: boolean }) {
+  return (
+    <button
+      type="button"
+      aria-label="Add item"
+      className={[
+        'navigation-rail-story__fab',
+        expanded ? '' : 'navigation-rail-story__fab--icon-only',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      <Icon name="plus_circle" />
+      {expanded ? <span>Add item</span> : null}
+    </button>
+  );
+}
+
 const meta = {
   title: 'Components/NavigationRail',
   component: NavigationRail,
@@ -86,20 +133,47 @@ function renderNavigationRail(args: NavigationRailStoryArgs) {
 
   return (
     <div className="navigation-rail-story__panel">
-      <NavigationRail ariaLabel={resolvedArgs.ariaLabel} expanded={resolvedArgs.expanded}>
-        <div className="navigation-rail-story__stack">
-          {navItems.map((item) => (
+      <NavigationRail
+        ariaLabel={resolvedArgs.ariaLabel}
+        expanded={resolvedArgs.expanded}
+        className="navigation-rail-story__frame"
+      >
+        <div className="navigation-rail-story__brand">
+          <NavigationRailBrand expanded={resolvedArgs.expanded} />
+        </div>
+        <div className="navigation-rail-story__menu-fab">
+          <NavigationRailChromeButton
+            label={resolvedArgs.expanded ? 'Collapse rail' : 'Expand rail'}
+            iconName={resolvedArgs.expanded ? 'menu_open' : 'menu'}
+          />
+          <NavigationRailFab expanded={resolvedArgs.expanded} />
+        </div>
+        <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
+          {navItems.slice(0, 5).map((item) => (
             <NavRailItem
               key={item.id}
               layout="rail"
               icon={<Icon name={item.iconName} />}
               label={item.label}
               selected={selectedItem === item.id}
+              badge={item.id === 'inventory' ? '3' : undefined}
+              badgeVariant={item.id === 'inventory' ? 'prominent' : undefined}
               onClick={() => {
                 updateArgs({ selectedItem: item.id });
               }}
             />
           ))}
+        </div>
+        <div className="navigation-rail-story__footer">
+          <NavRailItem
+            layout="rail"
+            icon={<Icon name="settings" />}
+            label="Settings"
+            selected={selectedItem === 'settings'}
+            onClick={() => {
+              updateArgs({ selectedItem: 'settings' });
+            }}
+          />
         </div>
       </NavigationRail>
     </div>
@@ -130,9 +204,16 @@ export const ExpandedAndDocked: Story = {
     <div className="navigation-rail-story__grid">
       <div className="navigation-rail-story__stack">
         <p className="navigation-rail-story__label">Expanded</p>
-        <NavigationRail ariaLabel="Primary navigation" expanded>
-          <div className="navigation-rail-story__stack">
-            {navItems.map((item, index) => (
+        <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
+          <div className="navigation-rail-story__brand">
+            <NavigationRailBrand expanded />
+          </div>
+          <div className="navigation-rail-story__menu-fab">
+            <NavigationRailChromeButton label="Collapse rail" iconName="menu_open" />
+            <NavigationRailFab expanded />
+          </div>
+          <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
+            {navItems.slice(0, 5).map((item, index) => (
               <NavRailItem
                 key={item.id}
                 layout="rail"
@@ -144,13 +225,27 @@ export const ExpandedAndDocked: Story = {
               />
             ))}
           </div>
+          <div className="navigation-rail-story__footer">
+            <NavRailItem layout="rail" icon={<Icon name="settings" />} label="Settings" />
+          </div>
         </NavigationRail>
       </div>
       <div className="navigation-rail-story__stack">
         <p className="navigation-rail-story__label">Docked</p>
-        <NavigationRail ariaLabel="Primary navigation" expanded={false}>
-          <div className="navigation-rail-story__stack">
-            {navItems.map((item, index) => (
+        <NavigationRail
+          ariaLabel="Primary navigation"
+          expanded={false}
+          className="navigation-rail-story__frame"
+        >
+          <div className="navigation-rail-story__brand">
+            <NavigationRailBrand expanded={false} />
+          </div>
+          <div className="navigation-rail-story__menu-fab">
+            <NavigationRailChromeButton label="Expand rail" iconName="menu" />
+            <NavigationRailFab expanded={false} />
+          </div>
+          <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
+            {navItems.slice(0, 5).map((item, index) => (
               <NavRailItem
                 key={item.id}
                 layout="rail"
@@ -161,6 +256,9 @@ export const ExpandedAndDocked: Story = {
                 badgeVariant={index === 0 ? 'prominent' : undefined}
               />
             ))}
+          </div>
+          <div className="navigation-rail-story__footer">
+            <NavRailItem layout="rail" icon={<Icon name="settings" />} label="Settings" />
           </div>
         </NavigationRail>
       </div>
