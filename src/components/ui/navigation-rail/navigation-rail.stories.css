@@ -1,0 +1,30 @@
+.navigation-rail-story {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.navigation-rail-story__panel {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(74, 0, 191, 0.04);
+}
+
+.navigation-rail-story__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.navigation-rail-story__stack {
+  display: grid;
+  gap: 12px;
+}
+
+.navigation-rail-story__label {
+  margin: 0;
+  color: var(--go-flow-sys-light-on-surface-variant);
+  font: var(--go-flow-typography-body-small);
+}

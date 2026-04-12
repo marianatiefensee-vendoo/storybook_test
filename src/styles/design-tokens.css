@@ -62,6 +62,7 @@
   --go-flow-state-layer-filled-hover: rgba(255, 255, 255, 0.08);
   --go-flow-state-layer-outline-hover: rgba(73, 68, 85, 0.08);
   --go-flow-state-layer-tonal-hover: rgba(80, 63, 134, 0.08);
+  --go-flow-state-layer-secondary-hover: rgba(100, 83, 155, 0.08);
 
   /* Spacing and shape */
   --go-flow-space-0: 0px;
@@ -172,6 +173,71 @@
   --go-flow-control-supporting-disabled: var(--go-flow-field-text-disabled);
   --go-flow-control-mark-disabled: rgba(255, 255, 255, 0.7);
   --go-flow-control-error-text: var(--go-flow-field-error-text);
+
+  /* Navigation rail-specific semantic tokens */
+  --go-flow-nav-rail-width-expanded: 220px;
+  --go-flow-nav-rail-width-docked: 100px;
+  --go-flow-nav-rail-height: 800px;
+  --go-flow-nav-rail-radius: 16px;
+  --go-flow-nav-rail-surface: var(--go-flow-sys-light-surface-container);
+  --go-flow-nav-rail-padding-inline: 20px;
+  --go-flow-nav-rail-padding-top: 44px;
+  --go-flow-nav-rail-section-gap: 40px;
+  --go-flow-nav-rail-items-gap: 16px;
+  --go-flow-nav-rail-footer-padding-block-expanded: 44px;
+  --go-flow-nav-rail-footer-padding-block-docked: 56px;
+
+  --go-flow-nav-item-bar-width: 167px;
+  --go-flow-nav-item-bar-height: 64px;
+  --go-flow-nav-item-bar-padding-block: 6px;
+  --go-flow-nav-item-bar-gap: 4px;
+  --go-flow-nav-item-bar-icon-shell-width: 56px;
+  --go-flow-nav-item-bar-icon-shell-height: 32px;
+  --go-flow-nav-item-bar-icon-shell-radius: 5px;
+  --go-flow-nav-item-bar-label-font: var(--go-flow-typography-label-medium);
+  --go-flow-nav-item-bar-label-letter-spacing: var(--go-flow-typography-label-medium-letter-spacing);
+  --go-flow-nav-item-bar-label-color: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-nav-item-bar-label-color-selected: var(--go-flow-sys-light-secondary);
+  --go-flow-nav-item-bar-surface-selected: var(--go-flow-sys-light-secondary-container);
+  --go-flow-nav-item-bar-state-layer: var(--go-flow-state-layer-outline-hover);
+  --go-flow-nav-item-bar-state-layer-selected: var(--go-flow-state-layer-secondary-hover);
+  --go-flow-nav-item-bar-badge-size: 16px;
+  --go-flow-nav-item-bar-badge-dot-size: 2px;
+  --go-flow-nav-item-bar-badge-bg: var(--go-flow-sys-light-error);
+  --go-flow-nav-item-bar-badge-fg: var(--go-flow-sys-light-on-error);
+
+  --go-flow-nav-item-rail-width: 103px;
+  --go-flow-nav-item-rail-docked-width: 56px;
+  --go-flow-nav-item-rail-padding: 16px;
+  --go-flow-nav-item-rail-gap: 8px;
+  --go-flow-nav-item-rail-icon-shell-width: 56px;
+  --go-flow-nav-item-rail-icon-shell-height: 32px;
+  --go-flow-nav-item-rail-icon-shell-radius: 12px;
+  --go-flow-nav-item-rail-docked-radius: 16px;
+  --go-flow-nav-item-rail-label-font: var(--go-flow-typography-label-large);
+  --go-flow-nav-item-rail-label-letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
+  --go-flow-nav-item-rail-label-color: var(--go-flow-sys-light-on-surface-variant);
+  --go-flow-nav-item-rail-surface-selected: var(--go-flow-sys-light-secondary-container);
+  --go-flow-nav-item-rail-state-layer: var(--go-flow-state-layer-outline-hover);
+  --go-flow-nav-item-rail-state-layer-selected: var(--go-flow-state-layer-secondary-hover);
+  --go-flow-nav-item-rail-badge-size: 16px;
+  --go-flow-nav-item-rail-badge-dot-size: 2px;
+  --go-flow-nav-item-rail-badge-bg: var(--go-flow-sys-light-error);
+  --go-flow-nav-item-rail-badge-fg: var(--go-flow-sys-light-on-error);
+
+  /* App bar-specific semantic tokens */
+  --go-flow-app-bar-height-small: 64px;
+  --go-flow-app-bar-height-medium: 112px;
+  --go-flow-app-bar-height-large: 120px;
+  --go-flow-app-bar-top-row-height: 56px;
+  --go-flow-app-bar-padding-inline: 4px;
+  --go-flow-app-bar-headline-width: 300px;
+  --go-flow-app-bar-headline-padding-inline: 16px;
+  --go-flow-app-bar-surface-flat: transparent;
+  --go-flow-app-bar-surface-scrolled: var(--go-flow-sys-light-surface-container);
+  --go-flow-app-bar-action-shell-size: 48px;
+  --go-flow-app-bar-action-size: 40px;
+  --go-flow-app-bar-action-radius: 4px;
 
   /* Button-specific semantic tokens */
   --go-flow-button-height-medium: 56px;
