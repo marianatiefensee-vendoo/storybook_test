@@ -132,3 +132,11 @@ When implementing, fixing, or planning any design-system or Storybook component:
 - Do not rely on raw node numbers alone
 - Use the Figma skills / MCP context from the full URL first
 - Treat the exact full URL as the visual source of truth
+
+## Figma MCP failure rule
+
+When a task depends on an exact Figma node:
+- If the live Figma MCP payload cannot be retrieved, do not claim exact parity
+- Clearly label the result as an approximation if implementation continues
+- Do not widen scope or infer hidden/expanded states from a single exact node
+- Prefer stopping after diagnostics for parity-critical work unless explicitly told to proceed without MCP
