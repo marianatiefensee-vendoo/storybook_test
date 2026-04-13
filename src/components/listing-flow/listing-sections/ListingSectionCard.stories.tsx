@@ -24,7 +24,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Structural listing-flow section wrapper with a step header and card body.',
+          'Structural listing-flow section wrapper with a step header and optional body.',
       },
     },
   },
@@ -74,7 +74,7 @@ export const Playground: Story = {
   },
 };
 
-export const Parity: Story = {
+export const Approximation: Story = {
   parameters: {
     layout: 'centered',
     controls: {
@@ -93,6 +93,31 @@ export const Parity: Story = {
           <p>Section body content.</p>
         </div>
       </ListingSectionCard>
+    </div>
+  ),
+};
+
+export const Collapsed: Story = {
+  parameters: {
+    layout: 'centered',
+    controls: {
+      disable: true,
+    },
+    design: createFigmaDesign(sectionDesignUrl),
+    docs: {
+      description: {
+        story:
+          'Header-only collapsed state matched to the user-verified screenshot; treated as an approximation until a live MCP payload is available.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ width: '100%', maxWidth: '480px' }}>
+      <ListingSectionCard
+        step={3}
+        title="Title & Description"
+        supportingText="Describe the item shoppers need to know about."
+      />
     </div>
   ),
 };
