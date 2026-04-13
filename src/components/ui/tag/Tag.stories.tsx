@@ -12,22 +12,34 @@ const tagFamilyUrl =
 type TagStoryArgs = {
   children: string;
   tone: TagTone;
-  iconName: '' | IconName;
+  showLeadingIcon: boolean;
+  showTrailingIcon: boolean;
+  leadingIconName: '' | IconName;
+  trailingIconName: '' | IconName;
 };
 
-function resolveIconName(tone: TagTone, iconName: '' | IconName) {
-  if (iconName) {
-    return iconName;
-  }
-
+function resolveDefaultLeadingIconName(tone: TagTone) {
   return tone === 'ai' ? 'sparkle' : 'tag';
 }
 
+function renderIcon(iconName: '' | IconName) {
+  if (!iconName) {
+    return null;
+  }
+
+  return <Icon name={iconName} />;
+}
+
 function renderTag(args: TagStoryArgs) {
-  const iconName = resolveIconName(args.tone, args.iconName);
+  const leadingIconName = args.leadingIconName || resolveDefaultLeadingIconName(args.tone);
+  const trailingIconName = args.trailingIconName || 'tag';
 
   return (
-    <Tag tone={args.tone} icon={<Icon name={iconName} />}>
+    <Tag
+      tone={args.tone}
+      leadingIcon={args.showLeadingIcon ? renderIcon(leadingIconName) : null}
+      trailingIcon={args.showTrailingIcon ? renderIcon(trailingIconName) : null}
+    >
       {args.children}
     </Tag>
   );
@@ -50,7 +62,10 @@ const meta = {
   args: {
     children: 'Status',
     tone: 'neutral',
-    iconName: '',
+    showLeadingIcon: true,
+    showTrailingIcon: false,
+    leadingIconName: '',
+    trailingIconName: '',
   },
   argTypes: {
     children: {
@@ -60,7 +75,26 @@ const meta = {
       control: 'radio',
       options: ['neutral', 'ai'] satisfies TagTone[],
     },
-    iconName: {
+    showLeadingIcon: {
+      control: 'boolean',
+      table: {
+        disable: true,
+      },
+    },
+    showTrailingIcon: {
+      control: 'boolean',
+      table: {
+        disable: true,
+      },
+    },
+    leadingIconName: {
+      control: 'select',
+      options: ['', ...iconNames] as Array<'' | IconName>,
+      table: {
+        disable: true,
+      },
+    },
+    trailingIconName: {
       control: 'select',
       options: ['', ...iconNames] as Array<'' | IconName>,
       table: {
@@ -87,10 +121,10 @@ export const Variants: Story = {
   },
   render: () => (
     <div className="tag-story__frame">
-      <Tag tone="neutral" icon={<Icon name="tag" />}>
+      <Tag tone="neutral" leadingIcon={<Icon name="tag" />}>
         Status
       </Tag>
-      <Tag tone="ai" icon={<Icon name="sparkle" />}>
+      <Tag tone="ai" leadingIcon={<Icon name="sparkle" />}>
         Status
       </Tag>
     </div>

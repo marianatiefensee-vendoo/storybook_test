@@ -6,7 +6,8 @@ export type TagTone = 'neutral' | 'ai';
 
 export interface TagProps extends Omit<ComponentPropsWithoutRef<'span'>, 'children'> {
   tone?: TagTone;
-  icon?: ReactNode;
+  leadingIcon?: ReactNode;
+  trailingIcon?: ReactNode;
   children: ReactNode;
 }
 
@@ -18,7 +19,8 @@ const toneClassNames: Record<TagTone, string> = {
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
   {
     tone = 'neutral',
-    icon,
+    leadingIcon,
+    trailingIcon,
     children,
     className = '',
     ...spanProps
@@ -29,12 +31,17 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
 
   return (
     <span ref={ref} className={classes} data-tone={tone} {...spanProps}>
-      {icon ? (
-        <span aria-hidden="true" className="tag__icon">
-          {icon}
+      {leadingIcon ? (
+        <span aria-hidden="true" className="tag__icon tag__icon--leading">
+          {leadingIcon}
         </span>
       ) : null}
       <span className="tag__label">{children}</span>
+      {trailingIcon ? (
+        <span aria-hidden="true" className="tag__icon tag__icon--trailing">
+          {trailingIcon}
+        </span>
+      ) : null}
     </span>
   );
 });
