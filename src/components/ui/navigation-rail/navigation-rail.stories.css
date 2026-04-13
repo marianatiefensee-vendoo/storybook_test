@@ -99,7 +99,8 @@
 .navigation-rail-story__footer {
   display: grid;
   align-content: end;
-  min-height: 120px;
+  margin-top: auto;
+  padding-bottom: var(--go-flow-nav-rail-footer-padding-block-expanded);
 }
 
 .navigation-rail-story__label {

@@ -9,7 +9,7 @@ import { createFigmaDesign } from '../../../stories/figma-design';
 import './navigation-rail.stories.css';
 
 const navigationRailDesignUrl =
-  'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=721-2226&m=dev';
+  'https://www.figma.com/design/941LilI1FqImC2usHWp0qN/Listing-Flow-Draft--Recreate-?node-id=1140-12447&m=dev';
 
 type NavItemId =
   | 'inventory'
@@ -156,8 +156,6 @@ function renderNavigationRail(args: NavigationRailStoryArgs) {
               icon={<Icon name={item.iconName} />}
               label={item.label}
               selected={selectedItem === item.id}
-              badge={item.id === 'inventory' ? '3' : undefined}
-              badgeVariant={item.id === 'inventory' ? 'prominent' : undefined}
               onClick={() => {
                 updateArgs({ selectedItem: item.id });
               }}
@@ -220,8 +218,6 @@ export const ExpandedAndDocked: Story = {
                 icon={<Icon name={item.iconName} />}
                 label={item.label}
                 selected={index === 0}
-                badge={index === 0 ? '3' : undefined}
-                badgeVariant={index === 0 ? 'prominent' : undefined}
               />
             ))}
           </div>
@@ -252,8 +248,6 @@ export const ExpandedAndDocked: Story = {
                 icon={<Icon name={item.iconName} />}
                 label={item.label}
                 selected={index === 0}
-                badge={index === 0 ? '3' : undefined}
-                badgeVariant={index === 0 ? 'prominent' : undefined}
               />
             ))}
           </div>

@@ -168,8 +168,6 @@ function renderDesktopAppShell(args: DesktopAppShellStoryArgs) {
                 icon={<Icon name={item.iconName} />}
                 label={item.label}
                 selected={selectedNavItem === item.id}
-                badge={item.id === 'inventory' ? '3' : undefined}
-                badgeVariant={item.id === 'inventory' ? 'prominent' : undefined}
                 onClick={() => fabClick()}
               />
             ))}
