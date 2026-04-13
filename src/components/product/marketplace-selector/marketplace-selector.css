@@ -42,12 +42,13 @@
   display: flex;
   flex: 1 1 auto;
   align-items: center;
+  justify-content: flex-start;
   gap: var(--go-flow-space-3);
   min-inline-size: 0;
 }
 
 .marketplace-selector__atom {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-inline-size: 0;
 }
 

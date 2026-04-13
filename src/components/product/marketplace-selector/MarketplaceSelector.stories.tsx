@@ -79,10 +79,9 @@ type Story = StoryObj<typeof meta>;
 function renderPlayground(args: Partial<MarketplaceSelectorProps>) {
   const [storyArgs, updateArgs] = useArgs<Partial<MarketplaceSelectorProps>>();
   const resolvedArgs = { ...defaultStoryArgs, ...args, ...storyArgs };
-  const frameWidth = resolvedArgs.state === 'not_connected' ? '401px' : '407px';
 
   return (
-    <div style={{ width: frameWidth }}>
+    <div style={{ width: '407px' }}>
       <MarketplaceSelector
         marketplace={resolvedArgs.marketplace}
         state={resolvedArgs.state}
@@ -111,7 +110,7 @@ export const States: Story = {
     <div style={storyStackStyle}>
       <section style={storySectionStyle}>
         <div style={storyLabelStyle}>Not connected</div>
-        <div style={{ width: '401px' }}>
+        <div style={{ width: '407px' }}>
           <MarketplaceSelector marketplace="eBay" state="not_connected" />
         </div>
       </section>
