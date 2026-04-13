@@ -179,8 +179,8 @@
 }
 
 .nav-rail-item--rail {
-  width: var(--go-flow-nav-item-rail-width);
-  align-self: flex-start;
+  width: 100%;
+  align-self: stretch;
   align-items: center;
 }
 

@@ -26,7 +26,7 @@ type NavRailItemStoryArgs = {
 
 const meta = {
   title: 'Components/NavRailItem',
-  component: NavRailItem,
+  component: NavRailItem as unknown as Meta<NavRailItemStoryArgs>['component'],
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -88,7 +88,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<NavRailItemStoryArgs>;
 
 function renderNavRailItem(args: NavRailItemStoryArgs) {
   const [storyArgs, updateArgs] = useArgs<NavRailItemStoryArgs>();

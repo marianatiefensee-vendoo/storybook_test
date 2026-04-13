@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 90px;
+  min-height: 54px;
 }
 
 .navigation-rail-story__brand-mark {
@@ -47,8 +47,8 @@
 }
 
 .navigation-rail-story__brand-mark--expanded {
-  width: 100%;
-  max-width: 176px;
+  width: 60px;
+  height: 54px;
 }
 
 .navigation-rail-story__brand-mark--docked {

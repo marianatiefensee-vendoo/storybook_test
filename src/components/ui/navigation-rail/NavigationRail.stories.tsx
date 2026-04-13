@@ -87,7 +87,7 @@ function NavigationRailFab({ expanded }: { expanded: boolean }) {
 
 const meta = {
   title: 'Components/NavigationRail',
-  component: NavigationRail,
+  component: NavigationRail as unknown as Meta<NavigationRailStoryArgs>['component'],
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -120,7 +120,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<NavigationRailStoryArgs>;
 
 function renderNavigationRail(args: NavigationRailStoryArgs) {
   const [storyArgs, updateArgs] = useArgs<NavigationRailStoryArgs>();
