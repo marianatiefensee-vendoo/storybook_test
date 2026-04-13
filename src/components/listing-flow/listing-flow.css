@@ -184,13 +184,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: var(--go-flow-listing-flow-card-padding);
+  padding: 18px var(--go-flow-listing-flow-card-padding) 16px;
 }
 
 .listing-flow-section__header-main {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
   min-width: 0;
 }
 
@@ -203,7 +203,7 @@
 .listing-flow-section__title-stack {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   min-width: 0;
 }
 
@@ -227,6 +227,12 @@
 .listing-flow-section__body {
   padding:
     0 var(--go-flow-listing-flow-card-padding) var(--go-flow-listing-flow-card-padding);
+}
+
+.listing-flow-section__trailing .listing-flow-icon-button {
+  --icon-button-width: 36px;
+  --icon-button-height: 36px;
+  --icon-button-icon-size: 18px;
 }
 
 .listing-flow-progress-row {
