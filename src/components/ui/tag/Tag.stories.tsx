@@ -77,29 +77,17 @@ const meta = {
     },
     showLeadingIcon: {
       control: 'boolean',
-      table: {
-        disable: true,
-      },
     },
     showTrailingIcon: {
       control: 'boolean',
-      table: {
-        disable: true,
-      },
     },
     leadingIconName: {
       control: 'select',
       options: ['', ...iconNames] as Array<'' | IconName>,
-      table: {
-        disable: true,
-      },
     },
     trailingIconName: {
       control: 'select',
       options: ['', ...iconNames] as Array<'' | IconName>,
-      table: {
-        disable: true,
-      },
     },
   },
 } satisfies Meta<TagStoryArgs>;
