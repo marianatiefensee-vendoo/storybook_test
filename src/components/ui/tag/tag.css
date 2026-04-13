@@ -1,0 +1,60 @@
+.tag {
+  --tag-bg: #aeaaae;
+  --tag-fg: var(--go-flow-sys-light-on-primary);
+  --tag-gap: 4px;
+  --tag-padding-inline: 4px;
+  --tag-min-height: 20px;
+  --tag-radius: var(--go-flow-alias-radius-chip, 8px);
+  --tag-icon-size: 12px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tag-gap);
+  box-sizing: border-box;
+  min-height: var(--tag-min-height);
+  padding-inline: var(--tag-padding-inline);
+  border-radius: var(--tag-radius);
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  font-family: var(--go-flow-font-family-brand);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.tag--neutral {
+  --tag-bg: #aeaaae;
+  --tag-fg: var(--go-flow-sys-light-on-primary);
+}
+
+.tag--ai {
+  --tag-bg: #e8ddff;
+  --tag-fg: #20005e;
+}
+
+.tag__icon {
+  --go-flow-icon-size: 12px;
+
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--tag-icon-size);
+  height: var(--tag-icon-size);
+}
+
+.tag__icon > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tag__label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 14px;
+}

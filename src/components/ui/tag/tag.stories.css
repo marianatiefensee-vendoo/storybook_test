@@ -1,0 +1,11 @@
+.tag-story__frame {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 20px;
+  box-sizing: border-box;
+  width: 102px;
+  height: 100px;
+  padding: 20px;
+  background: #ffffff;
+}
