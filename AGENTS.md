@@ -80,6 +80,9 @@ When implementing, fixing, or planning any design-system or Storybook component:
 - Always use the exact Figma node URL provided in the task.
 - Do not rely on a broad parent frame when a specific node URL is available.
 - Inspect the exact node first before proposing API or code changes.
+- For reusable design-system component families, inspect the canonical design-system family node and the exact variant node first.
+- Treat screen instances only as composition context, not as the source of component structure or nested child targets.
+- If a nested instance needs more detail, inspect the canonical source component in the design-system file instead of relying on unstable child IDs from the screen instance payload.
 - Use the Figma MCP tools / Figma skills first to understand:
   - structure
   - spacing
