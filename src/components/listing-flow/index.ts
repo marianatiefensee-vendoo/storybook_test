@@ -16,14 +16,12 @@ export {
 } from './supporting-pane/SupportingPane';
 export {
   ListingSectionCard,
-  ListingSectionCardItemDetails,
-  ListingSectionCardMarketplaces,
-  ListingSectionCardPricing,
-  ListingSectionCardShipping,
-  ListingSectionHeader,
   type ListingSectionCardProps,
-  type ListingSectionHeaderProps,
 } from './listing-sections/ListingSectionCard';
+export {
+  ListingSectionHeader,
+  type ListingSectionHeaderProps,
+} from './listing-sections/ListingSectionHeader';
 export {
   AiAssistPromoCard,
   EmptyAddPhotoTile,

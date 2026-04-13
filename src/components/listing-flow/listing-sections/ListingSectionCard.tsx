@@ -4,43 +4,12 @@ import {
   type ReactNode,
 } from 'react';
 
-import {
-  ListingFlowIconButton,
-  ListingFlowStepBadge,
-} from '../internal/listing-flow-ui';
+import { ListingFlowIconButton } from '../internal/listing-flow-ui';
+import { ListingSectionHeader } from './ListingSectionHeader';
 import '../listing-flow.css';
 
-export interface ListingSectionHeaderProps {
-  step: number;
-  title: ReactNode;
-  supportingText?: ReactNode;
-  trailing?: ReactNode;
-}
-
-export function ListingSectionHeader({
-  step,
-  title,
-  supportingText,
-  trailing,
-}: ListingSectionHeaderProps) {
-  return (
-    <div className="listing-flow-section__header">
-      <div className="listing-flow-section__header-main">
-        <ListingFlowStepBadge step={step} status="current" />
-        <div className="listing-flow-section__title-stack">
-          <span className="listing-flow-section__title">{title}</span>
-          {supportingText ? (
-            <span className="listing-flow-section__supporting">{supportingText}</span>
-          ) : null}
-        </div>
-      </div>
-      {trailing ? <div className="listing-flow-section__trailing">{trailing}</div> : null}
-    </div>
-  );
-}
-
 export interface ListingSectionCardProps
-  extends Omit<ComponentPropsWithoutRef<'section'>, 'children'> {
+  extends Omit<ComponentPropsWithoutRef<'section'>, 'children' | 'title'> {
   step: number;
   title: ReactNode;
   supportingText?: ReactNode;
@@ -53,6 +22,11 @@ export const ListingSectionCard = forwardRef<HTMLElement, ListingSectionCardProp
     { step, title, supportingText, trailing, children, className = '', ...sectionProps },
     ref,
   ) {
+    const resolvedTrailing =
+      trailing ?? (
+        <ListingFlowIconButton label="Collapse section" icon="chevron_down" />
+      );
+
     return (
       <section
         ref={ref}
@@ -63,9 +37,7 @@ export const ListingSectionCard = forwardRef<HTMLElement, ListingSectionCardProp
           step={step}
           title={title}
           supportingText={supportingText}
-          trailing={
-            trailing ?? <ListingFlowIconButton label="Collapse section" icon="chevron_down" />
-          }
+          trailing={resolvedTrailing}
         />
         <div className="listing-flow-card listing-flow-section__body">{children}</div>
       </section>
@@ -74,36 +46,3 @@ export const ListingSectionCard = forwardRef<HTMLElement, ListingSectionCardProp
 );
 
 ListingSectionCard.displayName = 'ListingSectionCard';
-
-export interface ListingSectionCardVariantProps
-  extends Omit<ListingSectionCardProps, 'title'> {
-  children: ReactNode;
-}
-
-export function ListingSectionCardMarketplaces({
-  children,
-  ...props
-}: ListingSectionCardVariantProps) {
-  return <ListingSectionCard {...props} title="Marketplaces">{children}</ListingSectionCard>;
-}
-
-export function ListingSectionCardItemDetails({
-  children,
-  ...props
-}: ListingSectionCardVariantProps) {
-  return <ListingSectionCard {...props} title="Item Details">{children}</ListingSectionCard>;
-}
-
-export function ListingSectionCardPricing({
-  children,
-  ...props
-}: ListingSectionCardVariantProps) {
-  return <ListingSectionCard {...props} title="Pricing">{children}</ListingSectionCard>;
-}
-
-export function ListingSectionCardShipping({
-  children,
-  ...props
-}: ListingSectionCardVariantProps) {
-  return <ListingSectionCard {...props} title="Shipping">{children}</ListingSectionCard>;
-}
