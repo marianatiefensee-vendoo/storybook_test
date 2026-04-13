@@ -5,12 +5,14 @@ import {
 } from 'react';
 
 import { ListingFlowIconButton } from '../internal/listing-flow-ui';
-import { ListingSectionHeader } from './ListingSectionHeader';
+import { ListingSectionHeader, type ListingSectionProgress } from './ListingSectionHeader';
 import '../listing-flow.css';
 
 export interface ListingSectionCardProps
   extends Omit<ComponentPropsWithoutRef<'section'>, 'children' | 'title'> {
   step: number;
+  progress?: ListingSectionProgress;
+  showAction?: boolean;
   title: ReactNode;
   supportingText?: ReactNode;
   trailing?: ReactNode;
@@ -19,14 +21,24 @@ export interface ListingSectionCardProps
 
 export const ListingSectionCard = forwardRef<HTMLElement, ListingSectionCardProps>(
   function ListingSectionCard(
-    { step, title, supportingText, trailing, children, className = '', ...sectionProps },
+    {
+      step,
+      progress = 'upcoming',
+      showAction = true,
+      title,
+      supportingText,
+      trailing,
+      children,
+      className = '',
+      ...sectionProps
+    },
     ref,
   ) {
     const hasBody = children != null;
     const resolvedTrailing =
-      trailing ?? (
+      trailing ?? (showAction ? (
         <ListingFlowIconButton label="Collapse section" icon="chevron_down" />
-      );
+      ) : null);
 
     return (
       <section
@@ -36,9 +48,10 @@ export const ListingSectionCard = forwardRef<HTMLElement, ListingSectionCardProp
       >
         <ListingSectionHeader
           step={step}
+          progress={progress}
           title={title}
           supportingText={supportingText}
-          trailing={resolvedTrailing}
+          trailing={resolvedTrailing ?? undefined}
         />
         {hasBody ? <div className="listing-flow-section__body">{children}</div> : null}
       </section>

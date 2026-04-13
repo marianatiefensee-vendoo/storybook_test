@@ -7,9 +7,12 @@ import {
 import { ListingFlowStepBadge } from '../internal/listing-flow-ui';
 import '../listing-flow.css';
 
+export type ListingSectionProgress = 'current' | 'complete' | 'upcoming';
+
 export interface ListingSectionHeaderProps
   extends Omit<ComponentPropsWithoutRef<'header'>, 'children' | 'title'> {
   step: number;
+  progress?: ListingSectionProgress;
   title: ReactNode;
   supportingText?: ReactNode;
   trailing?: ReactNode;
@@ -19,7 +22,7 @@ export const ListingSectionHeader = forwardRef<
   HTMLElement,
   ListingSectionHeaderProps
 >(function ListingSectionHeader(
-  { step, title, supportingText, trailing, className = '', ...headerProps },
+  { step, progress = 'upcoming', title, supportingText, trailing, className = '', ...headerProps },
   ref,
 ) {
   return (
@@ -29,7 +32,7 @@ export const ListingSectionHeader = forwardRef<
       {...headerProps}
     >
       <div className="listing-flow-section__header-main">
-        <ListingFlowStepBadge step={step} status="current" />
+        <ListingFlowStepBadge step={step} status={progress} />
         <div className="listing-flow-section__title-stack">
           <span className="listing-flow-section__title">{title}</span>
           {supportingText ? (

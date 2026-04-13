@@ -9,6 +9,8 @@ const sectionDesignUrl =
 
 type SectionStoryArgs = {
   step: number;
+  progress: 'current' | 'complete' | 'upcoming';
+  showAction: boolean;
   title: string;
   supportingText: string;
   children: ListingSectionCardProps['children'];
@@ -24,12 +26,14 @@ const meta = {
     docs: {
       description: {
         component:
-          'Structural listing-flow section wrapper with a step header and optional body.',
+          'Structural listing-flow section wrapper with a progress-aware header and optional body.',
       },
     },
   },
   args: {
     step: 3,
+    progress: 'upcoming',
+    showAction: true,
     title: 'Title & Description',
     supportingText: 'Describe the item shoppers need to know about.',
     children: (
@@ -41,6 +45,13 @@ const meta = {
   argTypes: {
     step: {
       control: { type: 'number', min: 1, max: 8, step: 1 },
+    },
+    progress: {
+      control: { type: 'select' },
+      options: ['current', 'complete', 'upcoming'],
+    },
+    showAction: {
+      control: 'boolean',
     },
     title: {
       control: 'text',
@@ -65,6 +76,8 @@ export const Playground: Story = {
     return (
       <ListingSectionCard
         step={resolved.step}
+        progress={resolved.progress}
+        showAction={resolved.showAction}
         title={resolved.title}
         supportingText={resolved.supportingText}
       >
@@ -74,18 +87,25 @@ export const Playground: Story = {
   },
 };
 
-export const Approximation: Story = {
+export const Expanded: Story = {
   parameters: {
     layout: 'centered',
     controls: {
       disable: true,
     },
     design: createFigmaDesign(sectionDesignUrl),
+    docs: {
+      description: {
+        story: 'Expanded state with body content for variant coverage.',
+      },
+    },
   },
   render: () => (
-    <div style={{ width: '100%', maxWidth: '480px' }}>
+    <div style={{ width: '812px' }}>
       <ListingSectionCard
         step={3}
+        progress="current"
+        showAction
         title="Title & Description"
         supportingText="Describe the item shoppers need to know about."
       >
@@ -106,15 +126,42 @@ export const Collapsed: Story = {
     design: createFigmaDesign(sectionDesignUrl),
     docs: {
       description: {
-        story:
-          'Header-only collapsed state matched to the user-verified screenshot; treated as an approximation until a live MCP payload is available.',
+        story: 'Exact collapsed variant from the canonical design-system family and screenshot.',
       },
     },
   },
   render: () => (
-    <div style={{ width: '100%', maxWidth: '480px' }}>
+    <div style={{ width: '812px' }}>
       <ListingSectionCard
         step={3}
+        progress="upcoming"
+        showAction
+        title="Title & Description"
+        supportingText="Describe the item shoppers need to know about."
+      />
+    </div>
+  ),
+};
+
+export const NoAction: Story = {
+  parameters: {
+    layout: 'centered',
+    controls: {
+      disable: true,
+    },
+    design: createFigmaDesign(sectionDesignUrl),
+    docs: {
+      description: {
+        story: 'Collapsed header shell without the trailing action, to verify the action-off variant.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ width: '812px' }}>
+      <ListingSectionCard
+        step={3}
+        progress="upcoming"
+        showAction={false}
         title="Title & Description"
         supportingText="Describe the item shoppers need to know about."
       />
