@@ -241,6 +241,26 @@
   --go-flow-app-bar-action-size: 40px;
   --go-flow-app-bar-action-radius: 4px;
 
+  /* Section card-specific semantic tokens */
+  --go-flow-section-card-surface: var(--go-flow-sys-light-surface);
+  --go-flow-section-card-header-surface-tint: rgba(104, 58, 223, 0.08);
+  --go-flow-section-card-border: var(--go-flow-sys-light-outline-variant);
+  --go-flow-section-card-border-expanded: var(--go-flow-sys-light-primary);
+  --go-flow-section-card-shadow-expanded: var(--go-flow-elevation-level-1);
+  --go-flow-section-card-radius: 12px;
+  --go-flow-section-card-padding: 24px;
+  --go-flow-section-card-header-gap: 12px;
+  --go-flow-section-card-title-gap: 4px;
+  --go-flow-section-card-divider: var(--go-flow-sys-light-outline-variant);
+  --go-flow-section-card-slot-surface: #ffffff;
+  --go-flow-section-card-slot-height: 48px;
+  --go-flow-section-card-step-size: 30px;
+  --go-flow-section-card-step-font: var(--go-flow-typography-label-large);
+  --go-flow-section-card-step-letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
+  --go-flow-section-card-step-collapsed-surface: var(--go-flow-sys-light-outline-variant);
+  --go-flow-section-card-step-expanded-surface: var(--go-flow-sys-light-primary);
+  --go-flow-section-card-step-fg: var(--go-flow-sys-light-on-primary);
+
   /* Listing flow-specific semantic tokens */
   --go-flow-listing-flow-surface: var(--go-flow-sys-light-surface);
   --go-flow-listing-flow-surface-variant: var(--go-flow-sys-light-surface-container);
