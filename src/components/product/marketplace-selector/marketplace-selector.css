@@ -1,0 +1,117 @@
+.marketplace-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--go-flow-space-3);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: var(--go-flow-space-12);
+  padding: var(--go-flow-space-2-5) var(--go-flow-space-4);
+  border: 1px solid var(--go-flow-sys-light-outline-variant);
+  border-radius: var(--go-flow-radius-sm);
+  background: var(--go-flow-sys-light-surface);
+  color: var(--go-flow-sys-light-on-surface);
+  text-align: left;
+  user-select: none;
+}
+
+.marketplace-selector--interactive {
+  cursor: pointer;
+}
+
+.marketplace-selector--interactive:focus-visible {
+  outline: 2px solid var(--go-flow-sys-light-primary);
+  outline-offset: 2px;
+}
+
+.marketplace-selector--static {
+  cursor: default;
+}
+
+.marketplace-selector[data-state='selected'] {
+  background: var(--go-flow-section-card-header-surface-tint);
+}
+
+.marketplace-selector[data-state='not_connected'] {
+  background: var(--go-flow-sys-light-surface);
+}
+
+.marketplace-selector__content {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: var(--go-flow-space-3);
+  min-inline-size: 0;
+}
+
+.marketplace-selector__atom {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.marketplace-selector__atom--compact .marketplace-atom__supporting {
+  display: none;
+}
+
+.marketplace-selector__atom--compact .marketplace-atom__label {
+  min-height: 0;
+  width: auto;
+}
+
+.marketplace-selector__atom--compact .marketplace-atom__content {
+  min-height: 40px;
+}
+
+.marketplace-selector[data-state='not_connected'] .marketplace-selector__atom,
+.marketplace-selector[data-state='not_connected'] .marketplace-selector__trailing {
+  opacity: 0.38;
+}
+
+.marketplace-selector__trailing {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--go-flow-space-12);
+  height: var(--go-flow-space-12);
+}
+
+.marketplace-selector__checkbox-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--go-flow-sys-light-outline);
+  border-radius: var(--go-flow-radius-sm);
+  background: var(--go-flow-sys-light-surface);
+  color: var(--go-flow-sys-light-on-primary);
+}
+
+.marketplace-selector__checkbox-shell--selected {
+  border-color: var(--go-flow-sys-light-primary);
+  background: var(--go-flow-sys-light-primary);
+}
+
+.marketplace-selector__checkbox-mark {
+  --go-flow-icon-size: 16px;
+}
+
+.marketplace-selector__icon {
+  --go-flow-icon-size: 24px;
+}
+
+.marketplace-selector__icon-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.marketplace-selector__icon-shell--muted {
+  color: var(--go-flow-sys-light-on-surface-variant);
+}
