@@ -125,3 +125,10 @@ When implementing, fixing, or planning any design-system or Storybook component:
 - Always use the Figma skills / MCP context before implementation when a Figma node is provided.
 - Always use Vendoo design-system rules/skills to keep styling, naming, and component architecture aligned with the repo.
 - Do not bypass these sources of truth unless explicitly instructed.
+
+## Exact Figma URL rule
+
+- Always use the full exact Figma node URL provided in the task
+- Do not rely on raw node numbers alone
+- Use the Figma skills / MCP context from the full URL first
+- Treat the exact full URL as the visual source of truth
