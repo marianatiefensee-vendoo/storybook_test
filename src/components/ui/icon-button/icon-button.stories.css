@@ -1,0 +1,51 @@
+.icon-button-story__grid,
+.icon-button-story__matrix {
+  display: grid;
+  gap: 20px;
+}
+
+.icon-button-story__grid {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.icon-button-story__matrix {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.icon-button-story__matrix-column {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.icon-button-story__matrix-heading {
+  color: var(--go-flow-sys-light-on-surface);
+  font: var(--go-flow-typography-title-small);
+  letter-spacing: var(--go-flow-typography-title-small-letter-spacing);
+  text-transform: capitalize;
+}
+
+.icon-button-story__tile {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--go-flow-sys-light-outline-variant);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.icon-button-story__tile--hover .icon-button::before {
+  opacity: 1;
+}
+
+.icon-button-story__tile--focus .icon-button {
+  outline: 2px solid var(--go-flow-sys-light-primary);
+  outline-offset: 2px;
+}
+
+.icon-button-story__caption {
+  color: var(--go-flow-sys-light-on-surface-variant);
+  font: var(--go-flow-typography-label-small);
+  letter-spacing: var(--go-flow-typography-label-small-letter-spacing);
+}

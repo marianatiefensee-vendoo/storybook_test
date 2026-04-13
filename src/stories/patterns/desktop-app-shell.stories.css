@@ -34,17 +34,14 @@
 }
 
 .desktop-app-shell__menu {
-  appearance: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--go-flow-app-bar-action-shell-size);
-  height: var(--go-flow-app-bar-action-shell-size);
-  padding: 0;
-  border: 0;
-  border-radius: var(--go-flow-app-bar-action-radius);
-  background: transparent;
-  color: var(--go-flow-sys-light-on-surface);
+  --icon-button-width: var(--go-flow-app-bar-action-shell-size);
+  --icon-button-height: var(--go-flow-app-bar-action-shell-size);
+  --icon-button-radius: var(--go-flow-app-bar-action-radius);
+  --icon-button-icon-size: var(--go-flow-icon-size);
+  --icon-button-fg: var(--go-flow-sys-light-on-surface);
+  --icon-button-bg: transparent;
+  --icon-button-border-color: transparent;
+  --icon-button-hover-layer: transparent;
 }
 
 .desktop-app-shell__fab {

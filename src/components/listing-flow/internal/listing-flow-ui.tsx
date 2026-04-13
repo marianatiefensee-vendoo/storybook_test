@@ -1,5 +1,6 @@
 import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from 'react';
 
+import { IconButton, type IconButtonProps } from '../../ui/icon-button/IconButton';
 import { Icon } from '../../ui/icon/Icon';
 import { type IconName } from '../../ui/icon/icon-names';
 import '../listing-flow.css';
@@ -36,7 +37,7 @@ export function ListingFlowDivider() {
 }
 
 interface ListingFlowIconButtonProps
-  extends Omit<ComponentPropsWithoutRef<'button'>, 'children' | 'type'> {
+  extends Omit<IconButtonProps, 'icon' | 'label' | 'variant' | 'size'> {
   label: string;
   icon: IconName;
 }
@@ -49,15 +50,15 @@ export const ListingFlowIconButton = forwardRef<
   ref,
 ) {
   return (
-    <button
+    <IconButton
       ref={ref}
-      type="button"
       className={['listing-flow-icon-button', className].filter(Boolean).join(' ')}
-      aria-label={label}
+      icon={<Icon name={icon} />}
+      label={label}
+      size="medium"
+      variant="standard"
       {...buttonProps}
-    >
-      <Icon name={icon} />
-    </button>
+    />
   );
 });
 
@@ -171,4 +172,3 @@ export const MarketplaceLogoTile = forwardRef<HTMLButtonElement, MarketplaceLogo
 );
 
 MarketplaceLogoTile.displayName = 'MarketplaceLogoTile';
-

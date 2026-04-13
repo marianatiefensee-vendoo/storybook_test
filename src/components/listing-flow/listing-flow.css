@@ -57,37 +57,13 @@
 }
 
 .listing-flow-icon-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: var(--go-flow-listing-flow-icon-button-size);
-  height: var(--go-flow-listing-flow-icon-button-size);
-  border: 0;
-  border-radius: var(--go-flow-listing-flow-icon-button-radius);
-  background: var(--go-flow-listing-flow-icon-button-surface);
-  color: var(--go-flow-listing-flow-icon-button-fg);
-  padding: 0;
-  cursor: pointer;
-  transition:
-    background-color var(--go-flow-button-transition-duration)
-      var(--go-flow-button-transition-easing),
-    color var(--go-flow-button-transition-duration)
-      var(--go-flow-button-transition-easing);
-}
-
-.listing-flow-icon-button:hover:not(:disabled) {
-  background: var(--go-flow-listing-flow-icon-button-surface-hover);
-}
-
-.listing-flow-icon-button:focus-visible {
-  outline: 2px solid var(--go-flow-sys-light-primary);
-  outline-offset: 2px;
-}
-
-.listing-flow-icon-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.38;
+  --icon-button-width: var(--go-flow-listing-flow-icon-button-size);
+  --icon-button-height: var(--go-flow-listing-flow-icon-button-size);
+  --icon-button-radius: var(--go-flow-listing-flow-icon-button-radius);
+  --icon-button-icon-size: 24px;
+  --icon-button-bg: var(--go-flow-listing-flow-icon-button-surface);
+  --icon-button-fg: var(--go-flow-listing-flow-icon-button-fg);
+  --icon-button-hover-layer: var(--go-flow-listing-flow-icon-button-surface-hover);
 }
 
 .listing-flow-step-badge {

@@ -3,6 +3,7 @@ import { fn } from 'storybook/test';
 
 import { AppBar } from '../../components/ui/app-bar/AppBar';
 import { AppBarHeadlineBlock } from '../../components/ui/app-bar/AppBarHeadlineBlock';
+import { IconButton } from '../../components/ui/icon-button/IconButton';
 import { NavRailItem } from '../../components/ui/navigation-rail/NavRailItem';
 import { NavigationRail } from '../../components/ui/navigation-rail/NavigationRail';
 import { Icon } from '../../components/ui/icon/Icon';
@@ -48,9 +49,13 @@ function DesktopShellIconButton({
   iconName: 'menu' | 'menu_open' | 'more_vertical' | 'search' | 'plus_circle';
 }) {
   return (
-    <button type="button" aria-label={label} className="desktop-app-shell__menu">
-      <Icon name={iconName} />
-    </button>
+    <IconButton
+      className="desktop-app-shell__menu"
+      icon={<Icon name={iconName} />}
+      label={label}
+      size="medium"
+      variant="standard"
+    />
   );
 }
 
