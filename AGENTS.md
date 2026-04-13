@@ -140,3 +140,13 @@ When a task depends on an exact Figma node:
 - Clearly label the result as an approximation if implementation continues
 - Do not widen scope or infer hidden/expanded states from a single exact node
 - Prefer stopping after diagnostics for parity-critical work unless explicitly told to proceed without MCP
+
+## Figma instance payload reliability rule
+
+When the exact Figma node is an instance or composed pattern:
+- Use the full exact node URL as the source of truth
+- Use the exact node screenshot as the primary visual truth
+- Do not blindly trust nested child IDs from the instance payload as standalone fetch targets
+- Treat top-level metadata as structural support
+- Treat generated design-context code as a helper, not exact truth
+- If inner primitives need deeper inspection, locate and inspect the canonical source component nodes from the design system instead of relying on unstable child IDs inside the instance payload
