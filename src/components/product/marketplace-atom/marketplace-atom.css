@@ -1,0 +1,89 @@
+.marketplace-atom {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--go-flow-space-2-5);
+  overflow: clip;
+  border-radius: var(--go-flow-radius-sm);
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.marketplace-atom[data-size='Default'] {
+  --marketplace-atom-logo-size: 56px;
+  --marketplace-atom-logo-border-width: 0px;
+  --marketplace-atom-logo-radius: var(--go-flow-radius-sm);
+}
+
+.marketplace-atom[data-size='Small'] {
+  --marketplace-atom-logo-size: var(--go-flow-space-8);
+  --marketplace-atom-logo-border-width: 0.571px;
+  --marketplace-atom-logo-radius: 2.286px;
+}
+
+.marketplace-atom__logo-shell {
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: var(--marketplace-atom-logo-size);
+  height: var(--marketplace-atom-logo-size);
+  border: var(--marketplace-atom-logo-border-width) solid #000;
+  border-radius: var(--marketplace-atom-logo-radius);
+  background: #fff;
+  overflow: visible;
+}
+
+.marketplace-atom[data-marketplace='Facebook'] .marketplace-atom__logo-shell,
+.marketplace-atom[data-marketplace='Shopify'] .marketplace-atom__logo-shell {
+  overflow: clip;
+}
+
+.marketplace-atom__logo-mark {
+  position: absolute;
+}
+
+.marketplace-atom__logo-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.marketplace-atom__label {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--go-flow-space-1);
+  min-height: 32px;
+  width: 243px;
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.marketplace-atom__label--default {
+  font: var(--go-flow-typography-body-large);
+  letter-spacing: var(--go-flow-typography-body-large-letter-spacing);
+}
+
+.marketplace-atom__label--small {
+  font: var(--go-flow-typography-label-large);
+  letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
+}
+
+.marketplace-atom__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 32px;
+  width: 100%;
+}
+
+.marketplace-atom__title {
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.marketplace-atom__supporting {
+  color: var(--go-flow-sys-light-on-surface);
+  font: var(--go-flow-typography-body-small);
+  letter-spacing: var(--go-flow-typography-body-small-letter-spacing);
+}
+
