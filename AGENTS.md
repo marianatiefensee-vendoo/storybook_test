@@ -45,6 +45,29 @@ For each task:
 5. implement stories
 6. summarize assumptions
 
+## Parity story rule
+When working on screen mocks, layout mocks, or example implementations based on a specific Figma node:
+- treat the task as a parity task unless explicitly told otherwise
+- inspect the exact node first
+- audit the current Storybook output against that node before coding
+- list visual deltas explicitly
+- fix composition/story issues before changing reusable primitives
+- do not invent badges, labels, states, or layout changes not visible in the node
+- keep generic playground stories separate from Figma parity stories
+
 ## Validation
 - Run relevant tests or checks if they exist.
 - Keep Storybook stories usable for visual QA.
+
+## Parity and interaction-shell rules
+
+When implementing or fixing a component against a specific Figma node:
+
+- Treat the task as a parity task unless explicitly told otherwise
+- Audit the current implementation against the exact node before coding
+- Do not approximate locked brand assets like logos; preserve the exact asset, aspect ratio, scale, and placement from the node
+- The visual interaction state layer must match the interactive hit area
+- Do not apply selected / hovered / focus state backgrounds only to inner content wrappers if the full item shell is intended to be interactive
+- The element that owns padding, width, radius, and click behavior should usually also own the state background
+- Fix story/composition-level issues first, then primitive issues if necessary
+- Do not invent badges, spacing, or alternate states not visible in the target node
