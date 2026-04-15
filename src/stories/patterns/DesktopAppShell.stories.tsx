@@ -7,6 +7,7 @@ import { Icon } from '../../components/ui/icon/Icon';
 import { IconButton } from '../../components/ui/icon-button/IconButton';
 import { NavRailItem } from '../../components/ui/navigation-rail/NavRailItem';
 import { NavigationRail } from '../../components/ui/navigation-rail/NavigationRail';
+import { iconNames, type IconName } from '../../components/ui/icon/icon-names';
 import { createFigmaDesign } from '../figma-design';
 import { DesktopShellLayout } from './DesktopShellLayout';
 import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
@@ -23,19 +24,42 @@ type NavItemId =
 type DesktopShellStoryArgs = {
   expanded: boolean;
   selectedNavItem: NavItemId;
+  inventoryLabel: string;
+  inventoryIconName: IconName;
+  automationsLabel: string;
+  automationsIconName: IconName;
+  analyticsLabel: string;
+  analyticsIconName: IconName;
+  marketplacesLabel: string;
+  marketplacesIconName: IconName;
+  bulkActionsLabel: string;
+  bulkActionsIconName: IconName;
+  settingsLabel: string;
+  settingsIconName: IconName;
 };
 
-const navItems: Array<{
+type NavItem = {
   id: NavItemId;
   label: string;
-  iconName: 'package' | 'sync' | 'analytics' | 'store' | 'controls';
-}> = [
-  { id: 'inventory', label: 'Inventory', iconName: 'package' },
-  { id: 'automations', label: 'Automations', iconName: 'sync' },
-  { id: 'analytics', label: 'Analytics', iconName: 'analytics' },
-  { id: 'marketplaces', label: 'Marketplaces', iconName: 'store' },
-  { id: 'bulk-actions', label: 'Bulk Actions', iconName: 'controls' },
-];
+  iconName: IconName;
+};
+
+const defaultDesktopShellArgs = {
+  expanded: true,
+  selectedNavItem: 'inventory',
+  inventoryLabel: 'Inventory',
+  inventoryIconName: 'package',
+  automationsLabel: 'Automations',
+  automationsIconName: 'sync',
+  analyticsLabel: 'Analytics',
+  analyticsIconName: 'analytics',
+  marketplacesLabel: 'Marketplaces',
+  marketplacesIconName: 'store',
+  bulkActionsLabel: 'Bulk Actions',
+  bulkActionsIconName: 'controls',
+  settingsLabel: 'Settings',
+  settingsIconName: 'settings',
+} satisfies DesktopShellStoryArgs;
 
 const importShellDesignUrl =
   'https://www.figma.com/design/wnYDUVOEmVuKk7YDu6o3Vz/M---Product-Design-System--Molecules-?node-id=1984-342889&m=dev';
@@ -44,15 +68,19 @@ const inventorySaleDetectionShellDesignUrl =
 
 function ShellChrome({
   expanded,
+  navItems,
   selectedNavItem,
   ctaLabel,
   content,
 }: {
   expanded: boolean;
+  navItems: NavItem[];
   selectedNavItem: NavItemId;
   ctaLabel: string;
   content: ReactNode;
 }) {
+  const settingsItem = navItems[navItems.length - 1];
+
   return (
     <DesktopShellLayout>
       <DesktopShellHeader
@@ -75,7 +103,7 @@ function ShellChrome({
         }
       />
 
-      <div className="desktop-shell-layout">
+      <div className="desktop-shell-layout desktop-shell-layout--storybook">
         <aside className="desktop-shell-layout__rail">
           <div className="desktop-shell-layout__rail-header">
             <IconButton
@@ -103,8 +131,8 @@ function ShellChrome({
             <div className="desktop-shell-layout__rail-footer">
               <NavRailItem
                 layout="rail"
-                icon={<Icon name="settings" />}
-                label="Settings"
+                icon={<Icon name={settingsItem?.iconName ?? 'settings'} />}
+                label={settingsItem?.label ?? 'Settings'}
                 selected={selectedNavItem === 'settings'}
               />
             </div>
@@ -396,10 +424,48 @@ function DesktopShellPatternPlayground(args: DesktopShellStoryArgs) {
   return renderShell(args, <PlaygroundContent />, 'New item');
 }
 
+function buildNavItems(args: DesktopShellStoryArgs): NavItem[] {
+  return [
+    {
+      id: 'inventory',
+      label: args.inventoryLabel,
+      iconName: args.inventoryIconName,
+    },
+    {
+      id: 'automations',
+      label: args.automationsLabel,
+      iconName: args.automationsIconName,
+    },
+    {
+      id: 'analytics',
+      label: args.analyticsLabel,
+      iconName: args.analyticsIconName,
+    },
+    {
+      id: 'marketplaces',
+      label: args.marketplacesLabel,
+      iconName: args.marketplacesIconName,
+    },
+    {
+      id: 'bulk-actions',
+      label: args.bulkActionsLabel,
+      iconName: args.bulkActionsIconName,
+    },
+    {
+      id: 'settings',
+      label: args.settingsLabel,
+      iconName: args.settingsIconName,
+    },
+  ];
+}
+
 function renderShell(args: DesktopShellStoryArgs, content: ReactNode, ctaLabel: string) {
+  const navItems = buildNavItems(args);
+
   return (
     <ShellChrome
       expanded={args.expanded}
+      navItems={navItems}
       selectedNavItem={args.selectedNavItem}
       ctaLabel={ctaLabel}
       content={content}
@@ -431,8 +497,7 @@ const meta = {
     },
   },
   args: {
-    expanded: true,
-    selectedNavItem: 'inventory',
+    ...defaultDesktopShellArgs,
   },
   argTypes: {
     expanded: {
@@ -441,6 +506,48 @@ const meta = {
     selectedNavItem: {
       control: 'radio',
       options: navItemIds,
+    },
+    inventoryLabel: {
+      control: 'text',
+    },
+    inventoryIconName: {
+      control: 'select',
+      options: iconNames,
+    },
+    automationsLabel: {
+      control: 'text',
+    },
+    automationsIconName: {
+      control: 'select',
+      options: iconNames,
+    },
+    analyticsLabel: {
+      control: 'text',
+    },
+    analyticsIconName: {
+      control: 'select',
+      options: iconNames,
+    },
+    marketplacesLabel: {
+      control: 'text',
+    },
+    marketplacesIconName: {
+      control: 'select',
+      options: iconNames,
+    },
+    bulkActionsLabel: {
+      control: 'text',
+    },
+    bulkActionsIconName: {
+      control: 'select',
+      options: iconNames,
+    },
+    settingsLabel: {
+      control: 'text',
+    },
+    settingsIconName: {
+      control: 'select',
+      options: iconNames,
     },
   },
 } satisfies Meta<DesktopShellStoryArgs>;
@@ -451,6 +558,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
   render: DesktopShellPatternPlayground,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export const ImportShell: Story = {
@@ -462,10 +572,7 @@ export const ImportShell: Story = {
   },
   render: () =>
     renderShell(
-      {
-        expanded: true,
-        selectedNavItem: 'inventory',
-      },
+      defaultDesktopShellArgs,
       <ImportShellContent />,
       'Continue import',
     ),
@@ -481,8 +588,8 @@ export const InventorySaleDetectionShell: Story = {
   render: () =>
     renderShell(
       {
+        ...defaultDesktopShellArgs,
         expanded: false,
-        selectedNavItem: 'inventory',
       },
       <InventorySaleDetectionContent />,
       'Review signals',

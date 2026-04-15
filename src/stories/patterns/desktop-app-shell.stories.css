@@ -1,5 +1,9 @@
 /* Story-specific overrides for DesktopAppShell stories */
 
+.desktop-shell-layout--storybook {
+  padding: 0;
+}
+
 .desktop-shell-pattern__page {
   display: grid;
   gap: 24px;
