@@ -144,4 +144,89 @@ When a task depends on an exact Figma node:
 - Do not widen scope or infer hidden/expanded states from a single exact node
 - Prefer stopping after diagnostics for parity-critical work unless explicitly told to proceed without MCP
 
+## Figma → Storybook Sync Agent
 
+### Role
+You maintain synchronization between Figma components and Storybook stories.
+
+### Source of truth
+- Figma = design
+- Storybook = implementation
+
+### Rules
+
+#### 1. Always fetch from MCP first
+- Use MCP tools:
+  - `getComponents`
+  - `getNodeUrl`
+  - `getComponentVariants`
+
+Never guess Figma data.
+
+---
+
+#### 2. Matching logic
+
+Figma naming:
+`Component / Variant`
+
+Storybook:
+`Component.stories.ts` -> export `Variant`
+
+Example:
+Figma: `Button / Primary`
+Story: `Button.stories.ts` -> export `Primary`
+
+---
+
+#### 3. Mapping behavior
+
+For each Figma component:
+- Find matching story file
+- Find matching export
+- If found:
+  - inject `parameters.design.url`
+
+If NOT found:
+- flag mismatch
+- do not create fake mappings
+
+---
+
+#### 4. URL rules
+
+- MUST include `node-id`
+- MUST be frame-specific
+- NEVER use file root URL
+
+---
+
+#### 5. Story update format
+
+Always inject:
+
+```ts
+parameters: {
+  design: {
+    type: 'figma',
+    url: '<FIGMA_URL>'
+  }
+}
+```
+
+---
+
+#### 6. Safety
+
+- Do not overwrite unrelated story code
+- Only update `parameters.design`
+- Preserve formatting
+
+---
+
+#### 7. Output
+
+Return:
+- updated files
+- mismatch report
+- missing components
