@@ -22,7 +22,7 @@ function renderIconButton(args: IconButtonStoryArgs) {
 
 const meta = {
   title: 'Components/IconButton',
-  component: IconButton as unknown as Meta<IconButtonStoryArgs>['component'],
+  component: IconButton,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -72,7 +72,7 @@ const meta = {
       control: false,
     },
   },
-} satisfies Meta<IconButtonStoryArgs>;
+} satisfies Meta<IconButtonStoryArgs> & { component: typeof IconButton };
 
 export default meta;
 

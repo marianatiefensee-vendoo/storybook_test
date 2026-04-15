@@ -3,15 +3,12 @@ import { fn } from 'storybook/test';
 
 import { Button } from '../../components/ui/button/Button';
 import { Icon } from '../../components/ui/icon/Icon';
+import { BrandLockup } from '../../components/ui/brand/Brand';
 import { createFigmaDesign } from '../figma-design';
 import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
 
 const uxReferenceUrl =
   'https://www.figma.com/design/wnYDUVOEmVuKk7YDu6o3Vz/M---Product-Design-System--Molecules-?node-id=1018-34725&m=dev';
-
-// Shared with DesktopAppShell — same brandmark asset.
-const brandMarkSrc =
-  'https://www.figma.com/api/mcp/asset/d2894c21-6448-4048-8359-7b02a6066a77';
 
 type DesktopShellHeaderStoryArgs = {
   quotaUsed: number;
@@ -23,23 +20,13 @@ type DesktopShellHeaderStoryArgs = {
   showQuota: boolean;
 };
 
-function BrandMark() {
-  return (
-    <img
-      alt="Vendoo"
-      className="desktop-shell-header__brand-mark"
-      src={brandMarkSrc}
-    />
-  );
-}
-
 function renderHeader(args: DesktopShellHeaderStoryArgs) {
   const onCta = fn();
   const onAccount = fn();
 
   return (
     <DesktopShellHeader
-      logo={<BrandMark />}
+      logo={<BrandLockup className="desktop-shell-header__brand-lockup" />}
       trailing={
         <>
           {args.showQuota ? (
@@ -120,7 +107,7 @@ export const WithQuota: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <DesktopShellHeader
-      logo={<BrandMark />}
+      logo={<BrandLockup className="desktop-shell-header__brand-lockup" />}
       trailing={
         <>
           <ShellHeaderQuota used={0} total={125} unit="Items" period="Oct 10 – Nov 10" />
@@ -147,7 +134,7 @@ export const ActionsOnly: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <DesktopShellHeader
-      logo={<BrandMark />}
+      logo={<BrandLockup className="desktop-shell-header__brand-lockup" />}
       trailing={
         <>
           <Button variant="filled" size="small" onClick={fn()}>
@@ -171,5 +158,5 @@ export const ActionsOnly: Story = {
 // Graceful minimum — logo only.
 export const Minimal: Story = {
   parameters: { controls: { disable: true } },
-  render: () => <DesktopShellHeader logo={<BrandMark />} />,
+  render: () => <DesktopShellHeader logo={<BrandLockup className="desktop-shell-header__brand-lockup" />} />,
 };

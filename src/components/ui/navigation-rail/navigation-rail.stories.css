@@ -43,17 +43,8 @@
 }
 
 .navigation-rail-story__brand-mark {
-  object-fit: contain;
-}
-
-.navigation-rail-story__brand-mark--expanded {
   width: 60px;
-  height: 54px;
-}
-
-.navigation-rail-story__brand-mark--docked {
-  width: 60px;
-  height: 54px;
+  height: auto;
 }
 
 .navigation-rail-story__menu-fab {

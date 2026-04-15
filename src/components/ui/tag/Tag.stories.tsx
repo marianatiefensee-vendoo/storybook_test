@@ -47,7 +47,7 @@ function renderTag(args: TagStoryArgs) {
 
 const meta = {
   title: 'Components/Tag',
-  component: Tag as unknown as Meta<TagStoryArgs>['component'],
+  component: Tag,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -90,7 +90,7 @@ const meta = {
       options: ['', ...iconNames] as Array<'' | IconName>,
     },
   },
-} satisfies Meta<TagStoryArgs>;
+} satisfies Meta<TagStoryArgs> & { component: typeof Tag };
 
 export default meta;
 

@@ -66,7 +66,7 @@ function renderSectionCard(args: SectionCardStoryArgs) {
 
 const meta = {
   title: 'Components/SectionCard',
-  component: SectionCard as unknown as Meta<SectionCardStoryArgs>['component'],
+  component: SectionCard,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -116,7 +116,7 @@ const meta = {
       control: 'text',
     },
   },
-} satisfies Meta<SectionCardStoryArgs>;
+} satisfies Meta<SectionCardStoryArgs> & { component: typeof SectionCard };
 
 export default meta;
 

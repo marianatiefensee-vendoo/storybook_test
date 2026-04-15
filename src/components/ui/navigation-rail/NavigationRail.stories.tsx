@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useArgs } from 'storybook/preview-api';
+import { useEffect, useState } from 'react';
 import { expect, userEvent, waitFor } from 'storybook/test';
 
 import { NavRailItem } from './NavRailItem';
 import { NavigationRail } from './NavigationRail';
 import { Icon } from '../icon/Icon';
+import { BrandMark } from '../brand/Brand';
 import { createFigmaDesign } from '../../../stories/figma-design';
 import './navigation-rail.stories.css';
 
@@ -37,21 +38,6 @@ const navItems: Array<{
   { id: 'bulk-actions', label: 'Bulk Actions', iconName: 'controls' },
   { id: 'settings', label: 'Settings', iconName: 'settings' },
 ];
-
-function NavigationRailBrand({ expanded }: { expanded: boolean }) {
-  return (
-    <img
-      alt="Vendoo"
-      className={[
-        'navigation-rail-story__brand-mark',
-        expanded
-          ? 'navigation-rail-story__brand-mark--expanded'
-          : 'navigation-rail-story__brand-mark--docked',
-      ].join(' ')}
-      src="https://www.figma.com/api/mcp/asset/d2894c21-6448-4048-8359-7b02a6066a77"
-    />
-  );
-}
 
 function NavigationRailChromeButton({
   label,
@@ -87,7 +73,7 @@ function NavigationRailFab({ expanded }: { expanded: boolean }) {
 
 const meta = {
   title: 'Components/NavigationRail',
-  component: NavigationRail as unknown as Meta<NavigationRailStoryArgs>['component'],
+  component: NavigationRail,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -116,37 +102,35 @@ const meta = {
       options: navItems.map((item) => item.id),
     },
   },
-} satisfies Meta<NavigationRailStoryArgs>;
+} satisfies Meta<NavigationRailStoryArgs> & { component: typeof NavigationRail };
 
 export default meta;
 
 type Story = StoryObj<NavigationRailStoryArgs>;
 
 function renderNavigationRail(args: NavigationRailStoryArgs) {
-  const [storyArgs, updateArgs] = useArgs<NavigationRailStoryArgs>();
-  const resolvedArgs = {
-    ...args,
-    ...storyArgs,
-  };
+  const [selectedItem, setSelectedItem] = useState(args.selectedItem);
 
-  const selectedItem = storyArgs.selectedItem ?? args.selectedItem;
+  useEffect(() => {
+    setSelectedItem(args.selectedItem);
+  }, [args.selectedItem]);
 
   return (
     <div className="navigation-rail-story__panel">
       <NavigationRail
-        ariaLabel={resolvedArgs.ariaLabel}
-        expanded={resolvedArgs.expanded}
+        ariaLabel={args.ariaLabel}
+        expanded={args.expanded}
         className="navigation-rail-story__frame"
       >
         <div className="navigation-rail-story__brand">
-          <NavigationRailBrand expanded={resolvedArgs.expanded} />
+          <BrandMark className="navigation-rail-story__brand-mark" />
         </div>
         <div className="navigation-rail-story__menu-fab">
           <NavigationRailChromeButton
-            label={resolvedArgs.expanded ? 'Collapse rail' : 'Expand rail'}
-            iconName={resolvedArgs.expanded ? 'menu_open' : 'menu'}
+            label={args.expanded ? 'Collapse rail' : 'Expand rail'}
+            iconName={args.expanded ? 'menu_open' : 'menu'}
           />
-          <NavigationRailFab expanded={resolvedArgs.expanded} />
+          <NavigationRailFab expanded={args.expanded} />
         </div>
         <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
           {navItems.slice(0, 5).map((item) => (
@@ -157,7 +141,7 @@ function renderNavigationRail(args: NavigationRailStoryArgs) {
               label={item.label}
               selected={selectedItem === item.id}
               onClick={() => {
-                updateArgs({ selectedItem: item.id });
+                setSelectedItem(item.id);
               }}
             />
           ))}
@@ -169,7 +153,7 @@ function renderNavigationRail(args: NavigationRailStoryArgs) {
             label="Settings"
             selected={selectedItem === 'settings'}
             onClick={() => {
-              updateArgs({ selectedItem: 'settings' });
+              setSelectedItem('settings');
             }}
           />
         </div>
@@ -184,7 +168,8 @@ export const Playground: Story = {
     const inventory = canvas.getByRole('button', { name: /Inventory/i });
     const settings = canvas.getByRole('button', { name: /Settings/i });
 
-    await expect(inventory).toHaveAttribute('aria-current', 'page');
+    await userEvent.click(inventory);
+    await waitFor(() => expect(inventory).toHaveAttribute('aria-current', 'page'));
     await userEvent.click(settings);
     await waitFor(() => expect(canvas.getByRole('button', { name: /Settings/i })).toHaveAttribute('aria-current', 'page'));
     await expect(canvas.getByRole('button', { name: /Inventory/i })).not.toHaveAttribute('aria-current', 'page');
@@ -204,7 +189,7 @@ export const ExpandedAndDocked: Story = {
         <p className="navigation-rail-story__label">Expanded</p>
         <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
           <div className="navigation-rail-story__brand">
-            <NavigationRailBrand expanded />
+            <BrandMark className="navigation-rail-story__brand-mark" />
           </div>
           <div className="navigation-rail-story__menu-fab">
             <NavigationRailChromeButton label="Collapse rail" iconName="menu_open" />
@@ -234,7 +219,7 @@ export const ExpandedAndDocked: Story = {
           className="navigation-rail-story__frame"
         >
           <div className="navigation-rail-story__brand">
-            <NavigationRailBrand expanded={false} />
+            <BrandMark className="navigation-rail-story__brand-mark" />
           </div>
           <div className="navigation-rail-story__menu-fab">
             <NavigationRailChromeButton label="Expand rail" iconName="menu" />

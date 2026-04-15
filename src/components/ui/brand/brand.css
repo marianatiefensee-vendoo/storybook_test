@@ -1,0 +1,15 @@
+.brand {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  flex: none;
+}
+
+.brand--lockup {
+  /* Intrinsic lockup proportions are preserved by default. */
+}
+
+.brand--mark {
+  /* Intrinsic mark proportions are preserved by default. */
+}

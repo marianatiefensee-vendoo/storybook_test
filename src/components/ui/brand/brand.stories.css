@@ -1,0 +1,81 @@
+.brand-story__playground {
+  display: grid;
+  place-items: center;
+  min-width: 260px;
+  min-height: 160px;
+  padding: 32px;
+  border-radius: 20px;
+  background: var(--go-flow-sys-light-surface);
+  box-shadow: var(--go-flow-elevation-level-1);
+}
+
+.brand-story__variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.brand-story__tile {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(74, 0, 191, 0.04);
+}
+
+.brand-story__caption,
+.brand-story__heading {
+  margin: 0;
+  color: var(--go-flow-sys-light-on-surface-variant);
+  font: var(--go-flow-typography-body-small);
+}
+
+.brand-story__contexts {
+  display: grid;
+  gap: 24px;
+  width: min(100%, 960px);
+}
+
+.brand-story__context {
+  display: grid;
+  gap: 12px;
+}
+
+.brand-story__lockup {
+  /* Let the intrinsic lockup size show in the variants view. */
+}
+
+.brand-story__mark {
+  /* Let the intrinsic mark size show in the variants view. */
+}
+
+.brand-story__lockup--header {
+  height: 28px;
+  width: auto;
+}
+
+.brand-story__mark--compact {
+  width: 60px;
+  height: auto;
+}
+
+.brand-story__rail-shell {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto auto;
+  gap: 16px;
+  align-items: start;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--go-flow-nav-rail-surface);
+}
+
+.brand-story__rail-brand {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  min-height: 60px;
+  padding-top: 10px;
+}

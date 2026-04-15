@@ -8,6 +8,7 @@ import { IconButton } from '../../components/ui/icon-button/IconButton';
 import { NavRailItem } from '../../components/ui/navigation-rail/NavRailItem';
 import { NavigationRail } from '../../components/ui/navigation-rail/NavigationRail';
 import { Icon } from '../../components/ui/icon/Icon';
+import { BrandLockup, BrandMark } from '../../components/ui/brand/Brand';
 import { createFigmaDesign } from '../figma-design';
 import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
 import './desktop-app-shell.stories.css';
@@ -153,11 +154,7 @@ function renderDesktopAppShell(args: DesktopAppShellStoryArgs) {
     <div className="desktop-app-shell">
       <aside className="desktop-app-shell__rail">
         <div className="desktop-app-shell__brand">
-          <img
-            alt="Vendoo"
-            className="desktop-app-shell__brand-mark"
-            src="https://www.figma.com/api/mcp/asset/d2894c21-6448-4048-8359-7b02a6066a77"
-          />
+          <BrandMark className="desktop-app-shell__brand-mark" />
           <DesktopShellIconButton label={args.railExpanded ? 'Collapse rail' : 'Expand rail'} iconName={args.railExpanded ? 'menu_open' : 'menu'} />
           <DesktopShellFab iconOnly={!args.railExpanded} />
         </div>
@@ -234,13 +231,7 @@ export const WithShellHeader: Story = {
   render: (args) => (
     <div className="desktop-app-shell-with-header">
       <DesktopShellHeader
-        logo={
-          <img
-            alt="Vendoo"
-            className="desktop-app-shell__brand-mark"
-            src="https://www.figma.com/api/mcp/asset/d2894c21-6448-4048-8359-7b02a6066a77"
-          />
-        }
+        logo={<BrandLockup className="desktop-app-shell__brand-lockup" />}
         trailing={
           <>
             <ShellHeaderQuota used={0} total={125} unit="Items" period="Oct 10 – Nov 10" />

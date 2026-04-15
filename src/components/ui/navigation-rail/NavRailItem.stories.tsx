@@ -26,7 +26,7 @@ type NavRailItemStoryArgs = {
 
 const meta = {
   title: 'Components/NavRailItem',
-  component: NavRailItem as unknown as Meta<NavRailItemStoryArgs>['component'],
+  component: NavRailItem,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -84,7 +84,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<NavRailItemStoryArgs>;
+} satisfies Meta<NavRailItemStoryArgs> & { component: typeof NavRailItem };
 
 export default meta;
 
