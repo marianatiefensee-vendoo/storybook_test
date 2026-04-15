@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ReactNode } from 'react';
+import { useArgs } from 'storybook/preview-api';
 
 import { Button } from '../../components/ui/button/Button';
 import { BrandLockup } from '../../components/ui/brand/Brand';
@@ -11,6 +12,7 @@ import { iconNames, type IconName } from '../../components/ui/icon/icon-names';
 import { createFigmaDesign } from '../figma-design';
 import { DesktopShellLayout } from './DesktopShellLayout';
 import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
+import '../../components/ui/navigation-rail/navigation-rail.stories.css';
 import './desktop-app-shell.stories.css';
 
 type NavItemId =
@@ -71,12 +73,14 @@ function ShellChrome({
   navItems,
   selectedNavItem,
   ctaLabel,
+  onMenuClick,
   content,
 }: {
   expanded: boolean;
   navItems: NavItem[];
   selectedNavItem: NavItemId;
   ctaLabel: string;
+  onMenuClick?: () => void;
   content: ReactNode;
 }) {
   const settingsItem = navItems[navItems.length - 1];
@@ -103,7 +107,7 @@ function ShellChrome({
         }
       />
 
-      <div className="desktop-shell-layout desktop-shell-layout--storybook">
+      <div className="desktop-shell-layout">
         <aside className="desktop-shell-layout__rail">
           <div className="desktop-shell-layout__rail-header">
             <IconButton
@@ -112,10 +116,15 @@ function ShellChrome({
               label={expanded ? 'Collapse rail' : 'Expand rail'}
               size="medium"
               variant="standard"
+              onClick={onMenuClick}
             />
           </div>
 
-          <NavigationRail ariaLabel="Primary navigation" expanded={expanded}>
+          <NavigationRail
+            ariaLabel="Primary navigation"
+            expanded={expanded}
+            className="navigation-rail-story__frame"
+          >
             <div className="desktop-shell-layout__rail-items">
               {navItems.map((item) => (
                 <NavRailItem
@@ -421,7 +430,20 @@ function PlaygroundContent() {
 }
 
 function DesktopShellPatternPlayground(args: DesktopShellStoryArgs) {
-  return renderShell(args, <PlaygroundContent />, 'New item');
+  const [storyArgs, updateArgs] = useArgs<DesktopShellStoryArgs>();
+  const resolvedArgs = {
+    ...args,
+    ...storyArgs,
+  };
+
+  return renderShell(
+    resolvedArgs,
+    <PlaygroundContent />,
+    'New item',
+    () => {
+      updateArgs({ expanded: !resolvedArgs.expanded });
+    },
+  );
 }
 
 function buildNavItems(args: DesktopShellStoryArgs): NavItem[] {
@@ -459,7 +481,12 @@ function buildNavItems(args: DesktopShellStoryArgs): NavItem[] {
   ];
 }
 
-function renderShell(args: DesktopShellStoryArgs, content: ReactNode, ctaLabel: string) {
+function renderShell(
+  args: DesktopShellStoryArgs,
+  content: ReactNode,
+  ctaLabel: string,
+  onMenuClick?: () => void,
+) {
   const navItems = buildNavItems(args);
 
   return (
@@ -468,6 +495,7 @@ function renderShell(args: DesktopShellStoryArgs, content: ReactNode, ctaLabel: 
       navItems={navItems}
       selectedNavItem={args.selectedNavItem}
       ctaLabel={ctaLabel}
+      onMenuClick={onMenuClick}
       content={content}
     />
   );
@@ -512,6 +540,7 @@ const meta = {
     },
     inventoryIconName: {
       control: 'select',
+      name: 'icon',
       options: iconNames,
     },
     automationsLabel: {
@@ -519,6 +548,7 @@ const meta = {
     },
     automationsIconName: {
       control: 'select',
+      name: 'icon',
       options: iconNames,
     },
     analyticsLabel: {
@@ -526,6 +556,7 @@ const meta = {
     },
     analyticsIconName: {
       control: 'select',
+      name: 'icon',
       options: iconNames,
     },
     marketplacesLabel: {
@@ -533,6 +564,7 @@ const meta = {
     },
     marketplacesIconName: {
       control: 'select',
+      name: 'icon',
       options: iconNames,
     },
     bulkActionsLabel: {
@@ -540,6 +572,7 @@ const meta = {
     },
     bulkActionsIconName: {
       control: 'select',
+      name: 'icon',
       options: iconNames,
     },
     settingsLabel: {
@@ -547,6 +580,7 @@ const meta = {
     },
     settingsIconName: {
       control: 'select',
+      name: 'icon',
       options: iconNames,
     },
   },
