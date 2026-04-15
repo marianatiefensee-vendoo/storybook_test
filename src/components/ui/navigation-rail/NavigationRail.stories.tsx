@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useEffect, useState } from 'react';
-import { expect, userEvent, waitFor } from 'storybook/test';
+import { expect } from 'storybook/test';
 
 import { NavRailItem } from './NavRailItem';
 import { NavigationRail } from './NavigationRail';
 import { Icon } from '../icon/Icon';
-import { BrandMark } from '../brand/Brand';
 import { createFigmaDesign } from '../../../stories/figma-design';
 import './navigation-rail.stories.css';
 
@@ -23,8 +21,6 @@ type NavItemId =
 type NavigationRailStoryArgs = {
   ariaLabel: string;
   expanded: boolean;
-  selectedItem: NavItemId;
-  showBrand: boolean;
 };
 
 const navItems: Array<{
@@ -40,38 +36,6 @@ const navItems: Array<{
   { id: 'settings', label: 'Settings', iconName: 'settings' },
 ];
 
-function NavigationRailChromeButton({
-  label,
-  iconName,
-}: {
-  label: string;
-  iconName: 'menu' | 'menu_open';
-}) {
-  return (
-    <button type="button" aria-label={label} className="navigation-rail-story__chrome-button">
-      <Icon name={iconName} />
-    </button>
-  );
-}
-
-function NavigationRailFab({ expanded }: { expanded: boolean }) {
-  return (
-    <button
-      type="button"
-      aria-label="Add item"
-      className={[
-        'navigation-rail-story__fab',
-        expanded ? '' : 'navigation-rail-story__fab--icon-only',
-      ]
-        .filter(Boolean)
-        .join(' ')}
-    >
-      <Icon name="plus_circle" />
-      {expanded ? <span>Add item</span> : null}
-    </button>
-  );
-}
-
 const meta = {
   title: 'Components/NavigationRail',
   component: NavigationRail,
@@ -82,28 +46,19 @@ const meta = {
     docs: {
       description: {
         component:
-          'Structural navigation rail container for the desktop shell. The playground demonstrates how rail items collapse into the docked state and how selection moves across the set.',
+          'Structural navigation rail container for the desktop shell. The playground demonstrates the container with NavRailItem children in expanded and docked states.',
       },
     },
   },
   args: {
     ariaLabel: 'Primary navigation',
     expanded: true,
-    selectedItem: 'inventory',
-    showBrand: false,
   },
   argTypes: {
     ariaLabel: {
       control: 'text',
     },
     expanded: {
-      control: 'boolean',
-    },
-    selectedItem: {
-      control: 'radio',
-      options: navItems.map((item) => item.id),
-    },
-    showBrand: {
       control: 'boolean',
     },
   },
@@ -114,12 +69,6 @@ export default meta;
 type Story = StoryObj<NavigationRailStoryArgs>;
 
 function renderNavigationRail(args: NavigationRailStoryArgs) {
-  const [selectedItem, setSelectedItem] = useState(args.selectedItem);
-
-  useEffect(() => {
-    setSelectedItem(args.selectedItem);
-  }, [args.selectedItem]);
-
   return (
     <div className="navigation-rail-story__panel">
       <NavigationRail
@@ -127,43 +76,15 @@ function renderNavigationRail(args: NavigationRailStoryArgs) {
         expanded={args.expanded}
         className="navigation-rail-story__frame"
       >
-        {args.showBrand ? (
-          <div className="navigation-rail-story__brand">
-            <BrandMark className="navigation-rail-story__brand-mark" />
-          </div>
-        ) : null}
-        <div className="navigation-rail-story__menu-fab">
-          <NavigationRailChromeButton
-            label={args.expanded ? 'Collapse rail' : 'Expand rail'}
-            iconName={args.expanded ? 'menu_open' : 'menu'}
-          />
-          <NavigationRailFab expanded={args.expanded} />
-        </div>
-        <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
-          {navItems.slice(0, 5).map((item) => (
-            <NavRailItem
-              key={item.id}
-              layout="rail"
-              icon={<Icon name={item.iconName} />}
-              label={item.label}
-              selected={selectedItem === item.id}
-              onClick={() => {
-                setSelectedItem(item.id);
-              }}
-            />
-          ))}
-        </div>
-        <div className="navigation-rail-story__footer">
+        {navItems.map((item, index) => (
           <NavRailItem
+            key={item.id}
             layout="rail"
-            icon={<Icon name="settings" />}
-            label="Settings"
-            selected={selectedItem === 'settings'}
-            onClick={() => {
-              setSelectedItem('settings');
-            }}
+            icon={<Icon name={item.iconName} />}
+            label={item.label}
+            selected={index === 0}
           />
-        </div>
+        ))}
       </NavigationRail>
     </div>
   );
@@ -173,17 +94,88 @@ export const Playground: Story = {
   render: renderNavigationRail,
   play: async ({ canvas }) => {
     const inventory = canvas.getByRole('button', { name: /Inventory/i });
-    const settings = canvas.getByRole('button', { name: /Settings/i });
 
-    await userEvent.click(inventory);
-    await waitFor(() => expect(inventory).toHaveAttribute('aria-current', 'page'));
-    await userEvent.click(settings);
-    await waitFor(() => expect(canvas.getByRole('button', { name: /Settings/i })).toHaveAttribute('aria-current', 'page'));
-    await expect(canvas.getByRole('button', { name: /Inventory/i })).not.toHaveAttribute('aria-current', 'page');
+    expect(inventory).toHaveAttribute('aria-current', 'page');
+    expect(canvas.getByRole('button', { name: /Automations/i })).not.toHaveAttribute('aria-current', 'page');
   },
 };
 
-export const ExpandedAndDocked: Story = {
+export const Expanded: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    layout: 'padded',
+  },
+  render: () => (
+    <div className="navigation-rail-story__panel">
+      <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
+        {navItems.map((item, index) => (
+          <NavRailItem
+            key={item.id}
+            layout="rail"
+            icon={<Icon name={item.iconName} />}
+            label={item.label}
+            selected={index === 0}
+          />
+        ))}
+      </NavigationRail>
+    </div>
+  ),
+};
+
+export const Docked: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    layout: 'padded',
+  },
+  render: () => (
+    <div className="navigation-rail-story__panel">
+      <NavigationRail
+        ariaLabel="Primary navigation"
+        expanded={false}
+        className="navigation-rail-story__frame"
+      >
+        {navItems.map((item, index) => (
+          <NavRailItem
+            key={item.id}
+            layout="rail"
+            icon={<Icon name={item.iconName} />}
+            label={item.label}
+            selected={index === 0}
+          />
+        ))}
+      </NavigationRail>
+    </div>
+  ),
+};
+
+export const NoSelection: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    layout: 'padded',
+  },
+  render: () => (
+    <div className="navigation-rail-story__panel">
+      <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
+        {navItems.map((item) => (
+          <NavRailItem
+            key={item.id}
+            layout="rail"
+            icon={<Icon name={item.iconName} />}
+            label={item.label}
+          />
+        ))}
+      </NavigationRail>
+    </div>
+  ),
+};
+
+export const CompositionExample: Story = {
   parameters: {
     controls: {
       disable: true,
@@ -193,79 +185,71 @@ export const ExpandedAndDocked: Story = {
   render: () => (
     <div className="navigation-rail-story__grid">
       <div className="navigation-rail-story__stack">
-        <p className="navigation-rail-story__label">Expanded</p>
-        <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
-          <div className="navigation-rail-story__brand">
-            <BrandMark className="navigation-rail-story__brand-mark" />
+        <p className="navigation-rail-story__label">Rail shell</p>
+        <div className="navigation-rail-story__panel">
+          <div className="navigation-rail-story__stack">
+            <p className="navigation-rail-story__label">Expanded rail</p>
+            <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
+              {navItems.map((item, index) => (
+                <NavRailItem
+                  key={item.id}
+                  layout="rail"
+                  icon={<Icon name={item.iconName} />}
+                  label={item.label}
+                  selected={index === 0}
+                />
+              ))}
+            </NavigationRail>
           </div>
-          <div className="navigation-rail-story__menu-fab">
-            <NavigationRailChromeButton label="Collapse rail" iconName="menu_open" />
-            <NavigationRailFab expanded />
+          <div className="navigation-rail-story__stack">
+            <p className="navigation-rail-story__label">Docked rail</p>
+            <NavigationRail ariaLabel="Primary navigation" expanded={false} className="navigation-rail-story__frame">
+              {navItems.map((item, index) => (
+                <NavRailItem
+                  key={item.id}
+                  layout="rail"
+                  icon={<Icon name={item.iconName} />}
+                  label={item.label}
+                  selected={index === 0}
+                />
+              ))}
+            </NavigationRail>
           </div>
-          <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
-            {navItems.slice(0, 5).map((item, index) => (
-              <NavRailItem
-                key={item.id}
-                layout="rail"
-                icon={<Icon name={item.iconName} />}
-                label={item.label}
-                selected={index === 0}
-              />
-            ))}
-          </div>
-          <div className="navigation-rail-story__footer">
-            <NavRailItem layout="rail" icon={<Icon name="settings" />} label="Settings" />
-          </div>
-        </NavigationRail>
+        </div>
       </div>
       <div className="navigation-rail-story__stack">
-        <p className="navigation-rail-story__label">Docked</p>
-        <NavigationRail
-          ariaLabel="Primary navigation"
-          expanded={false}
-          className="navigation-rail-story__frame"
-        >
-          <div className="navigation-rail-story__brand">
-            <BrandMark className="navigation-rail-story__brand-mark" />
+        <p className="navigation-rail-story__label">Real shell composition</p>
+        <div className="navigation-rail-story__panel">
+          <div className="navigation-rail-story__stack">
+            <p className="navigation-rail-story__label">Header slot</p>
+            <div className="navigation-rail-story__menu-fab">
+              <button type="button" aria-label="Collapse rail" className="navigation-rail-story__chrome-button">
+                <Icon name="menu_open" />
+              </button>
+              <button type="button" aria-label="Add item" className="navigation-rail-story__fab">
+                <Icon name="plus_circle" />
+                <span>Add item</span>
+              </button>
+            </div>
           </div>
-          <div className="navigation-rail-story__menu-fab">
-            <NavigationRailChromeButton label="Expand rail" iconName="menu" />
-            <NavigationRailFab expanded={false} />
-          </div>
-          <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
-            {navItems.slice(0, 5).map((item, index) => (
-              <NavRailItem
-                key={item.id}
-                layout="rail"
-                icon={<Icon name={item.iconName} />}
-                label={item.label}
-                selected={index === 0}
-              />
-            ))}
-          </div>
-          <div className="navigation-rail-story__footer">
-            <NavRailItem layout="rail" icon={<Icon name="settings" />} label="Settings" />
-          </div>
-        </NavigationRail>
+          <NavigationRail ariaLabel="Primary navigation" expanded className="navigation-rail-story__frame">
+            <div className="navigation-rail-story__stack navigation-rail-story__stack--rail">
+              {navItems.slice(0, 5).map((item, index) => (
+                <NavRailItem
+                  key={item.id}
+                  layout="rail"
+                  icon={<Icon name={item.iconName} />}
+                  label={item.label}
+                  selected={index === 0}
+                />
+              ))}
+            </div>
+            <div className="navigation-rail-story__footer">
+              <NavRailItem layout="rail" icon={<Icon name="settings" />} label="Settings" />
+            </div>
+          </NavigationRail>
+        </div>
       </div>
     </div>
   ),
-};
-
-export const BrandHidden: Story = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-    docs: {
-      description: {
-        story:
-          'Rail with brand mark hidden — current rollout state. Branding is owned by the site-level header; the rail starts directly with the menu button and FAB.',
-      },
-    },
-  },
-  args: {
-    showBrand: false,
-  },
-  render: renderNavigationRail,
 };
