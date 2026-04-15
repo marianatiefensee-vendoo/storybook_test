@@ -1,14 +1,180 @@
 /* Story-specific overrides for DesktopAppShell stories */
 
-/* Placeholder card used by MockContentBody */
-.desktop-app-shell__body {
+.desktop-shell-pattern__page {
+  display: grid;
+  gap: 24px;
+}
+
+.desktop-shell-pattern__page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.desktop-shell-pattern__heading-stack {
+  display: grid;
+  gap: 8px;
+  max-width: 760px;
+}
+
+.desktop-shell-pattern__eyebrow,
+.desktop-shell-pattern__section-title,
+.desktop-shell-pattern__metric-label {
+  margin: 0;
+  font: var(--go-flow-typography-label-medium);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--go-flow-sys-light-on-surface-variant);
+}
+
+.desktop-shell-pattern__page-title {
+  margin: 0;
+  font: var(--go-flow-typography-headline-large);
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.desktop-shell-pattern__page-supporting,
+.desktop-shell-pattern__section-supporting,
+.desktop-shell-pattern__metric-detail {
+  margin: 0;
+  font: var(--go-flow-typography-body-medium);
+  color: var(--go-flow-sys-light-on-surface-variant);
+}
+
+.desktop-shell-pattern__page-actions,
+.desktop-shell-pattern__section-actions {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.desktop-shell-pattern__metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.desktop-shell-pattern__metric-card {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(73, 68, 85, 0.08);
+  box-shadow: var(--go-flow-elevation-level-1);
+}
+
+.desktop-shell-pattern__metric-value {
+  margin: 0;
+  font: var(--go-flow-typography-display-small);
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.desktop-shell-pattern__content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+  gap: 16px;
+}
+
+.desktop-shell-pattern__content-grid--sale {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+}
+
+.desktop-shell-pattern__section {
   display: grid;
   gap: 16px;
   padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(73, 68, 85, 0.08);
+  box-shadow: var(--go-flow-elevation-level-1);
 }
 
-.desktop-app-shell__card {
-  min-height: 160px;
-  border-radius: 16px;
-  background: rgba(73, 68, 85, 0.06);
+.desktop-shell-pattern__section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.desktop-shell-pattern__definition-list,
+.desktop-shell-pattern__issue-list,
+.desktop-shell-pattern__table {
+  display: grid;
+  gap: 12px;
+}
+
+.desktop-shell-pattern__definition-row,
+.desktop-shell-pattern__issue-row,
+.desktop-shell-pattern__table-head,
+.desktop-shell-pattern__table-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.desktop-shell-pattern__definition-row {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+
+.desktop-shell-pattern__issue-row {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+
+.desktop-shell-pattern__definition-row {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(73, 68, 85, 0.08);
+}
+
+.desktop-shell-pattern__definition-row dt,
+.desktop-shell-pattern__definition-row dd,
+.desktop-shell-pattern__issue-row span,
+.desktop-shell-pattern__table-head span,
+.desktop-shell-pattern__table-row span {
+  margin: 0;
+  font: var(--go-flow-typography-body-medium);
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.desktop-shell-pattern__definition-row dt,
+.desktop-shell-pattern__table-head span {
+  color: var(--go-flow-sys-light-on-surface-variant);
+}
+
+.desktop-shell-pattern__definition-row dd {
+  text-align: right;
+}
+
+.desktop-shell-pattern__issue-row {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(73, 68, 85, 0.08);
+}
+
+.desktop-shell-pattern__issue-row span:last-child,
+.desktop-shell-pattern__table-row span:last-child {
+  justify-self: end;
+  color: var(--go-flow-sys-light-on-surface-variant);
+}
+
+.desktop-shell-pattern__table-head {
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(73, 68, 85, 0.12);
+  font: var(--go-flow-typography-label-medium);
+}
+
+.desktop-shell-pattern__table-row {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(73, 68, 85, 0.08);
+}
+
+@media (max-width: 1180px) {
+  .desktop-shell-pattern__metric-grid,
+  .desktop-shell-pattern__content-grid,
+  .desktop-shell-pattern__content-grid--sale {
+    grid-template-columns: 1fr;
+  }
 }
