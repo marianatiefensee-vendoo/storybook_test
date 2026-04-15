@@ -4,11 +4,37 @@ import { expect, userEvent, waitFor } from 'storybook/test';
 
 import { AppBar } from '../../components/ui/app-bar/AppBar';
 import { AppBarHeadlineBlock } from '../../components/ui/app-bar/AppBarHeadlineBlock';
+import { Button } from '../../components/ui/button/Button';
+import { BrandLockup } from '../../components/ui/brand/Brand';
 import { Icon } from '../../components/ui/icon/Icon';
 import { IconButton } from '../../components/ui/icon-button/IconButton';
+import { NavRailItem } from '../../components/ui/navigation-rail/NavRailItem';
+import { NavigationRail } from '../../components/ui/navigation-rail/NavigationRail';
 import { createFigmaDesign } from '../figma-design';
-import { DesktopShellLayout, type NavItemId } from './DesktopShellLayout';
+import { DesktopShellLayout } from './DesktopShellLayout';
+import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
 import './desktop-app-shell.stories.css';
+
+// IA definitions — live in the story/caller, not in the layout component.
+type NavItemId =
+  | 'inventory'
+  | 'automations'
+  | 'analytics'
+  | 'marketplaces'
+  | 'bulk-actions'
+  | 'settings';
+
+const NAV_ITEMS: Array<{
+  id: NavItemId;
+  label: string;
+  iconName: 'package' | 'sync' | 'analytics' | 'store' | 'controls';
+}> = [
+  { id: 'inventory', label: 'Inventory', iconName: 'package' },
+  { id: 'automations', label: 'Automations', iconName: 'sync' },
+  { id: 'analytics', label: 'Analytics', iconName: 'analytics' },
+  { id: 'marketplaces', label: 'Marketplaces', iconName: 'store' },
+  { id: 'bulk-actions', label: 'Bulk Actions', iconName: 'controls' },
+];
 
 const desktopAppShellDesignUrl =
   'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1-6095&m=dev';
@@ -42,6 +68,80 @@ function MockContentBody() {
   );
 }
 
+function buildRail({
+  expanded,
+  onExpandToggle,
+  selectedNavItem,
+  onNavItemSelect,
+}: {
+  expanded: boolean;
+  onExpandToggle?: () => void;
+  selectedNavItem: NavItemId;
+  onNavItemSelect?: (id: NavItemId) => void;
+}) {
+  return (
+    <>
+      <div className="desktop-shell-layout__rail-header">
+        <IconButton
+          className="desktop-shell-layout__menu"
+          icon={<Icon name={expanded ? 'menu_open' : 'menu'} />}
+          label={expanded ? 'Collapse rail' : 'Expand rail'}
+          size="medium"
+          variant="standard"
+          onClick={onExpandToggle}
+        />
+      </div>
+      <NavigationRail ariaLabel="Primary navigation" expanded={expanded}>
+        <div className="desktop-shell-layout__rail-items">
+          {NAV_ITEMS.map((item) => (
+            <NavRailItem
+              key={item.id}
+              layout="rail"
+              icon={<Icon name={item.iconName} />}
+              label={item.label}
+              selected={selectedNavItem === item.id}
+              onClick={() => onNavItemSelect?.(item.id)}
+            />
+          ))}
+        </div>
+      </NavigationRail>
+      <div className="desktop-shell-layout__rail-footer">
+        <NavRailItem
+          layout="rail"
+          icon={<Icon name="settings" />}
+          label="Settings"
+          selected={selectedNavItem === 'settings'}
+          onClick={() => onNavItemSelect?.('settings')}
+        />
+      </div>
+    </>
+  );
+}
+
+function buildHeader() {
+  return (
+    <DesktopShellHeader
+      logo={<BrandLockup className="desktop-shell-layout__brand-lockup" />}
+      trailing={
+        <>
+          <ShellHeaderQuota used={0} total={125} unit="Items" period="Oct 10 – Nov 10" />
+          <Button variant="filled" size="small">
+            New Item
+          </Button>
+          <Button
+            variant="outline"
+            size="small"
+            leadingIcon={<Icon name="user" />}
+            trailingIcon={<Icon name="chevron_down" />}
+          >
+            Account
+          </Button>
+        </>
+      }
+    />
+  );
+}
+
 function buildAppBar(args: Pick<DesktopAppShellStoryArgs, 'appBarSize' | 'appBarElevation'>) {
   return (
     <AppBar
@@ -70,8 +170,7 @@ function buildAppBar(args: Pick<DesktopAppShellStoryArgs, 'appBarSize' | 'appBar
 function DesktopAppShellPlayground(args: DesktopAppShellStoryArgs) {
   return (
     <DesktopShellLayout
-      expanded={args.expanded}
-      selectedNavItem={args.selectedNavItem}
+      rail={buildRail({ expanded: args.expanded, selectedNavItem: args.selectedNavItem })}
       appBar={buildAppBar(args)}
     >
       <MockContentBody />
@@ -98,7 +197,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Desktop shell pattern: site-level header, navigation rail, per-view app bar, and a content slot. Pass your view as children to test it in context. The rail IA (Inventory → Settings) is stable and baked in.',
+          'Desktop shell pattern: site-level header, navigation rail, per-view app bar, and a content slot. Pass your view as children and compose the rail slot with NavigationRail + NavRailItem.',
       },
     },
   },
@@ -147,10 +246,13 @@ export const Playground: Story = {
 
     return (
       <DesktopShellLayout
-        expanded={expanded}
-        onExpandToggle={() => setExpanded((e) => !e)}
-        selectedNavItem={selectedNavItem}
-        onNavItemSelect={setSelectedNavItem}
+        header={buildHeader()}
+        rail={buildRail({
+          expanded,
+          onExpandToggle: () => setExpanded((e) => !e),
+          selectedNavItem,
+          onNavItemSelect: setSelectedNavItem,
+        })}
         appBar={buildAppBar(args)}
       >
         <MockContentBody />
@@ -180,7 +282,9 @@ export const RailExpanded: Story = {
     },
   },
   render: () => (
-    <DesktopShellLayout expanded={true} selectedNavItem="inventory">
+    <DesktopShellLayout
+      rail={buildRail({ expanded: true, selectedNavItem: 'inventory' })}
+    >
       <MockContentBody />
     </DesktopShellLayout>
   ),
@@ -197,7 +301,9 @@ export const RailDocked: Story = {
     },
   },
   render: () => (
-    <DesktopShellLayout expanded={false} selectedNavItem="inventory">
+    <DesktopShellLayout
+      rail={buildRail({ expanded: false, selectedNavItem: 'inventory' })}
+    >
       <MockContentBody />
     </DesktopShellLayout>
   ),
@@ -216,8 +322,8 @@ export const WithShellHeader: Story = {
   },
   render: () => (
     <DesktopShellLayout
-      expanded={false}
-      selectedNavItem="inventory"
+      header={buildHeader()}
+      rail={buildRail({ expanded: false, selectedNavItem: 'inventory' })}
       appBar={
         <AppBar
           size="small"
