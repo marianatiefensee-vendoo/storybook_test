@@ -25,7 +25,6 @@ export function DesktopShellLayout({
   return (
     <div
       className={['desktop-shell-layout-wrapper', className].filter(Boolean).join(' ')}
-      data-has-header={header != null ? 'true' : 'false'}
       {...divProps}
     >
       {header}
