@@ -19,9 +19,23 @@
 - If live Figma MCP payload cannot be retrieved, do not claim exact parity.
 - Label approximation clearly when needed.
 
+## Storybook MCP rules
+- When working on UI components, always use the `storybook-claude-mcp-server` MCP tools before answering, generating code, or editing stories.
+- Never hallucinate component props.
+- Before using any property on a design-system component, first check Storybook documentation for that exact component.
+- First list available documentation/components.
+- Then fetch documentation for the specific component.
+- Only use props that are explicitly documented or shown in stories/examples.
+- If a prop is not documented, do not guess based on naming conventions or other libraries.
+- Fetch the latest story instructions before creating or updating stories.
+- Run story tests before considering the task complete.
+- If Storybook docs and repo code disagree, surface the mismatch instead of inventing a solution.
+
 ## Storybook rules
 - Build reusable primitives first.
 - Build pattern/mock compositions separately from public DS primitives.
 - Generic stories and parity stories are different things.
 - Add args-based Playground stories.
 - Use composed stories for realistic shell/page examples.
+- Keep stories focused: one story should demonstrate one concept clearly.
+- Avoid kitchen-sink stories when separate focused stories would be clearer.

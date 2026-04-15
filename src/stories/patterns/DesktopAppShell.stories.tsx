@@ -3,11 +3,13 @@ import { fn } from 'storybook/test';
 
 import { AppBar } from '../../components/ui/app-bar/AppBar';
 import { AppBarHeadlineBlock } from '../../components/ui/app-bar/AppBarHeadlineBlock';
+import { Button } from '../../components/ui/button/Button';
 import { IconButton } from '../../components/ui/icon-button/IconButton';
 import { NavRailItem } from '../../components/ui/navigation-rail/NavRailItem';
 import { NavigationRail } from '../../components/ui/navigation-rail/NavigationRail';
 import { Icon } from '../../components/ui/icon/Icon';
 import { createFigmaDesign } from '../figma-design';
+import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
 import './desktop-app-shell.stories.css';
 
 const desktopAppShellDesignUrl =
@@ -216,4 +218,48 @@ function DesktopAppShellPreview(args: DesktopAppShellStoryArgs) {
 
 export const Playground: Story = {
   render: renderDesktopAppShell,
+};
+
+// Full shell composition: site header (logo + quota + CTA + account) above rail + content.
+export const WithShellHeader: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story:
+          'Full desktop shell with the site-level header above the NavigationRail + AppBar layout. The header uses Go Flow DS primitives (Button, Icon) and the ShellHeaderQuota display widget.',
+      },
+    },
+  },
+  render: (args) => (
+    <div className="desktop-app-shell-with-header">
+      <DesktopShellHeader
+        logo={
+          <img
+            alt="Vendoo"
+            className="desktop-app-shell__brand-mark"
+            src="https://www.figma.com/api/mcp/asset/d2894c21-6448-4048-8359-7b02a6066a77"
+          />
+        }
+        trailing={
+          <>
+            <ShellHeaderQuota used={0} total={125} unit="Items" period="Oct 10 – Nov 10" />
+            <Button variant="filled" size="small" onClick={fn()}>
+              New Item
+            </Button>
+            <Button
+              variant="outline"
+              size="small"
+              leadingIcon={<Icon name="user" />}
+              trailingIcon={<Icon name="chevron_down" />}
+              onClick={fn()}
+            >
+              Account
+            </Button>
+          </>
+        }
+      />
+      {renderDesktopAppShell(args)}
+    </div>
+  ),
 };

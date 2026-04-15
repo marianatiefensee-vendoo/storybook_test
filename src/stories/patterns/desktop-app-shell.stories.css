@@ -100,3 +100,17 @@
   border-radius: 16px;
   background: rgba(73, 68, 85, 0.06);
 }
+
+/* WithShellHeader composition — site header above rail + content */
+
+.desktop-app-shell-with-header {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 960px;
+  background: linear-gradient(180deg, rgba(74, 0, 191, 0.03), rgba(74, 0, 191, 0.01));
+}
+
+.desktop-app-shell-with-header .desktop-app-shell {
+  background: none;
+  min-height: unset;
+}

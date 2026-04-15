@@ -1,0 +1,58 @@
+/* DesktopShellHeader — pattern-level site header */
+
+.desktop-shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  padding-inline: var(--go-flow-space-6);
+  padding-block: var(--go-flow-space-4);
+  background: var(--go-flow-sys-light-surface);
+  border-block-end: 1px solid var(--go-flow-sys-light-outline-variant);
+}
+
+.desktop-shell-header__logo {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
+.desktop-shell-header__trailing {
+  display: flex;
+  align-items: center;
+  gap: var(--go-flow-space-3);
+  flex: none;
+}
+
+.desktop-shell-header__brand-mark {
+  width: auto;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* ShellHeaderQuota — two-line usage counter */
+
+.shell-header-quota {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+
+.shell-header-quota__primary,
+.shell-header-quota__secondary {
+  margin: 0;
+}
+
+.shell-header-quota__primary {
+  font: var(--go-flow-typography-label-large);
+  letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
+  color: var(--go-flow-sys-light-on-surface);
+}
+
+.shell-header-quota__secondary {
+  font: var(--go-flow-typography-body-small);
+  letter-spacing: var(--go-flow-typography-body-small-letter-spacing);
+  color: var(--go-flow-sys-light-on-surface-variant);
+}
