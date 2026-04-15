@@ -10,7 +10,7 @@ import { createFigmaDesign } from '../../../stories/figma-design';
 import './navigation-rail.stories.css';
 
 const navigationRailDesignUrl =
-  'https://www.figma.com/design/941LilI1FqImC2usHWp0qN/Listing-Flow-Draft--Recreate-?node-id=1140-12447&m=dev';
+  'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=721-2225&m=dev';
 
 type NavItemId =
   | 'inventory'
@@ -24,6 +24,7 @@ type NavigationRailStoryArgs = {
   ariaLabel: string;
   expanded: boolean;
   selectedItem: NavItemId;
+  showBrand: boolean;
 };
 
 const navItems: Array<{
@@ -89,6 +90,7 @@ const meta = {
     ariaLabel: 'Primary navigation',
     expanded: true,
     selectedItem: 'inventory',
+    showBrand: false,
   },
   argTypes: {
     ariaLabel: {
@@ -100,6 +102,9 @@ const meta = {
     selectedItem: {
       control: 'radio',
       options: navItems.map((item) => item.id),
+    },
+    showBrand: {
+      control: 'boolean',
     },
   },
 } satisfies Meta<NavigationRailStoryArgs> & { component: typeof NavigationRail };
@@ -122,9 +127,11 @@ function renderNavigationRail(args: NavigationRailStoryArgs) {
         expanded={args.expanded}
         className="navigation-rail-story__frame"
       >
-        <div className="navigation-rail-story__brand">
-          <BrandMark className="navigation-rail-story__brand-mark" />
-        </div>
+        {args.showBrand ? (
+          <div className="navigation-rail-story__brand">
+            <BrandMark className="navigation-rail-story__brand-mark" />
+          </div>
+        ) : null}
         <div className="navigation-rail-story__menu-fab">
           <NavigationRailChromeButton
             label={args.expanded ? 'Collapse rail' : 'Expand rail'}
@@ -243,4 +250,22 @@ export const ExpandedAndDocked: Story = {
       </div>
     </div>
   ),
+};
+
+export const BrandHidden: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Rail with brand mark hidden — current rollout state. Branding is owned by the site-level header; the rail starts directly with the menu button and FAB.',
+      },
+    },
+  },
+  args: {
+    showBrand: false,
+  },
+  render: renderNavigationRail,
 };

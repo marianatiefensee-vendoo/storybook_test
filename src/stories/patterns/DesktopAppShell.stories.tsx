@@ -1,48 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
+import { useEffect, useState } from 'react';
+import { expect, userEvent, waitFor } from 'storybook/test';
 
 import { AppBar } from '../../components/ui/app-bar/AppBar';
 import { AppBarHeadlineBlock } from '../../components/ui/app-bar/AppBarHeadlineBlock';
-import { Button } from '../../components/ui/button/Button';
-import { IconButton } from '../../components/ui/icon-button/IconButton';
-import { NavRailItem } from '../../components/ui/navigation-rail/NavRailItem';
-import { NavigationRail } from '../../components/ui/navigation-rail/NavigationRail';
 import { Icon } from '../../components/ui/icon/Icon';
-import { BrandLockup, BrandMark } from '../../components/ui/brand/Brand';
+import { IconButton } from '../../components/ui/icon-button/IconButton';
 import { createFigmaDesign } from '../figma-design';
-import { DesktopShellHeader, ShellHeaderQuota } from './DesktopShellHeader';
+import { DesktopShellLayout, type NavItemId } from './DesktopShellLayout';
 import './desktop-app-shell.stories.css';
 
 const desktopAppShellDesignUrl =
   'https://www.figma.com/design/LS1yOsOQqbFFpG4c8T2kQO/Go-Flow-Design-System?node-id=1-6095&m=dev';
 
-type NavItemId =
-  | 'inventory'
-  | 'automations'
-  | 'analytics'
-  | 'marketplaces'
-  | 'bulk-actions'
-  | 'settings';
-
 type DesktopAppShellStoryArgs = {
-  railExpanded: boolean;
+  expanded: boolean;
   selectedNavItem: NavItemId;
   appBarSize: 'small' | 'medium' | 'large';
   appBarElevation: 'flat' | 'scrolled';
 };
-
-const navItems: Array<{
-  id: NavItemId;
-  label: string;
-  iconName: 'package' | 'sync' | 'analytics' | 'store' | 'controls' | 'settings';
-}> = [
-  { id: 'inventory', label: 'Inventory', iconName: 'package' },
-  { id: 'automations', label: 'Automations', iconName: 'sync' },
-  { id: 'analytics', label: 'Analytics', iconName: 'analytics' },
-  { id: 'marketplaces', label: 'Marketplaces', iconName: 'store' },
-  { id: 'bulk-actions', label: 'Bulk Actions', iconName: 'controls' },
-  { id: 'settings', label: 'Settings', iconName: 'settings' },
-];
 
 function DesktopShellIconButton({
   label,
@@ -52,60 +28,69 @@ function DesktopShellIconButton({
   iconName: 'menu' | 'menu_open' | 'more_vertical' | 'search' | 'plus_circle';
 }) {
   return (
-    <IconButton
-      className="desktop-app-shell__menu"
-      icon={<Icon name={iconName} />}
-      label={label}
-      size="medium"
-      variant="standard"
+    <IconButton icon={<Icon name={iconName} />} label={label} size="medium" variant="standard" />
+  );
+}
+
+function MockContentBody() {
+  return (
+    <div className="desktop-app-shell__body">
+      <div className="desktop-app-shell__card" />
+      <div className="desktop-app-shell__card" />
+      <div className="desktop-app-shell__card" />
+    </div>
+  );
+}
+
+function buildAppBar(args: Pick<DesktopAppShellStoryArgs, 'appBarSize' | 'appBarElevation'>) {
+  return (
+    <AppBar
+      size={args.appBarSize}
+      elevation={args.appBarElevation}
+      leading={<DesktopShellIconButton label="Open navigation" iconName="menu" />}
+      headline={
+        <AppBarHeadlineBlock
+          headline="Label"
+          supportingText="Supporting Text"
+          size={args.appBarSize}
+        />
+      }
+      trailing={
+        <div className="app-bar-story__actions">
+          <DesktopShellIconButton label="Search" iconName="search" />
+          <DesktopShellIconButton label="More options" iconName="more_vertical" />
+          <DesktopShellIconButton label="Open navigation panel" iconName="menu_open" />
+        </div>
+      }
     />
   );
 }
 
-function DesktopShellFab({ iconOnly = false }: { iconOnly?: boolean }) {
+// Used as meta.component so Storybook autodocs generates docs from DesktopAppShellStoryArgs.
+function DesktopAppShellPlayground(args: DesktopAppShellStoryArgs) {
   return (
-    <button
-      type="button"
-      aria-label="Add item"
-      className={[
-        'desktop-app-shell__fab',
-        iconOnly ? 'desktop-app-shell__fab--icon-only' : '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
+    <DesktopShellLayout
+      expanded={args.expanded}
+      selectedNavItem={args.selectedNavItem}
+      appBar={buildAppBar(args)}
     >
-      <Icon name="plus_circle" />
-      {iconOnly ? null : <span>Add item</span>}
-    </button>
+      <MockContentBody />
+    </DesktopShellLayout>
   );
 }
 
-function DesktopShellHeadline({
-  size,
-}: {
-  size: DesktopAppShellStoryArgs['appBarSize'];
-}) {
-  if (size === 'small') {
-    return (
-      <div className="app-bar-story__small-headline">
-        <p className="app-bar-story__small-headline-title">Label</p>
-        <p className="app-bar-story__small-headline-supporting">Supporting Text</p>
-      </div>
-    );
-  }
-
-  return (
-    <AppBarHeadlineBlock
-      headline="Label"
-      supportingText="Supporting Text"
-      size={size}
-    />
-  );
-}
+const navItemIds: NavItemId[] = [
+  'inventory',
+  'automations',
+  'analytics',
+  'marketplaces',
+  'bulk-actions',
+  'settings',
+];
 
 const meta = {
   title: 'Patterns/DesktopAppShell',
-  component: DesktopAppShellPreview,
+  component: DesktopAppShellPlayground,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -113,23 +98,23 @@ const meta = {
     docs: {
       description: {
         component:
-          'Desktop shell pattern composed from the navigation rail and top app bar primitives. Use the controls to switch rail density, selected navigation item, and app bar state.',
+          'Desktop shell pattern: site-level header, navigation rail, per-view app bar, and a content slot. Pass your view as children to test it in context. The rail IA (Inventory → Settings) is stable and baked in.',
       },
     },
   },
   args: {
-    railExpanded: true,
+    expanded: true,
     selectedNavItem: 'inventory',
     appBarSize: 'small',
     appBarElevation: 'flat',
   },
   argTypes: {
-    railExpanded: {
+    expanded: {
       control: 'boolean',
     },
     selectedNavItem: {
       control: 'radio',
-      options: navItems.map((item) => item.id),
+      options: navItemIds,
     },
     appBarSize: {
       control: 'radio',
@@ -146,111 +131,109 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-function renderDesktopAppShell(args: DesktopAppShellStoryArgs) {
-  const selectedNavItem = args.selectedNavItem;
-  const fabClick = fn();
-
-  return (
-    <div className="desktop-app-shell">
-      <aside className="desktop-app-shell__rail">
-        <div className="desktop-app-shell__brand">
-          <BrandMark className="desktop-app-shell__brand-mark" />
-          <DesktopShellIconButton label={args.railExpanded ? 'Collapse rail' : 'Expand rail'} iconName={args.railExpanded ? 'menu_open' : 'menu'} />
-          <DesktopShellFab iconOnly={!args.railExpanded} />
-        </div>
-        <NavigationRail ariaLabel="Primary navigation" expanded={args.railExpanded}>
-          <div className="desktop-app-shell__rail-items">
-            {navItems.slice(0, 5).map((item) => (
-              <NavRailItem
-                key={item.id}
-                layout="rail"
-                icon={<Icon name={item.iconName} />}
-                label={item.label}
-                selected={selectedNavItem === item.id}
-                onClick={() => fabClick()}
-              />
-            ))}
-          </div>
-        </NavigationRail>
-        <div className="desktop-app-shell__footer">
-          <NavRailItem
-            layout="rail"
-            icon={<Icon name="settings" />}
-            label="Settings"
-            selected={selectedNavItem === 'settings'}
-            onClick={() => fabClick()}
-          />
-        </div>
-      </aside>
-
-      <section className="desktop-app-shell__content">
-        <AppBar
-          size={args.appBarSize}
-          elevation={args.appBarElevation}
-          leading={<DesktopShellIconButton label="Open navigation" iconName="menu" />}
-          headline={<DesktopShellHeadline size={args.appBarSize} />}
-          trailing={
-            <div className="app-bar-story__actions">
-              <DesktopShellIconButton label="Search" iconName="search" />
-              <DesktopShellIconButton label="More options" iconName="more_vertical" />
-              <DesktopShellIconButton label="Open navigation panel" iconName="menu_open" />
-            </div>
-          }
-        />
-        <div className="desktop-app-shell__surface">
-          <div className="desktop-app-shell__body">
-            <div className="desktop-app-shell__card" />
-            <div className="desktop-app-shell__card" />
-            <div className="desktop-app-shell__card" />
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function DesktopAppShellPreview(args: DesktopAppShellStoryArgs) {
-  return renderDesktopAppShell(args);
-}
-
+// Playground — interactive shell with nav selection and expand toggle.
 export const Playground: Story = {
-  render: renderDesktopAppShell,
+  render: (args) => {
+    const [selectedNavItem, setSelectedNavItem] = useState<NavItemId>(args.selectedNavItem);
+    const [expanded, setExpanded] = useState(args.expanded);
+
+    useEffect(() => {
+      setSelectedNavItem(args.selectedNavItem);
+    }, [args.selectedNavItem]);
+
+    useEffect(() => {
+      setExpanded(args.expanded);
+    }, [args.expanded]);
+
+    return (
+      <DesktopShellLayout
+        expanded={expanded}
+        onExpandToggle={() => setExpanded((e) => !e)}
+        selectedNavItem={selectedNavItem}
+        onNavItemSelect={setSelectedNavItem}
+        appBar={buildAppBar(args)}
+      >
+        <MockContentBody />
+      </DesktopShellLayout>
+    );
+  },
+  play: async ({ canvas }) => {
+    const automations = canvas.getByRole('button', { name: /Automations/i });
+    await userEvent.click(automations);
+    await waitFor(() => expect(automations).toHaveAttribute('aria-current', 'page'));
+
+    const inventory = canvas.getByRole('button', { name: /Inventory/i });
+    await userEvent.click(inventory);
+    await waitFor(() => expect(inventory).toHaveAttribute('aria-current', 'page'));
+    await expect(automations).not.toHaveAttribute('aria-current', 'page');
+  },
 };
 
-// Full shell composition: site header (logo + quota + CTA + account) above rail + content.
+// RailExpanded — static reference: rail with labels visible.
+export const RailExpanded: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Rail in expanded state — labels visible, 220px wide.',
+      },
+    },
+  },
+  render: () => (
+    <DesktopShellLayout expanded={true} selectedNavItem="inventory">
+      <MockContentBody />
+    </DesktopShellLayout>
+  ),
+};
+
+// RailDocked — static reference: rail collapsed to icon-only.
+export const RailDocked: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Rail in docked state — icon-only, 100px wide.',
+      },
+    },
+  },
+  render: () => (
+    <DesktopShellLayout expanded={false} selectedNavItem="inventory">
+      <MockContentBody />
+    </DesktopShellLayout>
+  ),
+};
+
+// WithShellHeader — full composition: site header + docked rail + app bar + content.
 export const WithShellHeader: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story:
-          'Full desktop shell with the site-level header above the NavigationRail + AppBar layout. The header uses Go Flow DS primitives (Button, Icon) and the ShellHeaderQuota display widget.',
+          'Full desktop shell composition: site-level header (brand + quota + CTA + account) above the navigation rail and per-view app bar. This is the canonical integration target for engineering.',
       },
     },
   },
-  render: (args) => (
-    <div className="desktop-app-shell-with-header">
-      <DesktopShellHeader
-        logo={<BrandLockup className="desktop-app-shell__brand-lockup" />}
-        trailing={
-          <>
-            <ShellHeaderQuota used={0} total={125} unit="Items" period="Oct 10 – Nov 10" />
-            <Button variant="filled" size="small" onClick={fn()}>
-              New Item
-            </Button>
-            <Button
-              variant="outline"
-              size="small"
-              leadingIcon={<Icon name="user" />}
-              trailingIcon={<Icon name="chevron_down" />}
-              onClick={fn()}
-            >
-              Account
-            </Button>
-          </>
-        }
-      />
-      {renderDesktopAppShell(args)}
-    </div>
+  render: () => (
+    <DesktopShellLayout
+      expanded={false}
+      selectedNavItem="inventory"
+      appBar={
+        <AppBar
+          size="small"
+          elevation="flat"
+          leading={<DesktopShellIconButton label="Open navigation" iconName="menu" />}
+          headline={<AppBarHeadlineBlock headline="Inventory" supportingText="All items" />}
+          trailing={
+            <div className="app-bar-story__actions">
+              <DesktopShellIconButton label="Search" iconName="search" />
+              <DesktopShellIconButton label="More options" iconName="more_vertical" />
+            </div>
+          }
+        />
+      }
+    >
+      <MockContentBody />
+    </DesktopShellLayout>
   ),
 };

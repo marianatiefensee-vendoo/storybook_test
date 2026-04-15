@@ -240,7 +240,6 @@
   --nav-rail-item-fg: var(--go-flow-sys-light-on-secondary-container);
 }
 
-.nav-rail-item--rail[data-selected='true'] .nav-rail-item__icon,
 .nav-rail-item--rail[data-selected='true'] .nav-rail-item__label--rail {
   color: var(--go-flow-sys-light-on-secondary-container);
 }
@@ -299,6 +298,7 @@
 
 .nav-rail-item--rail[data-docked='true'][data-selected='true'] .nav-rail-item__rail-shell {
   background: var(--go-flow-nav-item-rail-surface-selected);
+  border-radius: var(--go-flow-nav-item-rail-docked-selected-radius);
 }
 
 .nav-rail-item--rail[data-docked='true'][data-selected='true'] .nav-rail-item__rail-shell::before {

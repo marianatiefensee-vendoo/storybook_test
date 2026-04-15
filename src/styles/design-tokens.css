@@ -216,6 +216,7 @@
   --go-flow-nav-item-rail-icon-shell-height: 32px;
   --go-flow-nav-item-rail-icon-shell-radius: 12px;
   --go-flow-nav-item-rail-docked-radius: 16px;
+  --go-flow-nav-item-rail-docked-selected-radius: 5px;
   --go-flow-nav-item-rail-label-font: var(--go-flow-typography-label-large);
   --go-flow-nav-item-rail-label-letter-spacing: var(--go-flow-typography-label-large-letter-spacing);
   --go-flow-nav-item-rail-label-color: var(--go-flow-sys-light-on-surface-variant);
