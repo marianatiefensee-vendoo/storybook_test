@@ -7,11 +7,6 @@
   background: linear-gradient(180deg, rgba(74, 0, 191, 0.03), rgba(74, 0, 191, 0.01));
 }
 
-/* Two-row layout when header is present */
-.desktop-shell-layout-wrapper[data-has-header='true'] {
-  grid-template-rows: auto 1fr;
-}
-
 /* Inner shell: rail | content two-column grid */
 .desktop-shell-layout {
   display: grid;

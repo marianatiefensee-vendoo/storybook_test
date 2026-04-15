@@ -169,11 +169,19 @@ function buildAppBar(args: Pick<DesktopAppShellStoryArgs, 'appBarSize' | 'appBar
 // Used as meta.component so Storybook autodocs generates docs from DesktopAppShellStoryArgs.
 function DesktopAppShellPlayground(args: DesktopAppShellStoryArgs) {
   return (
-    <DesktopShellLayout
-      rail={buildRail({ expanded: args.expanded, selectedNavItem: args.selectedNavItem })}
-      appBar={buildAppBar(args)}
-    >
-      <MockContentBody />
+    <DesktopShellLayout>
+      {buildHeader()}
+      <div className="desktop-shell-layout">
+        <aside className="desktop-shell-layout__rail">
+          {buildRail({ expanded: args.expanded, selectedNavItem: args.selectedNavItem })}
+        </aside>
+        <section className="desktop-shell-layout__content">
+          {buildAppBar(args)}
+          <div className="desktop-shell-layout__surface">
+            <MockContentBody />
+          </div>
+        </section>
+      </div>
     </DesktopShellLayout>
   );
 }
@@ -197,7 +205,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Desktop shell pattern: site-level header, navigation rail, per-view app bar, and a content slot. Pass your view as children and compose the rail slot with NavigationRail + NavRailItem.',
+          'Desktop shell pattern: wrapper-only shell container. Compose the site header, navigation rail, app bar, and content in the caller.',
       },
     },
   },
@@ -245,17 +253,24 @@ export const Playground: Story = {
     }, [args.expanded]);
 
     return (
-      <DesktopShellLayout
-        header={buildHeader()}
-        rail={buildRail({
-          expanded,
-          onExpandToggle: () => setExpanded((e) => !e),
-          selectedNavItem,
-          onNavItemSelect: setSelectedNavItem,
-        })}
-        appBar={buildAppBar(args)}
-      >
-        <MockContentBody />
+      <DesktopShellLayout>
+        {buildHeader()}
+        <div className="desktop-shell-layout">
+          <aside className="desktop-shell-layout__rail">
+            {buildRail({
+              expanded,
+              onExpandToggle: () => setExpanded((e) => !e),
+              selectedNavItem,
+              onNavItemSelect: setSelectedNavItem,
+            })}
+          </aside>
+          <section className="desktop-shell-layout__content">
+            {buildAppBar(args)}
+            <div className="desktop-shell-layout__surface">
+              <MockContentBody />
+            </div>
+          </section>
+        </div>
       </DesktopShellLayout>
     );
   },
@@ -282,10 +297,17 @@ export const RailExpanded: Story = {
     },
   },
   render: () => (
-    <DesktopShellLayout
-      rail={buildRail({ expanded: true, selectedNavItem: 'inventory' })}
-    >
-      <MockContentBody />
+    <DesktopShellLayout>
+      <div className="desktop-shell-layout">
+        <aside className="desktop-shell-layout__rail">
+          {buildRail({ expanded: true, selectedNavItem: 'inventory' })}
+        </aside>
+        <section className="desktop-shell-layout__content">
+          <div className="desktop-shell-layout__surface">
+            <MockContentBody />
+          </div>
+        </section>
+      </div>
     </DesktopShellLayout>
   ),
 };
@@ -301,10 +323,17 @@ export const RailDocked: Story = {
     },
   },
   render: () => (
-    <DesktopShellLayout
-      rail={buildRail({ expanded: false, selectedNavItem: 'inventory' })}
-    >
-      <MockContentBody />
+    <DesktopShellLayout>
+      <div className="desktop-shell-layout">
+        <aside className="desktop-shell-layout__rail">
+          {buildRail({ expanded: false, selectedNavItem: 'inventory' })}
+        </aside>
+        <section className="desktop-shell-layout__content">
+          <div className="desktop-shell-layout__surface">
+            <MockContentBody />
+          </div>
+        </section>
+      </div>
     </DesktopShellLayout>
   ),
 };
@@ -321,25 +350,30 @@ export const WithShellHeader: Story = {
     },
   },
   render: () => (
-    <DesktopShellLayout
-      header={buildHeader()}
-      rail={buildRail({ expanded: false, selectedNavItem: 'inventory' })}
-      appBar={
-        <AppBar
-          size="small"
-          elevation="flat"
-          leading={<DesktopShellIconButton label="Open navigation" iconName="menu" />}
-          headline={<AppBarHeadlineBlock headline="Inventory" supportingText="All items" />}
-          trailing={
-            <div className="app-bar-story__actions">
-              <DesktopShellIconButton label="Search" iconName="search" />
-              <DesktopShellIconButton label="More options" iconName="more_vertical" />
-            </div>
-          }
-        />
-      }
-    >
-      <MockContentBody />
+    <DesktopShellLayout>
+      {buildHeader()}
+      <div className="desktop-shell-layout">
+        <aside className="desktop-shell-layout__rail">
+          {buildRail({ expanded: false, selectedNavItem: 'inventory' })}
+        </aside>
+        <section className="desktop-shell-layout__content">
+          <AppBar
+            size="small"
+            elevation="flat"
+            leading={<DesktopShellIconButton label="Open navigation" iconName="menu" />}
+            headline={<AppBarHeadlineBlock headline="Inventory" supportingText="All items" />}
+            trailing={
+              <div className="app-bar-story__actions">
+                <DesktopShellIconButton label="Search" iconName="search" />
+                <DesktopShellIconButton label="More options" iconName="more_vertical" />
+              </div>
+            }
+          />
+          <div className="desktop-shell-layout__surface">
+            <MockContentBody />
+          </div>
+        </section>
+      </div>
     </DesktopShellLayout>
   ),
 };
