@@ -1,21 +1,12 @@
-import type { Preview } from '@storybook/react-vite'
-import '../src/styles/fonts.css'
-import '../src/styles/design-tokens.css'
+import type { Preview } from '@storybook/react-vite';
 
 const preview: Preview = {
-  tags: ['autodocs'],
   parameters: {
     docs: {
-      toc: true,
-    },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
+      source: {
+        type: 'code',
+        language: 'tsx',
       },
-    },
-    a11y: {
-      test: 'todo',
     },
   },
 };
