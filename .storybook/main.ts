@@ -16,6 +16,7 @@ const config: StorybookConfig = {
     '@storybook/addon-mcp',
   ],
   framework: '@storybook/react-vite',
+  staticDirs: ['../public'],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
