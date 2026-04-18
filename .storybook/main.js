@@ -6,6 +6,7 @@ const config = {
   ],
   addons: [
     '@storybook/addon-essentials',
+    '@storybook/addon-docs',
   ],
   framework: '@storybook/react-vite',
 };
