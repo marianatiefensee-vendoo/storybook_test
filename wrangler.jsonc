@@ -1,7 +1,0 @@
-{
-  "name": "vendoo-storybook",
-  "assets": {
-    "directory": "./storybook-static",
-    "binding": "ASSETS"
-  }
-}
