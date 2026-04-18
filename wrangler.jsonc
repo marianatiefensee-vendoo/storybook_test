@@ -1,8 +1,8 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "vendoo-storybook-design",
-  "compatibility_date": "2026-04-16",
+  "name": "vendoo-storybook",
+  "main": "src/index.ts", 
   "assets": {
-    "directory": "./storybook-static"
+    "directory": "./storybook-static",
+    "binding": "ASSETS"
   }
 }
