@@ -1,6 +1,5 @@
 {
   "name": "vendoo-storybook",
-  "main": "src/index.ts", 
   "assets": {
     "directory": "./storybook-static",
     "binding": "ASSETS"
