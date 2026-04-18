@@ -20,15 +20,15 @@ const config: StorybookConfig = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
-  async viteFinal(config) {
-    return {
-      ...config,
-      build: {
-        ...config.build,
-        minify: false,
-      },
-    };
-  },
-};
+async viteFinal(config) {
+  return {
+    ...config,
+    base: './', // 👈 critical for Cloudflare
+    build: {
+      ...config.build,
+      minify: false,
+    },
+  };
+}
 
 export default config;
