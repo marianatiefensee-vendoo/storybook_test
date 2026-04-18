@@ -12,7 +12,6 @@ const config: StorybookConfig = {
     '@storybook/addon-designs',
     '@storybook/addon-links',
     '@storybook/addon-docs',
-    '@storybook/addon-onboarding',
     '@storybook/addon-mcp',
   ],
   framework: '@storybook/react-vite',
@@ -29,6 +28,5 @@ async viteFinal(config) {
       minify: false,
     },
   };
-}
 
 export default config;
